@@ -1,0 +1,7 @@
+export enum LOYALTY {
+    VERYLOYAL = 'ADMIN',
+    LOYAL = 'ASSISTANT',
+    NORMAL = 'SALESMAN',
+    UNLOYAL = 'UNLOYAL',
+    VERYUNLOYAL = 'VERYUNLOYAL'
+}
