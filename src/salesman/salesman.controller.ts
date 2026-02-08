@@ -1,11 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { SalesmanService } from './salesman.service';
 import { CreateSalesmanDto } from './dto/create-salesman.dto';
 import { UpdateSalesmanDto } from './dto/update-salesman.dto';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @Controller('salesman')
 export class SalesmanController {
-  constructor(private readonly salesmanService: SalesmanService) {}
+  constructor(private readonly salesmanService: SalesmanService) { }
 
   @Post()
   create(@Body() createSalesmanDto: CreateSalesmanDto) {

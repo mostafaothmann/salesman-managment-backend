@@ -1,4 +1,5 @@
 import { Area } from "src/area/entities/area.entity";
+import { ROLE } from "src/auth/enums/role.enum";
 import { Building } from "src/building/entities/building.entity";
 import { City } from "src/city/entities/city.entity";
 import { Governorate } from "src/governorate/entities/governorate.entity";
@@ -17,10 +18,14 @@ export class Assistant {
     @Column({ type: 'varchar', length: 255, nullable: false })
     last_name: string;
 
+    //Assign assistant role to the assistant account directly
+    @Column({ type: 'enum', enum: ROLE, nullable: false ,default:ROLE.ASSISTANT})
+    role: ROLE;
+
     @Column({ type: 'varchar', length: 255, nullable: false })
     email: string;
 
-    @Column({ type: 'varchar',length:10, nullable: false })
+    @Column({ type: 'varchar', length: 10, nullable: false })
     phone_number: string;
 
     @Column({ type: 'varchar', nullable: false })

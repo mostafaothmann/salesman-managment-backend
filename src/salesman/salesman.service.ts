@@ -22,6 +22,10 @@ export class SalesmanService {
     return this.salesmanRepo.find();
   }
 
+  findByEmail(email: string): Promise<Salesman | null> {
+    return this.salesmanRepo.findOneBy({ email });
+  }
+
   findOne(id: number): Promise<Salesman | null> {
     return this.salesmanRepo.findOneBy({ id });
   }

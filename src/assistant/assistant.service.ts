@@ -23,6 +23,10 @@ export class AssistantService {
     return this.assistantRepo.findOneBy({ id })
   }
 
+  findByEmail(email: string): Promise<Assistant | null> {
+    return this.assistantRepo.findOneBy({ email });
+  }
+
   async update(id: number, updateAssistantDto: UpdateAssistantDto): Promise<Assistant | null> {
     await this.assistantRepo.update(id, updateAssistantDto)
     return this.assistantRepo.findOneBy({ id })

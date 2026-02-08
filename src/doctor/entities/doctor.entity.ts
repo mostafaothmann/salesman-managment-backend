@@ -1,6 +1,6 @@
 import { Area } from "src/area/entities/area.entity";
-import { LOYALTY } from "src/auth/loyalty-enums";
-import { WORKTIME } from "src/auth/worktime-enums";
+import { LOYALTY } from "src/auth/enums/loyalty-enums";
+import { WORKTIME } from "src/auth/enums/worktime-enums";
 import { Building } from "src/building/entities/building.entity";
 import { City } from "src/city/entities/city.entity";
 import { Governorate } from "src/governorate/entities/governorate.entity";

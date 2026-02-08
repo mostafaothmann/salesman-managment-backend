@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsDecimal, IsEnum, IsString, IsNumber, IsEmail, IsStrongPassword, IsDate, Length, Min, Max } from 'class-validator';
+import { ROLE } from 'src/auth/enums/role.enum';
 export class CreateAssistantDto {
     @IsNotEmpty()
     @IsString()
@@ -57,4 +58,7 @@ export class CreateAssistantDto {
     @IsNumber()
     building_id: number;
 
+    @IsEnum(ROLE)
+    role: ROLE.ASSISTANT
+    
 }

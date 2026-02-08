@@ -35,6 +35,7 @@ import { TypeIngredientModule } from './type-ingredient/type-ingredient.module';
 import { BaseOfferModule } from './base-offer/base-offer.module';
 import { OfferModule } from './offer/offer.module';
 import { OnlineOfferModule } from './online-offer/online-offer.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -66,7 +67,8 @@ import { OnlineOfferModule } from './online-offer/online-offer.module';
     TypeIngredientModule,
     BaseOfferModule,
     OfferModule,
-    OnlineOfferModule
+    OnlineOfferModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

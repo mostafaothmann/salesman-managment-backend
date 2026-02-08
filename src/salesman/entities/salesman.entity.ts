@@ -1,4 +1,5 @@
 import { Area } from "src/area/entities/area.entity";
+import { ROLE } from "src/auth/enums/role.enum"; 
 import { Building } from "src/building/entities/building.entity";
 import { City } from "src/city/entities/city.entity";
 import { Governorate } from "src/governorate/entities/governorate.entity";
@@ -17,6 +18,10 @@ export class Salesman {
     @Column({ type: 'varchar', length: 255, nullable: false })
     last_name: string;//last name of salesman
 
+    //Assign assistant role to the assistant account directly
+    @Column({ type: 'enum', enum: ROLE, nullable: false, default: ROLE.SALESMAN })
+    role: ROLE;
+
     @Column({ type: 'varchar', length: 255, nullable: false })
     email: string;//email of salesman
 
@@ -34,9 +39,6 @@ export class Salesman {
 
     @Column({ type: 'datetime', nullable: false })
     last_login: Date;//account creating date 
-
-    @Column({ type: 'varchar', length: 255, nullable: true })
-    location: string;
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;//account creating date 

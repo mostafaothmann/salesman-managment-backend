@@ -1,5 +1,5 @@
 import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
-import { LOYALTY } from "src/auth/loyalty-enums";
+import { LOYALTY } from "src/auth/enums/loyalty-enums";
 
 export class CreatePharmacistDto {
 
