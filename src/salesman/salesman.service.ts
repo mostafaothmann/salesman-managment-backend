@@ -4,6 +4,7 @@ import { UpdateSalesmanDto } from './dto/update-salesman.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Salesman } from './entities/salesman.entity';
 import { Repository } from 'typeorm';
+import { encodePassword } from 'src/auth/utils.ts/bcrypt';
 
 @Injectable()
 export class SalesmanService {
@@ -14,6 +15,7 @@ export class SalesmanService {
   ) { }
 
   create(createSalesmanDto: CreateSalesmanDto): Promise<Salesman> {
+    createSalesmanDto.password = encodePassword(createSalesmanDto.password)
     const salesman = this.salesmanRepo.create(createSalesmanDto);
     return this.salesmanRepo.save(salesman);
   }

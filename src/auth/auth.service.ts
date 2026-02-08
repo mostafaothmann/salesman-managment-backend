@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { SalesmanService } from 'src/salesman/salesman.service';
 import { AssistantService } from 'src/assistant/assistant.service';
 import { ROLE } from './enums/role.enum';
+import { comparePasswords } from './utils.ts/bcrypt';
 
 type authInput = { email: string; password: string };
 type signInData = { email: string; id: number; role: ROLE };
@@ -44,13 +45,14 @@ export class AuthService {
   async validateSalesman(input: authInput): Promise<signInData | null> {
     const user = await this.salesmanService.findByEmail(input.email);
 
-    if (user && user.password === input.password) {
+    if (user && comparePasswords(input.password, user.password)) {
+
       return { id: user.id, email: user.email, role: user.role };
     }
 
     return null;
   }
-  
+
   // ------------------------
   // Assistant AUTHENTICATION
   // ------------------------
@@ -66,7 +68,7 @@ export class AuthService {
   async validateAssistant(input: authInput): Promise<signInData | null> {
     const user = await this.salesmanService.findByEmail(input.email);
 
-    if (user && user.password === input.password) {
+    if (user && comparePasswords(input.password, user.password)) {
       return { id: user.id, email: user.email, role: user.role };
     }
 
