@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { SpecializationType } from "src/specialization-type/entities/specialization-type.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Specialization {
@@ -14,5 +15,7 @@ export class Specialization {
 
     @Column({ type: 'varchar', length: 255, nullable: true })
     description: string;
-
+    
+    @OneToMany(()=>SpecializationType,specializationType=>specializationType.specialization)
+    specializationTypes:SpecializationType[];
 }

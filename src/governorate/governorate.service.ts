@@ -18,11 +18,16 @@ export class GovernorateService {
   }
 
   findAll(): Promise<Governorate[]> {
-    return this.governorateRepo.find({relations:['cities']});
+    return this.governorateRepo.find({ relations: ['cities'] });
   }
 
   findOne(id: number): Promise<Governorate | null> {
-    return this.governorateRepo.findOneBy({ id });
+    return this.governorateRepo.findOne({
+      where: { id },
+      relations: {
+        cities: true,
+      },
+    });
   }
 
   async update(id: number, updateGovernorateDto: UpdateGovernorateDto): Promise<Governorate | null> {

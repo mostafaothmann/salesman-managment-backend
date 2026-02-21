@@ -27,5 +27,4 @@ export class Area {
 
     @OneToMany(() => Street, street => street.area)
     streets: Street
-
 }

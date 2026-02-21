@@ -16,15 +16,16 @@ export class SpecializationType {
     @Column({ type: 'int', nullable: false })
     type_id: number;
 
-    @ManyToOne(() => Specialization)
-    @JoinColumn({ name: 'specialization_id' })
-    specialization: Specialization;
-
     @CreateDateColumn()
     created_at: Date;
 
     @ManyToOne(() => Type)
     @JoinColumn({ name: 'type_id' })
     type: Type;
+
+    //each Governorate has cities in it 
+    @ManyToOne(() => Specialization, specialization => specialization.specializationTypes)
+    @JoinColumn({ name: 'specialization_id' })
+    specialization: Specialization;
 
 }

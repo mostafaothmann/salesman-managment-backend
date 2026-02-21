@@ -26,6 +26,6 @@ export class Street {
     area: Area;
 
     @OneToMany(() => Building, building => building.street)
-    buildings: Building
+    buildings: Building;
 
 }

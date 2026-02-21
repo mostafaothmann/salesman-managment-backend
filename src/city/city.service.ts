@@ -17,11 +17,16 @@ export class CityService {
   }
 
   findAll(): Promise<City[]> {
-    return this.cityRepo.find()
+    return this.cityRepo.find({ relations: ['areas'] })
   }
 
   findOne(id: number): Promise<City | null> {
-    return this.cityRepo.findOneBy({ id })
+    return this.cityRepo.findOne({
+      where: { id },
+      relations: {
+        areas: true,
+      },
+    })
   }
 
   async update(id: number, updateCityDto: UpdateCityDto): Promise<City | null> {

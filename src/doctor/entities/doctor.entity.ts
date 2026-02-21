@@ -25,6 +25,9 @@ export class Doctor {
     @Column({ type: 'varchar', length: 255, nullable: false })
     phone_number: string;
 
+    @Column({ type: 'boolean', nullable: false, default: true })
+    is_added_by_assistant: boolean;
+
     @Column({ type: 'varchar', length: 255, nullable: false })
     telephone_number: string;
 

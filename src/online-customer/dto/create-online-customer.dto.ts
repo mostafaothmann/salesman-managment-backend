@@ -27,4 +27,15 @@ export class CreateOnlineCustomerDto {
     @IsNotEmpty()
     salesman_id: number;
 
+    @IsNotEmpty()
+    @IsNumber()
+    governorate_Id?: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    city_Id?: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    area_id?: number;
 }

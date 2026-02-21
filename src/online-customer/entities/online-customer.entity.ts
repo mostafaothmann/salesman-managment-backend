@@ -1,4 +1,7 @@
+import { Area } from "src/area/entities/area.entity";
 import { Assistant } from "src/assistant/entities/assistant.entity";
+import { City } from "src/city/entities/city.entity";
+import { Governorate } from "src/governorate/entities/governorate.entity";
 import { Salesman } from "src/salesman/entities/salesman.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -23,7 +26,7 @@ export class OnlineCustomer {
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;
 
-    @Column({ type: 'datetime', nullable: true})
+    @Column({ type: 'datetime', nullable: true })
     verified_at: Date;
 
     @Column({ type: 'int', nullable: false })
@@ -31,6 +34,21 @@ export class OnlineCustomer {
 
     @Column({ type: 'int', nullable: false })
     salesman_id: number;
+
+    //each Governorate has many doctors in it 
+    @ManyToOne(() => Governorate)
+    @JoinColumn({ name: 'governorate_id' })
+    Governorate: Governorate;
+
+    //each City has many doctors in it 
+    @ManyToOne(() => City)
+    @JoinColumn({ name: 'city_id' })
+    City: City;
+
+    //each Area has many doctors in it 
+    @ManyToOne(() => Area)
+    @JoinColumn({ name: 'area_id' })
+    Area: Area;
 
     //each assistant has many online customers 
     @ManyToOne(() => Assistant)

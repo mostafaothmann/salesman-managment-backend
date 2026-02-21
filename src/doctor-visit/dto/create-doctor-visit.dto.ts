@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateDoctorVisitDto {
 
@@ -25,6 +25,10 @@ export class CreateDoctorVisitDto {
     @IsString()
     @IsNotEmpty()
     photo: string;
+
+    @IsBoolean()
+    @IsNotEmpty()
+    is_other_spoken_note: boolean;
 
     @IsString()
     closest_pharmacy: string;

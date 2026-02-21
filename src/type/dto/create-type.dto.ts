@@ -18,6 +18,22 @@ export class CreateTypeDto {
     @IsNotEmpty()
     quantity: number;
 
+    @IsNumber()
+    @IsNotEmpty()
+    grouptype_id: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    percentage: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    online_percentage: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    type: number;
+
     @IsDate()
     @IsNotEmpty()
     manufacturing_date?: Date;

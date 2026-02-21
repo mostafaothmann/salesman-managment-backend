@@ -36,6 +36,7 @@ import { BaseOfferModule } from './base-offer/base-offer.module';
 import { OfferModule } from './offer/offer.module';
 import { OnlineOfferModule } from './online-offer/online-offer.module';
 import { AuthModule } from './auth/auth.module';
+import { GroupTypeModule } from './group-type/group-type.module';
 
 
 @Module({
@@ -44,7 +45,7 @@ import { AuthModule } from './auth/auth.module';
     url: "mysql://root:@127.0.0.1:3306/rohalarad",
     autoLoadEntities: true,
     synchronize: true,
-  }),
+  }),    
     SalesmanModule, ProductModule, DoctorVisitModule, DoctorModule, TypeModule, IngredientModule,
     GovernorateModule, AreaModule, StreetModule, OrderModule, PharmacistModule, RecoveryCaseModule,
     RecoveryCaseImageModule,
@@ -68,7 +69,8 @@ import { AuthModule } from './auth/auth.module';
     BaseOfferModule,
     OfferModule,
     OnlineOfferModule,
-    AuthModule
+    AuthModule,
+    GroupTypeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,5 @@
 import { Area } from "src/area/entities/area.entity";
-import { ROLE } from "src/auth/enums/role.enum"; 
+import { ROLE } from "src/auth/enums/role.enum";
 import { Building } from "src/building/entities/building.entity";
 import { City } from "src/city/entities/city.entity";
 import { Governorate } from "src/governorate/entities/governorate.entity";
@@ -27,6 +27,18 @@ export class Salesman {
 
     @Column({ type: 'varchar', length: 255, nullable: false })
     password: string;//password of salesman
+
+    @Column({ type: 'int', nullable: false })
+    leader_id: number;//password of salesman
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    total_profit: number;//password of salesman
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    sales_profit: number;//password of salesman
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    team_profit: number;//password of salesman
 
     @Column({ type: 'varchar', length: 10, nullable: false })
     phone_number: string;//phone number of salesman
@@ -67,5 +79,10 @@ export class Salesman {
     @ManyToOne(() => Building)
     @JoinColumn({ name: 'building_id' })
     building: Building;
+
+    //each Leader has many salesmans in his team 
+    @ManyToOne(() => Building)
+    @JoinColumn({ name: 'leader_id' })
+    salesman: Salesman;
 
 }

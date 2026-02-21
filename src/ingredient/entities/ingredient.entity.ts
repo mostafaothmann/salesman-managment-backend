@@ -1,5 +1,6 @@
+import { TypeIngredient } from "src/type-ingredient/entities/type-ingredient.entity";
 import { Type } from "src/type/entities/type.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Ingredient {
@@ -13,10 +14,14 @@ export class Ingredient {
     @Column({ type: 'varchar', length: 255, nullable: true })
     description: string;//description of the ingredient
 
-    @Column({ type: 'decimal', precision: 10, scale: 2, nullable:true})
+    @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
     quantity: string;//description of the ingredient
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;
 
+    //each Ingredient has many TypeIngredients
+    @OneToMany(() => TypeIngredient, typeIngredient => typeIngredient.ingredient)
+    typeIngredients: TypeIngredient[];
+    
 }

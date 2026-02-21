@@ -19,11 +19,17 @@ export class DoctorVisit {
     @Column({ type: 'varchar', length: 255, nullable: true })
     closest_pharmacy: string;//the closest pharmacy to the doctor to be added by the admin after that 
 
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    rejection_cause: string;//the cause of rejection
+
     @Column({ type: 'datetime', nullable: false })
     validated_at: Date;//time on it the assistant validated the visit
 
     @Column({ type: 'int', nullable: false })
     number_of_patients: number;//number of patients that were in the clinic
+
+    @Column({ type: 'boolean', nullable: false, default: false })
+    is_other_spoken_note: boolean;//boolean to indicate if there is other spoken note
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;//time on it the salesman submitted the visit to be comitted

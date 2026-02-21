@@ -1,5 +1,5 @@
 import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsString, IsStrongPassword, Length, Max, Min } from "class-validator";
-import { ROLE } from "src/auth/enums/role.enum"; 
+import { ROLE } from "src/auth/enums/role.enum";
 
 export class CreateSalesmanDto {
 
@@ -45,6 +45,26 @@ export class CreateSalesmanDto {
 
     @IsNotEmpty()
     @IsNumber()
+    level: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    team_profit: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    total_profit: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    sales_profit: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    leader_id: number;
+
+    @IsNotEmpty()
+    @IsNumber()
     city_Id: number;
 
     @IsNotEmpty()
@@ -58,7 +78,7 @@ export class CreateSalesmanDto {
     @IsNotEmpty()
     @IsNumber()
     building_id: number;
-    
+
     @IsEnum(ROLE)
     role: ROLE.SALESMAN
 

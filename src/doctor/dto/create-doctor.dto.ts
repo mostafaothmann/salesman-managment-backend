@@ -1,4 +1,4 @@
-import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Max, Min } from "class-validator";
+import { IsBoolean, IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Max, Min } from "class-validator";
 import { LOYALTY } from "src/auth/enums/loyalty-enums";
 
 export class CreateDoctorDto {
@@ -10,6 +10,11 @@ export class CreateDoctorDto {
     @IsNotEmpty()
     @IsString()
     last_name?: string;
+
+
+    @IsNotEmpty()
+    @IsBoolean()
+    is_added_by_assistant?: boolean;
 
     @IsNotEmpty()
     @IsString()

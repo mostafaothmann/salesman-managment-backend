@@ -18,11 +18,14 @@ export class AreaService {
   }
 
   findAll(): Promise<Area[]> {
-    return this.areaRepo.find();
+    return this.areaRepo.find({ relations: ['streets'] });
   }
 
   findOne(id: number): Promise<Area | null> {
-    return this.areaRepo.findOneBy({ id });
+    return this.areaRepo.findOne({
+      where: { id },
+      relations: { streets: true }
+    });
   }
 
   async update(id: number, updateAreaDto: UpdateAreaDto): Promise<Area | null> {
@@ -33,5 +36,5 @@ export class AreaService {
   async remove(id: number): Promise<void> {
     await this.areaRepo.delete(id);
   }
-  
+
 }

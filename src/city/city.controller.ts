@@ -9,6 +9,7 @@ export class CityController {
 
   @Post()
   create(@Body() createCityDto: CreateCityDto) {
+    console.log(createCityDto);
     return this.cityService.create(createCityDto);
   }
 

@@ -5,7 +5,7 @@ import { UpdateSpecializationDto } from './dto/update-specialization.dto';
 
 @Controller('specialization')
 export class SpecializationController {
-  constructor(private readonly specializationService: SpecializationService) {}
+  constructor(private readonly specializationService: SpecializationService) { }
 
   @Post()
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
@@ -21,6 +21,11 @@ export class SpecializationController {
   findOne(@Param('id') id: string) {
     return this.specializationService.findOne(+id);
   }
+  //get types for each specialization byt id 
+  @Get('/with-types/:id')
+  findTypesForOne(@Param('id') id: string) {
+    return this.specializationService.findTypesForOne(+id);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSpecializationDto: UpdateSpecializationDto) {
@@ -31,4 +36,7 @@ export class SpecializationController {
   remove(@Param('id') id: string) {
     return this.specializationService.remove(+id);
   }
+
 }
+
+
