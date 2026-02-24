@@ -1,11 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
+import type { FilterDoctorProps } from './dto/create-doctor.dto';
 
 @Controller('doctor')
 export class DoctorController {
-  constructor(private readonly doctorService: DoctorService) {}
+  constructor(private readonly doctorService: DoctorService) { }
 
   @Post()
   create(@Body() createDoctorDto: CreateDoctorDto) {
@@ -31,4 +32,10 @@ export class DoctorController {
   remove(@Param('id') id: string) {
     return this.doctorService.remove(+id);
   }
+
+  @Post('/filter')
+  filter(@Body() filters: FilterDoctorProps) {
+    return this.doctorService.filter(filters);
+  }
+
 }

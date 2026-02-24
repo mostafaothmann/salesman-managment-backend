@@ -1,3 +1,4 @@
+import { Doctor } from "src/doctor/entities/doctor.entity";
 import { SpecializationType } from "src/specialization-type/entities/specialization-type.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -15,7 +16,10 @@ export class Specialization {
 
     @Column({ type: 'varchar', length: 255, nullable: true })
     description: string;
-    
-    @OneToMany(()=>SpecializationType,specializationType=>specializationType.specialization)
-    specializationTypes:SpecializationType[];
+
+    @OneToMany(() => SpecializationType, specializationType => specializationType.specialization)
+    specializationTypes: SpecializationType[];
+
+    @OneToMany(() => Doctor, doctor => doctor.specialization)
+    doctors: Doctor[];
 }

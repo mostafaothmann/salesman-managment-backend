@@ -32,7 +32,7 @@ export class TypeService {
   }
 
   async remove(id: number): Promise<void> {
-     await this.typeRepo.delete(id);
+    await this.typeRepo.delete(id);
   }
 
   async getSamplesDoctors(id: number): Promise<void> {
@@ -44,8 +44,10 @@ export class TypeService {
   }
 
   async getSpecializations(id: number): Promise<void> {
-    return await this.dataSource.query(`select s.id,s.name,st.status from
-       specialization s INNER JOIN specialization_type st where st.type_id=${id} `)
+    return await this.dataSource.query(`SELECT s.id as id, s.name as name, COUNT(d.id) AS doctor_count FROM 
+      specialization s INNER JOIN specialization_type st ON s.id = st.specialization_id INNER JOIN 
+      doctor d ON s.id = d.specialization_id WHERE st.type_id = ${id} GROUP BY s.id, s.name;
+`)
   }
   async getVisitsDoctors(id: number): Promise<void> {
     return await this.dataSource.query(`select dv.id,dv.note,dv.salesman_id,dv.doctor_id,dv.id,dv.created_at

@@ -26,5 +26,5 @@ export class Area {
     city: City;
 
     @OneToMany(() => Street, street => street.area)
-    streets: Street
+    streets: Street[];
 }

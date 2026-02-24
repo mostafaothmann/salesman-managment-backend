@@ -20,7 +20,7 @@ export class SpecializationService {
   }
 
   findAll(): Promise<Specialization[]> {
-    return this.specializationRepo.find();
+    return this.specializationRepo.find({relations:['doctors']});
   }
 
   findOne(id: number): Promise<Specialization | null> {

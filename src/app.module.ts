@@ -42,7 +42,7 @@ import { GroupTypeModule } from './group-type/group-type.module';
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
-    url: "mysql://root:@127.0.0.1:3306/rohalarad",
+    url: "mysql://root:@127.0.0.1:3306/rohalarad2",
     autoLoadEntities: true,
     synchronize: true,
   }),    

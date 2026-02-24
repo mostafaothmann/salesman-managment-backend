@@ -27,6 +27,6 @@ export class City {
     
     //children
     @OneToMany(() => Area, area => area.city)
-    areas:Area;
+    areas:Area[];
 
 }

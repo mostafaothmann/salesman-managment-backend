@@ -44,6 +44,22 @@ export class CreateDoctorDto {
     @IsEmail()
     description?: string;
 
+    @IsOptional()
+    @IsString()
+    first_work_time_opening?: string;
+
+    @IsOptional()
+    @IsString()
+    first_work_time_closing?: string;
+
+    @IsOptional()
+    @IsString()
+    second_work_time_opening?: string;
+
+    @IsOptional()
+    @IsString()
+    second_work_time_closing?: string;
+
     @IsNotEmpty()
     @IsString()
     phone_number?: string;
@@ -64,13 +80,21 @@ export class CreateDoctorDto {
     @IsDate()
     last_visit_date?: Date;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    favorite_time_opening?: string;
+    admin_description?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    favorite_time_closing?: string;
+    salesman_description?: string;
+
+    @IsOptional()
+    @IsString()
+    favourite_time_closing?: string;
+
+    @IsOptional()
+    @IsString()
+    favourite_time_opening?: string;
 
     @IsOptional()
     @IsNumber()
@@ -84,8 +108,9 @@ export class CreateDoctorDto {
     @IsNumber()
     average_patients_per_day?: number;
 
-    @IsEnum(LOYALTY)
-    loyalty?: LOYALTY;
+    @IsOptional()
+    @IsNumber()
+    loyalty?: number;
 
     @IsNotEmpty()
     @IsNumber()
@@ -103,8 +128,25 @@ export class CreateDoctorDto {
     @IsNumber()
     street_id?: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    building_id?: number;
+    /*    @IsNotEmpty()
+       @IsNumber()
+       building_id?: number; */
 
+}
+
+
+export interface FilterDoctorProps {
+    filter_first_name: string;
+    filter_last_name: string;
+    filter_min_classification: number;
+    filter_max_classification: number;
+    filter_min_age: number;
+    filter_max_age: number;
+    filter_specialization_id: number;
+    filter_min_loyalty: number;
+    filter_max_loyalty: number;
+    filter_governorate_id: number;
+    filter_city_id: number;
+    filter_area_id: number;
+    filter_street_id: number;
 }

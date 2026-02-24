@@ -14,5 +14,5 @@ export class Governorate {
     created_at: Date;
 
     @OneToMany(()=>City,city =>city.governorate)
-    cities:City;
+    cities:City[];
 }

@@ -4,6 +4,7 @@ import { WORKTIME } from "src/auth/enums/worktime-enums";
 import { Building } from "src/building/entities/building.entity";
 import { City } from "src/city/entities/city.entity";
 import { Governorate } from "src/governorate/entities/governorate.entity";
+import { Specialization } from "src/specialization/entities/specialization.entity";
 import { Street } from "src/street/entities/street.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -19,7 +20,7 @@ export class Doctor {
     @Column({ type: 'varchar', length: 255, nullable: false })
     last_name: string;//last name of the Pharmacist
 
-    @Column({ type: 'datetime', nullable: false })
+    @Column({ type: 'datetime', nullable: true })
     birth_date: Date;//birth date of the Pharmacist
 
     @Column({ type: 'varchar', length: 255, nullable: false })
@@ -28,34 +29,40 @@ export class Doctor {
     @Column({ type: 'boolean', nullable: false, default: true })
     is_added_by_assistant: boolean;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     telephone_number: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     graduation_university: string;
 
-    @Column({ type: 'enum', enum: LOYALTY, nullable: true })
-    loyalty: LOYALTY;
+    @Column({ type: 'int', nullable: true, default: 1 })
+    loyalty: number;
 
-    @Column({ type: 'time', nullable: false })
-    favorite_time_opening: string;
+    @Column({ type: 'varchar',length:255, nullable: true })
+    salesman_description: string
 
-    @Column({ type: 'time', nullable: false })
-    favorite_time_closing: string
+    @Column({ type: 'varchar',length:255, nullable: true })
+    admin_description: string
 
-    @Column({ type: 'time', nullable: false })
-    first_work_opeining_time: string
+    @Column({ type: 'varchar', nullable: true })
+    favourite_time_opening: string;
 
-    @Column({ type: 'time', nullable: false })
-    first_work_closing_time: string
+    @Column({ type: 'varchar', nullable: true })
+    favourite_time_closing: string
 
-    @Column({ type: 'time', nullable: false })
-    second_work_opining_time: string
+    @Column({ type: 'varchar', nullable: false })
+    first_work_time_opening: string
 
-    @Column({ type: 'time', nullable: false })
-    second_work_closing_time: string
+    @Column({ type: 'varchar', nullable: false })
+    first_work_time_closing: string
 
-    @Column({ type: 'datetime', nullable: false })
+    @Column({ type: 'varchar', nullable: false })
+    second_work_time_opening: string
+
+    @Column({ type: 'varchar', nullable: true })
+    second_work_time_closing: string
+
+    @Column({ type: 'datetime', nullable: true })
     last_visit_date: Date;
 
     @Column({ type: 'varchar', length: 255, nullable: false })
@@ -63,6 +70,21 @@ export class Doctor {
 
     @Column({ type: 'int', nullable: false, default: 0 })
     classification: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    governorate_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    city_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    area_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    street_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    specialization_id: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
     average_patients_per_day: number;
@@ -96,9 +118,14 @@ export class Doctor {
     @JoinColumn({ name: 'street_id' })
     Street: Street;
 
-    //each Building has many doctors in it 
-    @ManyToOne(() => Building)
-    @JoinColumn({ name: 'building_id' })
-    Building: Building;
+    /*    //each Building has many doctors in it 
+       @ManyToOne(() => Building)
+       @JoinColumn({ name: 'building_id' })
+       Building: Building; */
+
+    //each Specialization has many doctors in it 
+    @ManyToOne(() => Specialization)
+    @JoinColumn({ name: 'specialization_id' })
+    specialization: Specialization;
 
 }
