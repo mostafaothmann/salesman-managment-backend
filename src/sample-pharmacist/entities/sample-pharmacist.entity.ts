@@ -1,7 +1,9 @@
 import { PharmacistVisit } from "src/pharmacist-visit/entities/pharmacist-visit.entity";
 import { Type } from "src/type/entities/type.entity";
-import { Column, CreateDateColumn, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
+@Entity()
+@Unique('unique_sample_pharmacist', ['pharmacistVisit', 'type']) // prevents duplicates
 export class SamplePharmacist {
     @PrimaryGeneratedColumn()
     id: number;
@@ -26,5 +28,5 @@ export class SamplePharmacist {
     //each type has many samples 
     @ManyToOne(() => Type)
     @JoinColumn({ name: 'type_id' })
-    Type: Type;
+    type: Type;
 }

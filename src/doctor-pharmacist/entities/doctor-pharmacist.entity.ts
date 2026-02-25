@@ -1,8 +1,9 @@
 import { Doctor } from "src/doctor/entities/doctor.entity";
 import { Pharmacist } from "src/pharmacist/entities/pharmacist.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
+@Unique('unique_doctor_pharmacist', ['doctor', 'pharmacist']) // prevents duplicates
 export class DoctorPharmacist {
 
     @PrimaryGeneratedColumn()

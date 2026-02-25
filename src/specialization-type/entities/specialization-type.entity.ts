@@ -1,8 +1,9 @@
 import { Specialization } from "src/specialization/entities/specialization.entity";
 import { Type } from "src/type/entities/type.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
+@Unique('unique_specialization_type',['type', 'specialization']) // prevents duplicates
 export class SpecializationType {
     @PrimaryGeneratedColumn()
     id: number;
@@ -19,7 +20,7 @@ export class SpecializationType {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(() => Type)
+    @ManyToOne(() => Type,type => type.specializationTypes)
     @JoinColumn({ name: 'type_id' })
     type: Type;
 

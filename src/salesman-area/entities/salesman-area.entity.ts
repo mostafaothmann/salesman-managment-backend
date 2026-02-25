@@ -1,9 +1,10 @@
 import { Assistant } from './../../assistant/entities/assistant.entity';
 import { Area } from "src/area/entities/area.entity";
 import { Salesman } from "src/salesman/entities/salesman.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
+@Unique('unique_salesman_area', ['salesman', 'area']) // prevents duplicates
 export class SalesmanArea {
 
     @PrimaryGeneratedColumn()
@@ -31,12 +32,12 @@ export class SalesmanArea {
     //each salesman has many salesmen
     @ManyToOne(() => Salesman)
     @JoinColumn({ name: 'salesman_id' })
-    Salesman: Salesman;
+    salesman: Salesman;
 
     //each area has many salesmen
     @ManyToOne(() => Area)
     @JoinColumn({ name: 'area_id' })
-    Area: Area;
+    area: Area;
 
     //each assistant has many salesmen
     @ManyToOne(() => Area)

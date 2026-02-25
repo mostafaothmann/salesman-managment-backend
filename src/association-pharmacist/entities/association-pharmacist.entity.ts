@@ -1,7 +1,9 @@
 import { Association } from "src/association/entities/association.entity";
 import { Pharmacist } from "src/pharmacist/entities/pharmacist.entity";
-import { Column, CreateDateColumn, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
+@Entity()
+@Unique('unique_association_pharmacist', ['association', 'pharmacist']) // prevents duplicates
 export class AssociationPharmacist {
 
     @PrimaryGeneratedColumn()

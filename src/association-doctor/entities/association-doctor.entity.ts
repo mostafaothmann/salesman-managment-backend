@@ -1,13 +1,14 @@
 import { Association } from "src/association/entities/association.entity";
 import { Doctor } from "src/doctor/entities/doctor.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
+@Unique('unique_association_doctor', ['association', 'doctor']) // prevents duplicates
 export class AssociationDoctor {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', length: 255, nullable: false,default: "normal" })
+    @Column({ type: 'varchar', length: 255, nullable: false, default: "normal" })
     status: string;
 
     @CreateDateColumn({ type: 'datetime' })
