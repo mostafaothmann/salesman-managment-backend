@@ -5,7 +5,7 @@ import { UpdateIngredientDto } from './dto/update-ingredient.dto';
 
 @Controller('ingredient')
 export class IngredientController {
-  constructor(private readonly ingredientService: IngredientService) {}
+  constructor(private readonly ingredientService: IngredientService) { }
 
   @Post()
   create(@Body() createIngredientDto: CreateIngredientDto) {
@@ -31,4 +31,10 @@ export class IngredientController {
   remove(@Param('id') id: string) {
     return this.ingredientService.remove(+id);
   }
+
+  @Get('/types/:id')
+  getIngredients(@Param('id') id: string) {
+    return this.ingredientService.getTypes(+id)
+  }
+
 }

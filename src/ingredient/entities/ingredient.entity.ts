@@ -12,7 +12,10 @@ export class Ingredient {
     name: string;//name of ingredient
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    description: string;//description of the ingredient
+    admin_description: string;//description of the ingredient
+
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    salesman_description: string;//description of the ingredient
 
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
     quantity: string;//description of the ingredient
@@ -23,5 +26,5 @@ export class Ingredient {
     //each Ingredient has many TypeIngredients
     @OneToMany(() => TypeIngredient, typeIngredient => typeIngredient.ingredient)
     typeIngredients: TypeIngredient[];
-    
+
 }

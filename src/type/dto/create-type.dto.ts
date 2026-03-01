@@ -8,7 +8,11 @@ export class CreateTypeDto {
 
     @IsString()
     @IsOptional()
-    description?: string;
+    admin_description?: string;
+
+    @IsString()
+    @IsOptional()
+    salesman_description?: string;
 
     @IsString()
     @IsNotEmpty()

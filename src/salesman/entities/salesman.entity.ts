@@ -18,6 +18,13 @@ export class Salesman {
     @Column({ type: 'varchar', length: 255, nullable: false })
     last_name: string;//last name of salesman
 
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    lat: string;//latitude of the place 
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    lan: string;//langitude of the place 
+
     //Assign assistant role to the assistant account directly
     @Column({ type: 'enum', enum: ROLE, nullable: false, default: ROLE.SALESMAN })
     role: ROLE;

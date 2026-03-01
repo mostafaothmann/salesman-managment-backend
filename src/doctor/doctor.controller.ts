@@ -14,8 +14,8 @@ export class DoctorController {
   }
 
   @Get()
-  findAll() {
-    return this.doctorService.findAll();
+  findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 10) {
+    return this.doctorService.findAll(page, limit);
   }
 
   @Get(':id')

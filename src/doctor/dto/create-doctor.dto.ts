@@ -90,6 +90,14 @@ export class CreateDoctorDto {
 
     @IsOptional()
     @IsString()
+    lan?: string;
+
+    @IsOptional()
+    @IsString()
+    lat?: string;
+
+    @IsOptional()
+    @IsString()
     favourite_time_closing?: string;
 
     @IsOptional()
@@ -126,6 +134,10 @@ export class CreateDoctorDto {
 
     @IsNotEmpty()
     @IsNumber()
+    sex?: number;
+
+    @IsNotEmpty()
+    @IsNumber()
     street_id?: number;
 
     /*    @IsNotEmpty()
@@ -136,6 +148,8 @@ export class CreateDoctorDto {
 
 
 export interface FilterDoctorProps {
+    page: number;
+    limit: number;
     filter_first_name: string;
     filter_last_name: string;
     filter_min_classification: number;

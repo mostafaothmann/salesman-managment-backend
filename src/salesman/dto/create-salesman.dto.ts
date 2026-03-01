@@ -1,4 +1,4 @@
-import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsString, IsStrongPassword, Length, Max, Min } from "class-validator";
+import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsStrongPassword, Length, Max, Min } from "class-validator";
 import { ROLE } from "src/auth/enums/role.enum";
 
 export class CreateSalesmanDto {
@@ -12,6 +12,14 @@ export class CreateSalesmanDto {
     @IsString()
     @Length(1, 20)
     last_name: string;
+
+    @IsOptional()
+    @IsString()
+    lan?: string;
+
+    @IsOptional()
+    @IsString()
+    lat?: string;
 
     @IsNotEmpty()
     @IsEmail()

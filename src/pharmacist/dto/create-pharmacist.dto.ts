@@ -12,6 +12,18 @@ export class CreatePharmacistDto {
     last_name: string;
 
     @IsNotEmpty()
+    @IsNumber()
+    sex?: number;
+
+    @IsOptional()
+    @IsString()
+    lan?: string;
+
+    @IsOptional()
+    @IsString()
+    lat?: string;
+
+    @IsNotEmpty()
     @IsString()
     graduation_university: string;
 
@@ -86,10 +98,6 @@ export class CreatePharmacistDto {
     @IsNumber()
     street_id: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    building_id: number;
-
     @IsString()
     @IsOptional()
     first_work_opening_time: string;
@@ -105,4 +113,24 @@ export class CreatePharmacistDto {
     @IsString()
     @IsOptional()
     second_work_closing_time: string;
+}
+
+
+
+export interface FilterPharmacistProps {
+    page: number;
+    limit: number;
+    filter_first_name: string;
+    filter_last_name: string;
+    filter_min_classification: number;
+    filter_max_classification: number;
+    filter_min_age: number;
+    filter_max_age: number;
+    filter_specialization_id: number;
+    filter_min_loyalty: number;
+    filter_max_loyalty: number;
+    filter_governorate_id: number;
+    filter_city_id: number;
+    filter_area_id: number;
+    filter_street_id: number;
 }

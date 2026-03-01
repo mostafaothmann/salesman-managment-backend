@@ -17,11 +17,20 @@ export class Pharmacist {
     @Column({ type: 'varchar', nullable: false })
     last_name: string;//last name of the Pharmacist
 
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    lat: string;//latitude of the place 
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    lan: string;//langitude of the place 
+
     @Column({ type: 'datetime', nullable: false })
     birth_date: Date;//birth date of the Pharmacist
 
-    @Column({ type: 'int', nullable: false })
-    phone_number: string;//birth date of the Pharmacist
+    @Column({ type: 'varchar', length: 10, nullable: false })
+    phone_number: string;
+
+    @Column({ type: 'varchar', nullable: false })
+    telephone_number: string;
 
     @Column({ type: 'varchar', length: 255, nullable: false })
     photo: string;
@@ -50,11 +59,29 @@ export class Pharmacist {
     @Column({ type: 'varchar', length: 255, nullable: false })
     last_visit_note: string;
 
+    @Column({ type: 'datetime', nullable: true })
+    last_visit_date: Date;
+
     @Column({ type: 'varchar', length: 255, nullable: false })
     classification: number;
 
     @Column({ type: 'int', nullable: false })
     average_patients_per_day: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    governorate_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    city_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    area_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    street_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    sex: number;
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;
@@ -91,9 +118,9 @@ export class Pharmacist {
     @JoinColumn({ name: 'street_id' })
     Street: Street;
 
-    //each Building has many doctors in it 
-    @ManyToOne(() => Building)
-    @JoinColumn({ name: 'building_id' })
-    Building: Building;
-
+    /*     //each Building has many doctors in it 
+        @ManyToOne(() => Building)
+        @JoinColumn({ name: 'building_id' })
+        Building: Building;
+     */
 }

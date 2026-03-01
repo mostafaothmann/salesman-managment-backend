@@ -3,7 +3,7 @@ import { Type } from 'src/type/entities/type.entity';
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
-@Unique('unique_sample_doctor', ['doctorVisit', 'doctor']) // prevents duplicates
+@Unique('unique_sample_doctor', ['doctorVisit', 'type']) // prevents duplicates
 export class SampleDoctor {
 
     @PrimaryGeneratedColumn()

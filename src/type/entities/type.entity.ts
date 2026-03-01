@@ -13,7 +13,10 @@ export class Type {
     name: string;//name of the type
 
     @Column({ type: 'varchar', length: 255, nullable: true })
-    description: string;//description of the type
+    admin_description: string;//admin description of the type
+
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    salesman_description: string;//salesmandescription of the type
 
     @Column({ type: 'datetime', nullable: true })
     manufacturing_date: Date;//the date when the type has been creted  
@@ -27,8 +30,6 @@ export class Type {
     @Column({ type: 'int', nullable: true })
     price_for_piece: number;//price for one piece of the type 
 
-    @Column({ type: 'int', nullable: true })
-    salesman_percentage: number;//price for one piece of the type 
 
     @Column({ type: 'int', nullable: true, default: 1 })
     quantity: number;//price for one piece of the type 

@@ -65,23 +65,22 @@ export class TypeService {
   }
 
   async getOnlineProducts(id: number): Promise<void> {
-    await this.dataSource.query(`select p.id,p.total_price,p.has_return,p.total_quantity,p.order_id,pv.created_at
+    return await this.dataSource.query(`select p.id,p.total_price,p.has_return,p.total_quantity,p.order_id,pv.created_at
        from online_product p where p.type_id=${id}`)
   }
 
   async getRecoveryCases(id: number): Promise<void> {
-    await this.dataSource.query(`select rc.id,rc.total_price,rc.has_return,rc.total_quantity,rc.order_id,rc.created_at
+    return await this.dataSource.query(`select rc.id,rc.total_price,rc.has_return,rc.total_quantity,rc.order_id,rc.created_at
        from recovery_case rc where rc.type_id=${id}`)
   }
 
   async getBaseOffers(id: number): Promise<void> {
-    await this.dataSource.query(`select *
+    return await this.dataSource.query(`select *
        from base_offer bs where bs.type_id=${id}`)
   }
 
   async getIngredients(id: number): Promise<void> {
-    await this.dataSource.query(`select ti.id,t.name,ti.quantity_percentage
+    return await this.dataSource.query(`select i.name,ti.quantity_percentage from
        type_ingredient ti INNER JOIN ingredient i where ti.type_id=${id} `)
   }
-
 }

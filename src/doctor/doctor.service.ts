@@ -16,33 +16,58 @@ export class DoctorService {
     return this.docotorRepo.save(docotr)
   }
 
-  findAll(): Promise<Doctor[]> {
-    return this.dataSource.query(`select d.id,d.first_name, d.last_name, d.specialization_id ,
-       d.classification, d.loyalty, d.last_visit_date,d.phone_number,d.telephone_number, d.city_id, d.area_id ,d.street_id from doctor d;
-       `)
+  async findAll(page: number = 1, limit: number = 10) {
+    const offset = (page - 1) * limit;
+
+    const data = await this.dataSource.query(`
+    SELECT d.id, d.first_name, d.last_name, d.specialization_id,
+           d.classification, d.loyalty, d.last_visit_date,
+           d.lat, d.lan, d.phone_number, d.telephone_number,
+           d.city_id, d.area_id, d.street_id
+    FROM doctor d
+    LIMIT ${limit} OFFSET ${offset};
+  `);
+
+    const totalResult = await this.dataSource.query(`
+    SELECT COUNT(*) as total FROM doctor;
+  `);
+    const total = parseInt(totalResult[0].total, 10);
+
+    return {
+      data,
+      total,
+      page,
+      lastPage: Math.ceil(total / limit),
+    };
   }
 
-  async filter(filters: FilterDoctorProps): Promise<Record<string, any>[]> {
+  async filter(
+    filters: FilterDoctorProps,
+  ): Promise<Record<string, any>> {
 
-    const query = this.docotorRepo.createQueryBuilder('doctor').
-      select('doctor.id', 'id').
-      addSelect('doctor.first_name', 'first_name').
-      addSelect('doctor.last_name', 'last_name').
-      addSelect('TIMESTAMPDIFF(YEAR,doctor.birth_date,CURDATE())', 'age').
-      addSelect('doctor.specialization_id', 'specialization_id').
-      addSelect('doctor.classification', 'classification').
-      addSelect('doctor.loyalty', 'loyalty').
-      addSelect('doctor.last_visit_date', 'last_visit_date').
-      addSelect('doctor.city_id', 'city_id').
-      addSelect('doctor.area_id', 'area_id').
-      addSelect('doctor.street_id', 'street_id').
-      addSelect('doctor.phone_number', 'phone_number').
-      addSelect('doctor.telephone_number', 'telephone_number')
+    const query = this.docotorRepo.createQueryBuilder('doctor')
+      .select('doctor.id', 'id')
+      .addSelect('doctor.lan', 'lan')
+      .addSelect('doctor.lat', 'lat')
+      .addSelect('doctor.first_name', 'first_name')
+      .addSelect('doctor.last_name', 'last_name')
+      .addSelect('TIMESTAMPDIFF(YEAR,doctor.birth_date,CURDATE())', 'age')
+      .addSelect('doctor.specialization_id', 'specialization_id')
+      .addSelect('doctor.classification', 'classification')
+      .addSelect('doctor.loyalty', 'loyalty')
+      .addSelect('doctor.last_visit_date', 'last_visit_date')
+      .addSelect('doctor.city_id', 'city_id')
+      .addSelect('doctor.area_id', 'area_id')
+      .addSelect('doctor.street_id', 'street_id')
+      .addSelect('doctor.phone_number', 'phone_number')
+      .addSelect('doctor.telephone_number', 'telephone_number');
 
+
+    console.log(filters)
     if (filters.filter_first_name || filters.filter_last_name) {
       query.andWhere(
         `CONCAT(doctor.first_name,' ',doctor.last_name) LIKE :fullName`,
-        { fullName: `%${filters.filter_first_name||''} ${filters.filter_last_name||''}%` },
+        { fullName: `%${filters.filter_first_name || ''} ${filters.filter_last_name || ''}%` },
       );
     }
 
@@ -115,12 +140,26 @@ export class DoctorService {
         { maxLoyalty: filters.filter_max_loyalty },
       );
     }
-    console.log("filers", filters)
-    console.log(query.getSql())
-    console.log(query.getParameters())
-    console.log("results", await query.getRawMany())
-    return await query.getRawMany()
+    // Pagination
 
+    filters.limit = filters.limit > 100 ? 100 : filters.limit;
+    filters.page = filters.page < 1 ? 1 : filters.page;
+
+    const skip = (filters.page - 1) * filters.limit;
+
+    query.skip(skip).take(filters.limit);
+
+    const [data, total] = await Promise.all([
+      query.getRawMany(),
+      query.clone().getCount(),
+    ]);
+
+    return {
+      data,
+      total,
+      page: filters.page,
+      lastPage: Math.ceil(total / filters.limit),
+    };
   }
 
   findOne(id: number): Promise<Doctor | null> {

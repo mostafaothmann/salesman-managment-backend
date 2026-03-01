@@ -37,6 +37,7 @@ import { OfferModule } from './offer/offer.module';
 import { OnlineOfferModule } from './online-offer/online-offer.module';
 import { AuthModule } from './auth/auth.module';
 import { GroupTypeModule } from './group-type/group-type.module';
+import { HospitalModule } from './hospital/hospital.module';
 
 
 @Module({
@@ -71,6 +72,7 @@ import { GroupTypeModule } from './group-type/group-type.module';
     OnlineOfferModule,
     AuthModule,
     GroupTypeModule,
+    HospitalModule,
   ],
   controllers: [AppController],
   providers: [AppService],

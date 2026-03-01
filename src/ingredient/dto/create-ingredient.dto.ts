@@ -6,12 +6,16 @@ export class CreateIngredientDto {
     @IsNotEmpty()
     name: string;
 
-    @IsOptional()
     @IsString()
-    description?: string;
+    @IsOptional()
+    admin_description?: string;
+
+    @IsString()
+    @IsOptional()
+    salesman_description?: string;
 
     @IsOptional()
     @IsDecimal()
     quantity?: string;
-    
+
 }
