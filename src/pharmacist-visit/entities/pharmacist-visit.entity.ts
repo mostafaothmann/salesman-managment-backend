@@ -12,6 +12,9 @@ export class PharmacistVisit {
     @Column({ type: 'varchar', length: 255, nullable: true })
     photo: string;//photo of the visiting document with either the signature or the stamp on it
 
+    @Column({ type: 'int', nullable: false })
+    visit_status_id: number;//number of patients that were in the clinic
+
     @Column({ type: 'varchar', length: 255, nullable: true })
     note: string;//note on how the doctor treated the salesman 
 
@@ -38,5 +41,5 @@ export class PharmacistVisit {
     @ManyToOne(() => Salesman)
     @JoinColumn({ name: 'salesman_id' })
     Salesman: Salesman;
-    
+
 }

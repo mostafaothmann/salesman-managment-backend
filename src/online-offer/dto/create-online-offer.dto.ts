@@ -10,4 +10,12 @@ export class CreateOnlineOfferDto {
     @IsNotEmpty()
     order_id: number;
 
+    @IsNumber()
+    @IsNotEmpty()
+    total_price: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    total_quantity: number;
+    
 }

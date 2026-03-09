@@ -5,14 +5,19 @@ import { UpdateSampleDoctorDto } from './dto/update-sample-doctor.dto';
 
 @Controller('sample-doctor')
 export class SampleDoctorController {
-  constructor(private readonly sampleDoctorService: SampleDoctorService) {}
+  constructor(private readonly sampleDoctorService: SampleDoctorService) { }
 
   @Post()
   create(@Body() createSampleDoctorDto: CreateSampleDoctorDto) {
     return this.sampleDoctorService.create(createSampleDoctorDto);
   }
 
-  @Get()
+  @Get('/all')
+  getAll() {
+    return this.sampleDoctorService.getAll();
+  }
+
+  @Get('')
   findAll() {
     return this.sampleDoctorService.findAll();
   }

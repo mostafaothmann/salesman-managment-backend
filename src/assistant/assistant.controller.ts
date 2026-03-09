@@ -5,7 +5,7 @@ import { UpdateAssistantDto } from './dto/update-assistant.dto';
 
 @Controller('assistant')
 export class AssistantController {
-  constructor(private readonly assistantService: AssistantService) {}
+  constructor(private readonly assistantService: AssistantService) { }
 
   @Post()
   create(@Body() createAssistantDto: CreateAssistantDto) {
@@ -17,6 +17,11 @@ export class AssistantController {
     return this.assistantService.findAll();
   }
 
+  @Get(`/fullname`)
+  getNames() {
+    return this.assistantService.getNames();
+  }
+  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.assistantService.findOne(+id);
@@ -31,4 +36,5 @@ export class AssistantController {
   remove(@Param('id') id: string) {
     return this.assistantService.remove(+id);
   }
+
 }

@@ -10,7 +10,6 @@ export class DoctorService {
   constructor(@InjectRepository(Doctor)
   private readonly docotorRepo: Repository<Doctor>,
     private readonly dataSource: DataSource) { }
-
   create(createDoctorDto: CreateDoctorDto): Promise<Doctor> {
     const docotr = this.docotorRepo.create(createDoctorDto);
     return this.docotorRepo.save(docotr)
@@ -63,7 +62,6 @@ export class DoctorService {
       .addSelect('doctor.telephone_number', 'telephone_number');
 
 
-    console.log(filters)
     if (filters.filter_first_name || filters.filter_last_name) {
       query.andWhere(
         `CONCAT(doctor.first_name,' ',doctor.last_name) LIKE :fullName`,
@@ -153,7 +151,9 @@ export class DoctorService {
       query.getRawMany(),
       query.clone().getCount(),
     ]);
+    console.log(filters)
 
+    console.log(query.getQueryAndParameters())
     return {
       data,
       total,
@@ -162,8 +162,9 @@ export class DoctorService {
     };
   }
 
-  findOne(id: number): Promise<Doctor | null> {
-    return this.docotorRepo.findOneBy({ id })
+
+  async findOne(id: number): Promise<Doctor | null> {
+    return await this.docotorRepo.findOneBy({ id })
   }
 
   async update(id: number, updateDoctorDto: UpdateDoctorDto): Promise<Doctor | null> {
@@ -173,5 +174,8 @@ export class DoctorService {
 
   async remove(id: number): Promise<void> {
     await this.docotorRepo.delete(id)
+  }
+  async getNames(): Promise<{ first_name: string, last_name: string }[] | []> {
+    return await this.dataSource.query(`select d.id,d.first_name,d.last_name from doctor as d `)
   }
 }

@@ -1,14 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AssosiationService } from './association.service';
-import { CreateAssosiationDto } from './dto/create-assosiation.dto';
-import { UpdateAssosiationDto } from './dto/update-assosiation.dto';
+import { CreateAssociationDto } from './dto/create-assosiation.dto';
+import { UpdateAssociationDto } from './dto/update-assosiation.dto';
 
-@Controller('assosiation')
+@Controller('association')
 export class AssosiationController {
   constructor(private readonly assosiationService: AssosiationService) {}
 
   @Post()
-  create(@Body() createAssosiationDto: CreateAssosiationDto) {
+  create(@Body() createAssosiationDto: CreateAssociationDto) {
     return this.assosiationService.create(createAssosiationDto);
   }
 
@@ -23,7 +23,7 @@ export class AssosiationController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAssosiationDto: UpdateAssosiationDto) {
+  update(@Param('id') id: string, @Body() updateAssosiationDto: UpdateAssociationDto) {
     return this.assosiationService.update(+id, updateAssosiationDto);
   }
 

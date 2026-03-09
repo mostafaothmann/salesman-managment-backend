@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { TypeService } from './type.service';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { UpdateTypeDto } from './dto/update-type.dto';
@@ -12,13 +12,18 @@ export class TypeController {
     return this.typeService.create(createTypeDto);
   }
 
+  @Get(`/names`)
+  getNames() {
+    return this.typeService.getNames();
+  }
+
   @Get()
   findAll() {
     return this.typeService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.typeService.findOne(+id);
   }
 
@@ -81,4 +86,6 @@ export class TypeController {
   getSpecializations(@Param('id') id: string) {
     return this.typeService.getSpecializations(+id)
   }
+
+
 }

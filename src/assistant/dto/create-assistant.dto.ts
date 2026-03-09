@@ -1,10 +1,18 @@
-import { IsNotEmpty, IsDecimal, IsEnum, IsString, IsNumber, IsEmail, IsStrongPassword, IsDate, Length, Min, Max } from 'class-validator';
+import { IsNotEmpty, IsDecimal, IsEnum, IsString, IsNumber, IsEmail, IsStrongPassword, IsDate, Length, Min, Max, IsOptional } from 'class-validator';
 import { ROLE } from 'src/auth/enums/role.enum';
 export class CreateAssistantDto {
+
     @IsNotEmpty()
     @IsString()
-    @Length(1, 20)
     first_name: string;
+
+    @IsOptional()
+    @IsString()
+    lan?: string;
+
+    @IsOptional()
+    @IsString()
+    lat?: string;
 
     @IsNotEmpty()
     @IsString()
@@ -13,8 +21,12 @@ export class CreateAssistantDto {
 
     @IsNotEmpty()
     @IsEmail()
-    @Length(1, 40)
     email: string;
+
+    @IsNotEmpty()
+    @IsString()
+    admin_description: string;
+
 
     @IsNotEmpty()
     @IsStrongPassword({
@@ -40,11 +52,20 @@ export class CreateAssistantDto {
 
     @IsNotEmpty()
     @IsNumber()
-    governorate_Id?: number;
+    governorate_id?: number;
 
     @IsNotEmpty()
     @IsNumber()
-    city_Id: number;
+    city_id: number;
+
+    
+    @IsNotEmpty()
+    @IsNumber()
+    sex: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    account_status_id: number;
 
     @IsNotEmpty()
     @IsNumber()
@@ -60,5 +81,5 @@ export class CreateAssistantDto {
 
     @IsEnum(ROLE)
     role: ROLE.ASSISTANT
-    
+
 }

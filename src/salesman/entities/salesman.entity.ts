@@ -18,12 +18,17 @@ export class Salesman {
     @Column({ type: 'varchar', length: 255, nullable: false })
     last_name: string;//last name of salesman
 
-
     @Column({ type: 'varchar', length: 255, nullable: false })
     lat: string;//latitude of the place 
 
     @Column({ type: 'varchar', length: 255, nullable: false })
     lan: string;//langitude of the place 
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    admin_description: string;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    sex: number;
 
     //Assign assistant role to the assistant account directly
     @Column({ type: 'enum', enum: ROLE, nullable: false, default: ROLE.SALESMAN })
@@ -35,17 +40,26 @@ export class Salesman {
     @Column({ type: 'varchar', length: 255, nullable: false })
     password: string;//password of salesman
 
-    @Column({ type: 'int', nullable: false })
-    leader_id: number;//password of salesman
+    @Column({ type: 'int', nullable: true })
+    leader_id: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
-    total_profit: number;//password of salesman
+    total_profit: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
-    sales_profit: number;//password of salesman
+    sales_profit: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
-    team_profit: number;//password of salesman
+    team_profit: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    account_status_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    account_type_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    level: number;
 
     @Column({ type: 'varchar', length: 10, nullable: false })
     phone_number: string;//phone number of salesman
@@ -61,6 +75,18 @@ export class Salesman {
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;//account creating date 
+
+    @Column({ type: 'int', nullable: false })
+    governorate_id: number;
+
+    @Column({ type: 'int', nullable: false })
+    city_id: number;
+
+    @Column({ type: 'int', nullable: false })
+    area_id: number;
+
+    @Column({ type: 'int', nullable: false })
+    street_id: number;
 
     //each Governorate has many salesmans in it 
     @ManyToOne(() => Governorate)
@@ -82,14 +108,14 @@ export class Salesman {
     @JoinColumn({ name: 'street_id' })
     street: Street;
 
-    //each Building has many salesmans in it 
-    @ManyToOne(() => Building)
-    @JoinColumn({ name: 'building_id' })
-    building: Building;
+    /*     //each Building has many salesmans in it 
+        @ManyToOne(() => Building)
+        @JoinColumn({ name: 'building_id' })
+        building: Building; */
 
     //each Leader has many salesmans in his team 
-    @ManyToOne(() => Building)
+    @ManyToOne(() => Salesman, { nullable: true })
     @JoinColumn({ name: 'leader_id' })
-    salesman: Salesman;
+    leader: Salesman;
 
 }

@@ -9,7 +9,7 @@ export class AssociationDoctor {
     id: number;
 
     @Column({ type: 'varchar', length: 255, nullable: false, default: "normal" })
-    status: string;
+    status: number;
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;

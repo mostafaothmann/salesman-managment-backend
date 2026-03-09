@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateHospitalDto } from './dto/create-hospital.dto';
 import { UpdateHospitalDto } from './dto/update-hospital.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Hospital } from './entities/hospital.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class HospitalService {
-  create(createHospitalDto: CreateHospitalDto) {
-    return 'This action adds a new hospital';
+  constructor(
+    @InjectRepository(Hospital)
+    private readonly hospitalRepo: Repository<Hospital>,
+  ) { }
+
+  create(createTypeDto: CreateHospitalDto): Promise<Hospital> {
+    const type = this.hospitalRepo.create(createTypeDto);
+    return this.hospitalRepo.save(type);
   }
 
-  findAll() {
-    return `This action returns all hospital`;
+  findAll(): Promise<Hospital[]> {
+    return this.hospitalRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} hospital`;
+  findOne(id: number): Promise<Hospital | null> {
+    return this.hospitalRepo.findOneBy(
+      { id }
+    );
   }
 
-  update(id: number, updateHospitalDto: UpdateHospitalDto) {
-    return `This action updates a #${id} hospital`;
+  async update(id: number, updateGroupTypeDto: UpdateHospitalDto): Promise<Hospital | null> {
+    await this.hospitalRepo.update(id, updateGroupTypeDto);
+    return this.hospitalRepo.findOneBy({ id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} hospital`;
+  async remove(id: number): Promise<void> {
+    await this.hospitalRepo.delete(id);
   }
 }

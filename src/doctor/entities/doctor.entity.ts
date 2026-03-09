@@ -27,7 +27,7 @@ export class Doctor {
     lan: string;//langitude of the place 
 
     @Column({ type: 'datetime', nullable: true })
-    birth_date: Date;//birth date of the Pharmacist
+    birth_date: Date;//birth date of the Doctor
 
     @Column({ type: 'varchar', length: 255, nullable: false })
     phone_number: string;

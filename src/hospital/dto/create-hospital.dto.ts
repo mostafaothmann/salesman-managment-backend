@@ -2,9 +2,15 @@ import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateHospitalDto {
 
-    @IsNotEmpty()
-    @IsNumber()
-    id: number;
+
+
+    @IsOptional()
+    @IsString()
+    lan?: string;
+
+    @IsOptional()
+    @IsString()
+    lat?: string;
 
     @IsOptional()
     @IsString()
@@ -17,6 +23,10 @@ export class CreateHospitalDto {
     @IsNotEmpty()
     @IsNumber()
     governorate_id: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    type: number;
 
     @IsNotEmpty()
     @IsNumber()

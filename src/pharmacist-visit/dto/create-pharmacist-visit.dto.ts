@@ -10,10 +10,14 @@ export class CreatePharmacistVisitDto {
     @IsNotEmpty()
     type_id: number;
 
+    @IsNumber()
+    @IsNotEmpty()
+    visit_status_id: number;
+
     @IsDate()
     @IsNotEmpty()
-    validated_at:Date;
-    
+    validated_at: Date;
+
     @IsNumber()
     @IsNotEmpty()
     salesman_id: number;

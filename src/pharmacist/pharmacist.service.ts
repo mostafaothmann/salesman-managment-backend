@@ -166,4 +166,8 @@ export class PharmacistService {
   async remove(id: number): Promise<void> {
     await this.docotorRepo.delete(id)
   }
+
+  async getNames(): Promise<{ first_name: string, last_name: string }[] | []> {
+    return await this.dataSource.query(`select p.id,p.first_name,p.last_name from pharmacist as p `)
+  }
 }

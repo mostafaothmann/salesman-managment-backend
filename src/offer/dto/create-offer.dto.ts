@@ -32,7 +32,7 @@ export class CreateOfferDto {
     @IsNumber()
     @IsNotEmpty()
     return_quantity: number;
-
+    
     @IsNumber()
     @IsNotEmpty()
     total_quantity: number;

@@ -10,7 +10,7 @@ export class AssociationPharmacist {
     id: number;
 
     @Column({ type: 'varchar', length: 255, nullable: false, default: "normal" })
-    status: string;
+    status: number;
 
     @ManyToOne(() => Pharmacist)
     @JoinColumn({ name: 'pharmacist_id' })

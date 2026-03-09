@@ -15,6 +15,24 @@ export class Order {
     @Column({ type: 'datetime', nullable: false })
     validated_at: Date;
 
+    @Column({ type: 'int', nullable: false, default: 0 })
+    total_price: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    total_quantity: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    base_total_price: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    base_total_quantity: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    total_return_quantity: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    total_return_price: number;
+
     //describes if it is a return 
     @Column({ type: 'boolean', nullable: false })
     is_return: boolean;

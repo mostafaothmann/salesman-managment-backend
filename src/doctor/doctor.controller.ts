@@ -18,6 +18,11 @@ export class DoctorController {
     return this.doctorService.findAll(page, limit);
   }
 
+  @Get('/fullname')
+  getNames() {
+    return this.doctorService.getNames();
+  }
+  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.doctorService.findOne(+id);
@@ -37,5 +42,7 @@ export class DoctorController {
   filter(@Body() filters: FilterDoctorProps) {
     return this.doctorService.filter(filters);
   }
+
+
 
 }

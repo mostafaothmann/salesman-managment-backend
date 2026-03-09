@@ -1,3 +1,4 @@
+import { IsNotEmpty, IsNumber } from "class-validator";
 import { BaseOffer } from "src/base-offer/entities/base-offer.entity";
 import { OnlineOrder } from "src/online-order/entities/online-order.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
@@ -13,6 +14,14 @@ export class OnlineOffer {
 
     @Column({ type: 'int', nullable: false })
     online_order_id: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    total_price: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    total_quantity: number;
 
     //each BaseOffer has many offers in it 
     @ManyToOne(() => BaseOffer)

@@ -8,7 +8,7 @@ export class CreateOnlineProductDto {
 
     @IsNotEmpty()
     @IsNumber()
-    type_id?: number;
+    type_id: number;
 
     @IsNotEmpty()
     @IsNumber()

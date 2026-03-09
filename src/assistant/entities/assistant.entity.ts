@@ -18,12 +18,18 @@ export class Assistant {
     @Column({ type: 'varchar', length: 255, nullable: false })
     last_name: string;
 
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    admin_description: string;
+
     //Assign assistant role to the assistant account directly
-    @Column({ type: 'enum', enum: ROLE, nullable: false ,default:ROLE.ASSISTANT})
+    @Column({ type: 'enum', enum: ROLE, nullable: false, default: ROLE.ASSISTANT })
     role: ROLE;
 
     @Column({ type: 'varchar', length: 255, nullable: false })
     email: string;
+
+    @Column({ type: 'datetime', nullable: true })
+    birth_date: Date;//birth date of the Assistant
 
     @Column({ type: 'varchar', length: 10, nullable: false })
     phone_number: string;
@@ -34,11 +40,23 @@ export class Assistant {
     @Column({ type: 'varchar', length: 255, nullable: false })
     password: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: true })
-    description: string;
-
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    governorate_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    city_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    area_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    street_id: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    account_status_id: number;
 
     //each Governorate has many assistants in it 
     @ManyToOne(() => Governorate)

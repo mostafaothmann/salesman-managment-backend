@@ -18,4 +18,27 @@ export class CreateOnlineOrderDto {
     @IsNotEmpty()
     validated_at: Date;
 
+    @IsNumber()
+    @IsNotEmpty()
+    base_total_price: number;
+
+    @IsNumber()
+    return_total_price: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    total_price: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    base_quantity: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    return_quantity: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    total_quantity: number;
+
 }

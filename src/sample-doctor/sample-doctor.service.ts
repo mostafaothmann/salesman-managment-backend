@@ -3,7 +3,7 @@ import { CreateSampleDoctorDto } from './dto/create-sample-doctor.dto';
 import { UpdateSampleDoctorDto } from './dto/update-sample-doctor.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SampleDoctor } from './entities/sample-doctor.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
 
 @Injectable()
@@ -11,6 +11,7 @@ export class SampleDoctorService {
   constructor(
     @InjectRepository(SampleDoctor)
     private readonly sampleRepo: Repository<SampleDoctor>,
+    private readonly dataSource: DataSource
   ) { }
 
   create(createSampleDoctorDto: CreateSampleDoctorDto): Promise<SampleDoctor> {
@@ -18,10 +19,26 @@ export class SampleDoctorService {
     return this.sampleRepo.save(sample);
   }
 
-  findAll(): Promise<SampleDoctor[]> {
+  getAll(): Promise<SampleDoctor[]> {
     return this.sampleRepo.find();
   }
 
+  async findAll(page: number = 1, limit: number = 10) {
+    const offset = (page - 1) * limit;
+    const data = await this.dataSource.query(`select * from sample_doctor
+       LIMIT ${limit} OFFSET ${offset};
+       `);
+    const totalResult = await this.dataSource.query(`
+    SELECT COUNT(*) as total FROM doctor_visit;
+  `);
+    const total = parseInt(totalResult[0].total, 10);
+    return {
+      data,
+      total,
+      page,
+      lastPage: Math.ceil(total / limit),
+    };
+  }
   findOne(id: number): Promise<SampleDoctor | null> {
     return this.sampleRepo.findOneBy({ id });
   }

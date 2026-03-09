@@ -11,6 +11,12 @@ export class Hospital {
     id: number;
 
     @Column({ type: 'varchar', length: 255, nullable: false })
+    lat: string;//latitude of the place 
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    lan: string;//langitude of the place 
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
     phone_number: string;
 
     @Column({ type: 'varchar', length: 255, nullable: true })
@@ -24,6 +30,9 @@ export class Hospital {
 
     @Column({ type: 'int', nullable: false, default: 0 })
     classification: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    type: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
     governorate_id: number;
@@ -42,12 +51,6 @@ export class Hospital {
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;
-
-    @Column({ type: 'varchar', length: 255, nullable: true, default: "" })
-    wife_husband_first_name: string;
-
-    @Column({ type: 'varchar', length: 255, nullable: true, default: "" })
-    wife_husband_last_name: string;
 
     //each Governorate has many doctors in it 
     @ManyToOne(() => Governorate)

@@ -83,4 +83,7 @@ export class TypeService {
     return await this.dataSource.query(`select i.name,ti.quantity_percentage from
        type_ingredient ti INNER JOIN ingredient i where ti.type_id=${id} `)
   }
+  async getNames(): Promise<{ name: string }[] | []> {
+    return this.dataSource.query(`select t.name,t.id from type as t`)
+  }
 }

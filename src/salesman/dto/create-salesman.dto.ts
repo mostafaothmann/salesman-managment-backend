@@ -26,6 +26,10 @@ export class CreateSalesmanDto {
     email: string;
 
     @IsNotEmpty()
+    @IsEmail()
+    admin_description: string;
+
+    @IsNotEmpty()
     @IsStrongPassword({
         minLength: 10,
         minLowercase: 1,
@@ -50,6 +54,18 @@ export class CreateSalesmanDto {
     @IsNotEmpty()
     @IsNumber()
     governorate_Id: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    account_status_id: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    account_type_id: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    sex: number;
 
     @IsNotEmpty()
     @IsNumber()
@@ -89,5 +105,22 @@ export class CreateSalesmanDto {
 
     @IsEnum(ROLE)
     role: ROLE.SALESMAN
+
+
+}
+
+export interface FilterSalesmanProps {
+    page: number;
+    limit: number;
+    filter_first_name: string;
+    filter_last_name: string;
+    filter_governorate_id: number;
+    filter_city_id: number;
+    filter_area_id: number;
+    filter_street_id: number;
+    filter_account_status_id: number;
+    filter_account_type_id: number;
+    filter_min_time: number;
+    filter_max_time: number;
 
 }

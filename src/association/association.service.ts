@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAssosiationDto } from './dto/create-assosiation.dto';
-import { UpdateAssosiationDto } from './dto/update-assosiation.dto';
+import { CreateAssociationDto } from './dto/create-assosiation.dto';
+import { UpdateAssociationDto } from './dto/update-assosiation.dto';
+import { Association } from './entities/association.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AssosiationService {
-  create(createAssosiationDto: CreateAssosiationDto) {
-    return 'This action adds a new assosiation';
+  constructor(
+    @InjectRepository(Association)
+    private readonly associationRepo: Repository<Association>,
+  ) { }
+
+  create(associationDto: CreateAssociationDto): Promise<Association> {
+    const association = this.associationRepo.create(associationDto);
+    return this.associationRepo.save(association);
   }
 
-  findAll() {
-    return `This action returns all assosiation`;
+  findAll(): Promise<Association[]> {
+    return this.associationRepo.find({ relations: ['streets'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} assosiation`;
+  findOne(id: number): Promise<Association | null> {
+    return this.associationRepo.findOneBy({ id });
   }
 
-  update(id: number, updateAssosiationDto: UpdateAssosiationDto) {
-    return `This action updates a #${id} assosiation`;
+  async update(id: number, updateAssociationDto: UpdateAssociationDto): Promise<Association | null> {
+    await this.associationRepo.update(id, updateAssociationDto);
+    return this.associationRepo.findOneBy({ id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} assosiation`;
+  async remove(id: number): Promise<void> {
+    await this.associationRepo.delete(id);
   }
+
 }

@@ -24,6 +24,25 @@ export class OnlineOrder {
     @Column({ type: 'int', nullable: false })
     online_customer_id: number;
 
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    total_price: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    total_quantity: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    base_total_price: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    base_total_quantity: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    total_return_quantity: number;
+
+    @Column({ type: 'int', nullable: false, default: 0 })
+    total_return_price: number;
+
     //each salesman has many online orders 
     @ManyToOne(() => Salesman)
     @JoinColumn({ name: 'salesman_id' })

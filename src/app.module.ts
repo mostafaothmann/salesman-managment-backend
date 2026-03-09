@@ -38,6 +38,11 @@ import { OnlineOfferModule } from './online-offer/online-offer.module';
 import { AuthModule } from './auth/auth.module';
 import { GroupTypeModule } from './group-type/group-type.module';
 import { HospitalModule } from './hospital/hospital.module';
+import { MallModule } from './mall/mall.module';
+import { HospitalDoctorModule } from './hospital-doctor/hospital-doctor.module';
+import { HospitalPharmacistModule } from './hospital-pharmacist/hospital-pharmacist.module';
+import { SpeechModule } from './speech/speech.module';
+import { PhotoModule } from './photo/photo.module';
 
 
 @Module({
@@ -46,7 +51,7 @@ import { HospitalModule } from './hospital/hospital.module';
     url: "mysql://root:@127.0.0.1:3306/rohalarad2",
     autoLoadEntities: true,
     synchronize: true,
-  }),    
+  }),    SpeechModule,PhotoModule,
     SalesmanModule, ProductModule, DoctorVisitModule, DoctorModule, TypeModule, IngredientModule,
     GovernorateModule, AreaModule, StreetModule, OrderModule, PharmacistModule, RecoveryCaseModule,
     RecoveryCaseImageModule,
@@ -73,6 +78,11 @@ import { HospitalModule } from './hospital/hospital.module';
     AuthModule,
     GroupTypeModule,
     HospitalModule,
+    MallModule,
+    HospitalDoctorModule,
+    HospitalPharmacistModule,
+    SpeechModule,
+    PhotoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

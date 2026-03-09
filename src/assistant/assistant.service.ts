@@ -3,12 +3,13 @@ import { CreateAssistantDto } from './dto/create-assistant.dto';
 import { UpdateAssistantDto } from './dto/update-assistant.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Assistant } from './entities/assistant.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
 @Injectable()
 export class AssistantService {
   constructor(@InjectRepository(Assistant)
-  private readonly assistantRepo: Repository<Assistant>) { }
+  private readonly assistantRepo: Repository<Assistant>,
+    private readonly dataSource: DataSource) { }
 
   create(createAssistantDto: CreateAssistantDto): Promise<Assistant> {
     const assitant = this.assistantRepo.create(createAssistantDto);
@@ -16,7 +17,8 @@ export class AssistantService {
   }
 
   findAll(): Promise<Assistant[]> {
-    return this.assistantRepo.find();
+    return this.dataSource.query(`select a.id,a.first_name,a.last_name,a.phone_number,a.telephone_number,
+      a.email,a.password,a.created_at,a.governorate_id,a.area_id,a.city_id,a.street_id,a.account_status_id from assistant a`)
   }
 
   findOne(id: number): Promise<Assistant | null> {
@@ -34,5 +36,8 @@ export class AssistantService {
 
   async remove(id: number): Promise<void> {
     await this.assistantRepo.delete(id)
+  }
+  async getNames(): Promise<{ first_name: string, last_name: string }[] | []> {
+    return await this.dataSource.query(`select a.id,a.first_name,a.last_name from assistant as a`)
   }
 }

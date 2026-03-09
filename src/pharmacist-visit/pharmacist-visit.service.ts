@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePharmacistVisitDto } from './dto/create-pharmacist-visit.dto';
 import { UpdatePharmacistVisitDto } from './dto/update-pharmacist-visit.dto';
+import { DataSource, Repository } from 'typeorm';
+import { PharmacistVisit } from './entities/pharmacist-visit.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PharmacistVisitService {
+  constructor(@InjectRepository(PharmacistVisit)
+  private readonly pharmacistVisitRepo: Repository<PharmacistVisit>,
+    private readonly dataSource: DataSource) { }
   create(createPharmacistVisitDto: CreatePharmacistVisitDto) {
     return 'This action adds a new pharmacistVisit';
   }
@@ -23,4 +29,5 @@ export class PharmacistVisitService {
   remove(id: number) {
     return `This action removes a #${id} pharmacistVisit`;
   }
+
 }
