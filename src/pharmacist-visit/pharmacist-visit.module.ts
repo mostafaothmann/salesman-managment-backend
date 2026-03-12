@@ -8,5 +8,6 @@ import { PharmacistVisit } from './entities/pharmacist-visit.entity';
   imports: [TypeOrmModule.forFeature([PharmacistVisit])],
   controllers: [PharmacistVisitController],
   providers: [PharmacistVisitService],
+  exports: [PharmacistVisitService]
 })
 export class PharmacistVisitModule { }

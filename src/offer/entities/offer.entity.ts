@@ -23,6 +23,9 @@ export class Offer {
     @Column({ type: 'int', nullable: false, default: null })
     return_quantity: number;
 
+    @Column({ type: 'int', nullable: false, default: null })
+    total_quantity: number;
+
     @Column({ type: 'int', nullable: false })
     base_total_price: number;
 
@@ -40,6 +43,9 @@ export class Offer {
 
     @Column({ type: 'boolean', nullable: false, default: false })
     is_with_gift: boolean;
+
+    @Column({ type: 'datetime', nullable: false })
+    return_date: Date;//date of return
 
     //each BaseOffer has many offers in it 
     @ManyToOne(() => BaseOffer)

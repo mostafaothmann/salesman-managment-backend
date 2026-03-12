@@ -16,7 +16,11 @@ export class CreateAssociationDto {
 
     @IsString()
     @IsOptional()
-    description?: string;
+    admin_description?: string;
+
+    @IsString()
+    @IsOptional()
+    salesman_description?: string;
 
     @IsString()
     @IsNotEmpty()

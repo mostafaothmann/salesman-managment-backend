@@ -18,7 +18,7 @@ export class AssosiationService {
   }
 
   findAll(): Promise<Association[]> {
-    return this.associationRepo.find({ relations: ['streets'] });
+    return this.associationRepo.find()
   }
 
   findOne(id: number): Promise<Association | null> {

@@ -19,8 +19,14 @@ export class Association {
     @Column({ type: 'varchar', length: 255, nullable: false })
     name: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: true })
-    description: string;
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    email: string;
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    admin_description: string;
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    salesman_description: string;
 
     @Column({ type: 'varchar', length: 10, nullable: true })
     phone_number: string;

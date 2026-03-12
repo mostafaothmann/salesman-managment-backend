@@ -29,8 +29,6 @@ import { SpecializationModule } from './specialization/specialization.module';
 import { DoctorVisitModule } from './doctor-visit/doctor-visit.module';
 import { OnlineProductModule } from './online-product/online-product.module';
 import { SpecializationTypeModule } from './specialization-type/specialization-type.module';
-import { SampleDoctorModule } from './sample-doctor/sample-doctor.module';
-import { SamplePharmacistModule } from './sample-pharmacist/sample-pharmacist.module';
 import { TypeIngredientModule } from './type-ingredient/type-ingredient.module';
 import { BaseOfferModule } from './base-offer/base-offer.module';
 import { OfferModule } from './offer/offer.module';
@@ -43,12 +41,18 @@ import { HospitalDoctorModule } from './hospital-doctor/hospital-doctor.module';
 import { HospitalPharmacistModule } from './hospital-pharmacist/hospital-pharmacist.module';
 import { SpeechModule } from './speech/speech.module';
 import { PhotoModule } from './photo/photo.module';
+import { SampleModule } from './sample/sample.module';
+import { VisitModule } from './visit/visit.module';
+import { BaseGiftModule } from './base-gift/base-gift.module';
+import { GiftVisitModule } from './gift-visit/gift-visit.module';
+import { VideoLinkModule } from './video-link/video-link.module';
+import { SalesmanMessageModule } from './salesman-message/salesman-message.module';
 
 
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
-    url: "mysql://root:@127.0.0.1:3306/rohalarad2",
+    url: "mysql://root:@127.0.0.1:3306/rohalarad3",
     autoLoadEntities: true,
     synchronize: true,
   }),    SpeechModule,PhotoModule,
@@ -69,8 +73,6 @@ import { PhotoModule } from './photo/photo.module';
     SpecializationModule,
     OnlineProductModule,
     SpecializationTypeModule,
-    SampleDoctorModule,
-    SamplePharmacistModule,
     TypeIngredientModule,
     BaseOfferModule,
     OfferModule,
@@ -83,6 +85,12 @@ import { PhotoModule } from './photo/photo.module';
     HospitalPharmacistModule,
     SpeechModule,
     PhotoModule,
+    SampleModule,
+    VisitModule,
+    BaseGiftModule,
+    GiftVisitModule,
+    VideoLinkModule,
+    SalesmanMessageModule,
   ],
   controllers: [AppController],
   providers: [AppService],

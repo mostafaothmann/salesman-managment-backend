@@ -32,12 +32,13 @@ export class CreateOfferDto {
     @IsNumber()
     @IsNotEmpty()
     return_quantity: number;
-    
+
     @IsNumber()
     @IsNotEmpty()
     total_quantity: number;
 
     @IsBoolean()
+    @IsNotEmpty()
     is_with_gift: boolean;
 
     @IsBoolean()

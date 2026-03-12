@@ -22,10 +22,11 @@ export class DoctorVisitService {
   async findAll(page: number = 1, limit: number = 10) {
     const offset = (page - 1) * limit;
     const data = await this.dataSource.query(`select dv.lan,dv.lat, dv.id,dv.visit_status_id,dv.salesman_id,dv.assistant_id,
-      dv.doctor_id,dv.type_id,dv.created_at,dv.validated_at,d.lat as doctorLat,d.lan as doctorLan, sd.quantity as quantity,
-      sd.type_id as sample_type
-      from doctor_visit as dv INNER JOIN doctor as d on dv.doctor_id = d.id FULL JOIN sample_doctor as sd on dv.id=sd.doctor_visit_id
-       LIMIT ${limit} OFFSET ${offset};
+      dv.doctor_id,dv.type_id,dv.created_at,dv.validated_at,d.lat as doctorLat,d.lan as doctorLan, s.quantity as quantity,
+      s.type_id as sample_type
+      from doctor_visit as dv INNER JOIN doctor as d on dv.doctor_id = d.id LEFT JOIN sample as s on dv.id=s.visit_id
+      GROUP BY dv.id
+      LIMIT ${limit} OFFSET ${offset};
        `);
 
     const totalResult = await this.dataSource.query(`
@@ -40,11 +41,9 @@ export class DoctorVisitService {
     };
   }
 
-
   async filter(
     filters: FilterDoctorVisitProps,
   ): Promise<Record<string, any>> {
-
     const query = this.visitRepo
       .createQueryBuilder('dv')
       .innerJoin('doctor', 'd', 'dv.doctor_id = d.id')

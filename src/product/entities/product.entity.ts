@@ -1,4 +1,3 @@
-import { OnlineOrder } from "src/online-order/entities/online-order.entity";
 import { Order } from "src/order/entities/order.entity";
 import { Type } from "src/type/entities/type.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
@@ -18,13 +17,19 @@ export class Product {
     @Column({ type: 'int', nullable: false })
     base_quantity: number;//amount of the base requested product
 
+    @Column({ type: 'int', nullable: false })
+    total_quantity: number;//total amoutn after return 
+
+    @Column({ type: 'datetime', nullable: false })
+    return_date: Date;//date of return
+
     @Column({ type: 'int', nullable: false, default: null })
     return_quantity: number;//amount of the requested product
 
     @Column({ type: 'int', nullable: false, default: null })
     return_discount: number;//changeable 7% or 15%
 
-    @Column({ type: 'boolean', nullable: false ,default:false})
+    @Column({ type: 'boolean', nullable: false, default: false })
     has_return: boolean;//is there a return for this 
 
     @Column({ type: 'int', nullable: false })
@@ -37,7 +42,13 @@ export class Product {
     total_price: number;//total final price of the requsted product
 
     @CreateDateColumn({ type: 'datetime' })
-    created_at: Date;
+    created_at: Date;//selling date
+
+    @Column({ type: 'int', nullable: false })
+    order_id: number;
+
+    @Column({ type: 'int', nullable: false })
+    type_id: number;
 
     //each order has many products 
     @ManyToOne(() => Order)

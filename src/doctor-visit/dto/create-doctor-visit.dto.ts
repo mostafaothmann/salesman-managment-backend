@@ -6,49 +6,6 @@ export class CreateDoctorVisitDto {
     @IsNotEmpty()
     doctor_id: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-    assistant_id: number;
-
-    @IsNumber()
-    @IsNotEmpty()
-    type_id: number;
-
-    @IsNumber()
-    @IsNotEmpty()
-    visit_status_id: number;
-
-    @IsNumber()
-    @IsNotEmpty()
-    salesman_id: number;
-
-    @IsString()
-    @IsNotEmpty()
-    lan: string;
-
-    @IsString()
-    @IsNotEmpty()
-    lat: string;
-
-    @IsString()
-    @IsNotEmpty()
-    note: string;
-
-    @IsString()
-    @IsNotEmpty()
-    number_of_patients: number;
-
-    @IsString()
-    @IsNotEmpty()
-    photo: string;
-
-    @IsBoolean()
-    @IsNotEmpty()
-    is_other_spoken_note: boolean;
-
-    @IsString()
-    closest_pharmacy: string;
-
 }
 
 
