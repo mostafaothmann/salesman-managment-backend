@@ -22,7 +22,6 @@ export class SalesmanMessageService {
 
   async findAll(page: number = 1, limit: number = 10) {
     const offset = (page - 1) * limit;
-
     const data = await this.dataSource.query(`
     SELECT sm.id, sm.title, sm.content, sm.salesman_id,sm.created_at
     FROM salesman_message sm
@@ -33,26 +32,12 @@ export class SalesmanMessageService {
     SELECT COUNT(*) as total FROM salesman_message;
   `);
     const total = parseInt(totalResult[0].total, 10);
-
     return {
       data,
       total,
       page,
       lastPage: Math.ceil(total / limit),
     };
-  }
-
-  findOne(id: number): Promise<SalesmanMessage | null> {
-    return this.salesmanMessageRepo.findOneBy({ id });
-  }
-
-  async update(id: number, updateSalesmanMessageDto: UpdateSalesmanMessageDto): Promise<SalesmanMessage | null> {
-    await this.salesmanMessageRepo.update(id, updateSalesmanMessageDto);
-    return this.salesmanMessageRepo.findOneBy({ id });
-  }
-
-  async remove(id: number): Promise<void> {
-    await this.salesmanMessageRepo.delete(id);
   }
 
 
@@ -83,14 +68,10 @@ export class SalesmanMessageService {
     }
 
     // Pagination
-
     filters.limit = filters.limit > 100 ? 100 : filters.limit;
     filters.page = filters.page < 1 ? 1 : filters.page;
-
     const skip = (filters.page - 1) * filters.limit;
-
     query.skip(skip).take(filters.limit);
-
     const [data, total] = await Promise.all([
       query.getRawMany(),
       query.clone().getCount(),
@@ -103,5 +84,20 @@ export class SalesmanMessageService {
       lastPage: Math.ceil(total / filters.limit),
     };
   }
+
+  findOne(id: number): Promise<SalesmanMessage | null> {
+    return this.salesmanMessageRepo.findOneBy({ id });
+  }
+
+  async update(id: number, updateSalesmanMessageDto: UpdateSalesmanMessageDto): Promise<SalesmanMessage | null> {
+    await this.salesmanMessageRepo.update(id, updateSalesmanMessageDto);
+    return this.salesmanMessageRepo.findOneBy({ id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.salesmanMessageRepo.delete(id);
+  }
+
+
 
 }

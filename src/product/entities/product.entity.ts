@@ -9,9 +9,6 @@ export class Product {
     id: number;
 
     @Column({ type: 'int', nullable: false })
-    quantity: number;//amount of the final requested product
-
-    @Column({ type: 'int', nullable: false })
     price_for_piece: number;
 
     @Column({ type: 'int', nullable: false })
@@ -23,7 +20,7 @@ export class Product {
     @Column({ type: 'datetime', nullable: false })
     return_date: Date;//date of return
 
-    @Column({ type: 'int', nullable: false, default: null })
+    @Column({ type: 'int', nullable: false, default: 0 })
     return_quantity: number;//amount of the requested product
 
     @Column({ type: 'int', nullable: false, default: null })
@@ -35,8 +32,26 @@ export class Product {
     @Column({ type: 'int', nullable: false })
     base_total_price: number;//price before return
 
-    @Column({ type: 'int', nullable: false, default: null })
+    @Column({ type: 'int', nullable: false, default: 0 })
     return_total_price: number;//price after return 
+
+    @Column({ type: 'int', nullable: false, default: null })
+    total_percentage: number;//total_percentage afeter the return for the salesman
+
+    @Column({ type: 'int', nullable: false, default: null })
+    base_percentage: number;//total_percentage for the salesman
+
+    @Column({ type: 'int', nullable: false, default: null })
+    percentage_for_piece: number;//total_percentage for the salesman
+
+    @Column({ type: 'int', nullable: false, default: null })
+    delivery_percentage_for_piece: number;//total_percentage for the salesman
+
+    @Column({ type: 'int', nullable: false, default: null })
+    total_delivery_percentage: number;//total_percentage for the salesman
+
+    @Column({ type: 'int', nullable: false, default: null })
+    return_percentage: number;//return_percentage to get from the salesman the salesman
 
     @Column({ type: 'int', nullable: false })
     total_price: number;//total final price of the requsted product

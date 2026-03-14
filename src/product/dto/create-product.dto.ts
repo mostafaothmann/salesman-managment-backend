@@ -12,6 +12,30 @@ export class CreateProductDto {
 
     @IsNotEmpty()
     @IsNumber()
+    delivery_percentage_for_piece: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    percentage_for_piece: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    total_percentage: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    base_percentage: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    return_percentage: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    total_delivery_percentage: number
+
+    @IsNotEmpty()
+    @IsNumber()
     order_id: number;
 
     @IsNumber()
@@ -52,5 +76,15 @@ export class CreateProductDto {
     @IsDate()
     @IsOptional()
     return_date?: Date;
+}
 
+
+export interface FilterProductProps {
+    page: number;
+    limit: number;
+    filter_type_id: number;
+    filter_min_quantity: number;
+    filter_max_quantity: number;
+    filter_min_total_price: number;
+    filter_max_total_price: number;
 }

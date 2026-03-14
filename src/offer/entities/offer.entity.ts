@@ -11,6 +11,16 @@ export class Offer {
     @Column({ type: 'int', nullable: false })
     base_offer_id: number;//which offer is related to 
 
+
+    @Column({ type: 'int', nullable: false, default: null })
+    total_percentage: number;//total_percentage afeter the return for the salesman
+
+    @Column({ type: 'int', nullable: false, default: null })
+    base_percentage: number;//total_percentage for the salesman
+
+    @Column({ type: 'int', nullable: false, default: null })
+    total_delivery_percentage: number;//total_percentage for the salesman
+
     @Column({ type: 'int', nullable: false })
     order_id: number;//which order is related to 
 
@@ -21,6 +31,12 @@ export class Offer {
     base_quantity: number;
 
     @Column({ type: 'int', nullable: false, default: null })
+    percentage_for_piece: number;//total_percentage for the salesman
+
+    @Column({ type: 'int', nullable: false, default: null })
+    delivery_percentage_for_piece: number;//total_percentage for the salesman
+
+    @Column({ type: 'int', nullable: false, default: 0 })
     return_quantity: number;
 
     @Column({ type: 'int', nullable: false, default: null })
@@ -29,7 +45,7 @@ export class Offer {
     @Column({ type: 'int', nullable: false })
     base_total_price: number;
 
-    @Column({ type: 'int', nullable: false, default: null })
+    @Column({ type: 'int', nullable: false, default: 0 })
     return_total_price: number;
 
     @Column({ type: 'int', nullable: false, default: null })

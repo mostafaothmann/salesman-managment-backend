@@ -21,6 +21,22 @@ export class CreateOfferDto {
     @IsNumber()
     return_total_price: number;
 
+    @IsNotEmpty()
+    @IsNumber()
+    total_percentage: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    base_percentage: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    return_percentage: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    total_delivery_percentage: number
+
     @IsNumber()
     @IsNotEmpty()
     total_price: number;
@@ -50,5 +66,13 @@ export class CreateOfferDto {
 
     @IsDate()
     return_date: Date;
+
+    @IsNotEmpty()
+    @IsNumber()
+    delivery_percentage_for_piece: number;
+
+    @IsNotEmpty()
+    @IsNumber()
+    percentage_for_piece: number;
 
 }

@@ -32,7 +32,10 @@ export class Type {
 
 
     @Column({ type: 'int', nullable: true, default: 1 })
-    quantity: number;//price for one piece of the type 
+    quantity: number;//quantity existed in the repos
+
+    @Column({ type: 'int', nullable: true, default: 1 })
+    delivery_percentage: number;//delivery percentage on the type
 
     @Column({ type: 'int', nullable: true, default: 10 })
     percentage: number;//percentage for field salesman
