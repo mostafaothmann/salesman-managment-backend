@@ -28,62 +28,62 @@ export class TypeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTypeDto: UpdateTypeDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateTypeDto: UpdateTypeDto) {
     return this.typeService.update(+id, updateTypeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.remove(+id);
   }
 
   @Get('/samples-doctors/:id')
-  getSamplesDoctors(@Param('id') id: string) {
+  getSamplesDoctors(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getSamplesDoctors(+id)
   }
 
   @Get('/samples-pharmacists/:id')
-  getSamplesPharmacists(@Param('id') id: string) {
+  getSamplesPharmacists(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getSamplesPharmacists(+id)
   }
 
   @Get('/base-offers/:id')
-  getBaseOffers(@Param('id') id: string) {
+  getBaseOffers(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getBaseOffers(+id)
   }
 
   @Get('/recovery-cases/:id')
-  getRecoveryCases(@Param('id') id: string) {
+  getRecoveryCases(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getRecoveryCases(+id)
   }
 
   @Get('/products/:id')
-  getProducts(@Param('id') id: string) {
+  getProducts(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getProducts(+id)
   }
 
   @Get('/online-products/:id')
-  getOnlineProducts(@Param('id') id: string) {
+  getOnlineProducts(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getOnlineProducts(+id)
   }
 
   @Get('/doctors-visits/:id')
-  getDoctorsVisits(@Param('id') id: string) {
+  getDoctorsVisits(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getVisitsDoctors(+id)
   }
 
   @Get('/pharmacists-visits/:id')
-  getPharmacistsVisits(@Param('id') id: string) {
+  getPharmacistsVisits(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getVisitsPharmacists(+id)
   }
 
   @Get('/ingredients/:id')
-  getIngredients(@Param('id') id: string) {
+  getIngredients(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getIngredients(+id)
   }
 
   @Get('/specializations/:id')
-  getSpecializations(@Param('id') id: string) {
+  getSpecializations(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getSpecializations(+id)
   }
 

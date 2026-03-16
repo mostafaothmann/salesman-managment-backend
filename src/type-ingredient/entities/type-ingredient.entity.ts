@@ -22,7 +22,7 @@ export class TypeIngredient {
     created_at: Date;
 
     //each TypeIngredient has Type in it 
-    @ManyToOne(() => Type, type => type.typeIngredients)
+    @ManyToOne(() => Type)
     @JoinColumn({ name: 'type_id' })
     type: Type;
 

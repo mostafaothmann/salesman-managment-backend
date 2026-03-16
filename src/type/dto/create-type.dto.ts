@@ -32,8 +32,13 @@ export class CreateTypeDto {
 
     @IsNumber()
     @IsNotEmpty()
+    return_discount: number;
+
+    @IsNumber()
+    @IsNotEmpty()
     delivery_percentage: number;
-    
+
+
     @IsNumber()
     @IsNotEmpty()
     online_percentage: number;

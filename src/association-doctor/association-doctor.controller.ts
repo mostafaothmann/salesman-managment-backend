@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { AssociationDoctorService } from './association-doctor.service';
 import { CreateAssociationDoctorDto } from './dto/create-association-doctor.dto';
 import { UpdateAssociationDoctorDto } from './dto/update-association-doctor.dto';
@@ -18,17 +18,17 @@ export class AssociationDoctorController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.associationDoctorService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAssociationDoctorDto: UpdateAssociationDoctorDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateAssociationDoctorDto: UpdateAssociationDoctorDto) {
     return this.associationDoctorService.update(+id, updateAssociationDoctorDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.associationDoctorService.remove(+id);
   }
 }

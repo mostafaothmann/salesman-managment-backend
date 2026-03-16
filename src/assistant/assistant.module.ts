@@ -9,6 +9,5 @@ import { Assistant } from './entities/assistant.entity';
   controllers: [AssistantController],
   providers: [AssistantService],
   exports: [AssistantService]
-
 })
 export class AssistantModule { }

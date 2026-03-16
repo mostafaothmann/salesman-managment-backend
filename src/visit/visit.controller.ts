@@ -1,5 +1,5 @@
 import { FilterPharmacistProps } from './../pharmacist/dto/create-pharmacist.dto';
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { VisitService } from './visit.service';
 import { CreateVisitDto } from './dto/create-visit.dto';
 import { UpdateVisitDto } from './dto/update-visit.dto';
@@ -45,18 +45,18 @@ export class VisitController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.visitService.findOne(+id);
   }
 
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVisitDto: UpdateVisitDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateVisitDto: UpdateVisitDto) {
     return this.visitService.update(+id, updateVisitDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.visitService.remove(+id);
   }
   @Post('/doctors/filter')

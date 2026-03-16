@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { OnlineCustomerService } from './online-customer.service';
 import { CreateOnlineCustomerDto } from './dto/create-online-customer.dto';
 import { UpdateOnlineCustomerDto } from './dto/update-online-customer.dto';
@@ -18,17 +18,17 @@ export class OnlineCustomerController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.onlineCustomerService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOnlineCustomerDto: UpdateOnlineCustomerDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateOnlineCustomerDto: UpdateOnlineCustomerDto) {
     return this.onlineCustomerService.update(+id, updateOnlineCustomerDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.onlineCustomerService.remove(+id);
   }
 }

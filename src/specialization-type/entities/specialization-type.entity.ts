@@ -20,7 +20,7 @@ export class SpecializationType {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(() => Type,type => type.specializationTypes)
+    @ManyToOne(() => Type)
     @JoinColumn({ name: 'type_id' })
     type: Type;
 

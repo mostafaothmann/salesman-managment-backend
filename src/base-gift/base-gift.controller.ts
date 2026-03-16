@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { BaseGiftService } from './base-gift.service';
 import { CreateBaseGiftDto } from './dto/create-base-gift.dto';
 import { UpdateBaseGiftDto } from './dto/update-base-gift.dto';
@@ -23,17 +23,17 @@ export class BaseGiftController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.baseGiftService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBaseGiftDto: UpdateBaseGiftDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateBaseGiftDto: UpdateBaseGiftDto) {
     return this.baseGiftService.update(+id, updateBaseGiftDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.baseGiftService.remove(+id);
   }
 }

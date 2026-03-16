@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { SampleService } from './sample.service';
 import { CreateSampleDto, type FilterSampleProps } from './dto/create-sample.dto';
 import { UpdateSampleDto } from './dto/update-sample.dto';
@@ -33,17 +33,17 @@ export class SampleController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.sampleService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSampleDto: UpdateSampleDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateSampleDto: UpdateSampleDto) {
     return this.sampleService.update(+id, updateSampleDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.sampleService.remove(+id);
   }
 

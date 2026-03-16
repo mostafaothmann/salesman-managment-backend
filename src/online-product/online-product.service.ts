@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UpdateOnlineOrderDto } from 'src/online-order/dto/update-online-order.dto';
+import { OnlineProduct } from './entities/online-product.entity';
 import { CreateOnlineProductDto } from './dto/create-online-product.dto';
 import { UpdateOnlineProductDto } from './dto/update-online-product.dto';
 
 @Injectable()
 export class OnlineProductService {
-  create(createOnlineProductDto: CreateOnlineProductDto) {
-    return 'This action adds a new onlineProduct';
+  constructor(
+    @InjectRepository(OnlineProduct)
+    private readonly onlineProductRepo: Repository<OnlineProduct>,
+  ) { }
+
+  create(createOnlineProductDto: CreateOnlineProductDto): Promise<OnlineProduct> {
+    const area = this.onlineProductRepo.create(createOnlineProductDto);
+    return this.onlineProductRepo.save(area);
   }
 
-  findAll() {
-    return `This action returns all onlineProduct`;
+  findAll(): Promise<OnlineProduct[]> {
+    return this.onlineProductRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} onlineProduct`;
+  findOne(id: number): Promise<OnlineProduct | null> {
+    return this.onlineProductRepo.findOneBy({ id });
   }
 
-  update(id: number, updateOnlineProductDto: UpdateOnlineProductDto) {
-    return `This action updates a #${id} onlineProduct`;
+  async update(id: number, updateOnlineProductDto: UpdateOnlineProductDto): Promise<OnlineProduct | null> {
+    await this.onlineProductRepo.update(id, updateOnlineProductDto);
+    return this.onlineProductRepo.findOneBy({ id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} onlineProduct`;
+  async remove(id: number): Promise<void> {
+    await this.onlineProductRepo.delete(id);
   }
 }

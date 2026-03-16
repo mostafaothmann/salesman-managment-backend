@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BaseOffer } from './entities/base-offer.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([BaseOffer])],
+  imports: [TypeOrmModule.forFeature([BaseOffer])],
   controllers: [BaseOfferController],
   providers: [BaseOfferService],
+  exports: [BaseOfferService]
 })
-export class BaseOfferModule {}
+export class BaseOfferModule { }

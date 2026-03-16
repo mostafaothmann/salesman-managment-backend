@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UpdateOnlineOrderDto } from 'src/online-order/dto/update-online-order.dto';
+import { OnlineOffer } from './entities/online-offer.entity';
 import { CreateOnlineOfferDto } from './dto/create-online-offer.dto';
 import { UpdateOnlineOfferDto } from './dto/update-online-offer.dto';
 
 @Injectable()
 export class OnlineOfferService {
-  create(createOnlineOfferDto: CreateOnlineOfferDto) {
-    return 'This action adds a new onlineOffer';
+  constructor(
+    @InjectRepository(OnlineOffer)
+    private readonly onlineOfferRepo: Repository<OnlineOffer>,
+  ) { }
+
+  create(createOnlineOfferDto: CreateOnlineOfferDto): Promise<OnlineOffer> {
+    const area = this.onlineOfferRepo.create(createOnlineOfferDto);
+    return this.onlineOfferRepo.save(area);
   }
 
-  findAll() {
-    return `This action returns all onlineOffer`;
+  findAll(): Promise<OnlineOffer[]> {
+    return this.onlineOfferRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} onlineOffer`;
+  findOne(id: number): Promise<OnlineOffer | null> {
+    return this.onlineOfferRepo.findOneBy({ id });
   }
 
-  update(id: number, updateOnlineOfferDto: UpdateOnlineOfferDto) {
-    return `This action updates a #${id} onlineOffer`;
+  async update(id: number, updateOnlineOfferDto: UpdateOnlineOfferDto): Promise<OnlineOffer | null> {
+    await this.onlineOfferRepo.update(id, updateOnlineOfferDto);
+    return this.onlineOfferRepo.findOneBy({ id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} onlineOffer`;
+  async remove(id: number): Promise<void> {
+    await this.onlineOfferRepo.delete(id);
   }
 }

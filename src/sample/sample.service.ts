@@ -104,7 +104,7 @@ export class SampleService {
       .addSelect('s.type_id', 'type_id')
       .addSelect('s.quantity', 'quantity')
       .addSelect('s.created_at', 'created_at')
-      .addSelect('s._visit_id', '_visit_id')
+      .addSelect('s.visit_id', 'visit_id')
 
     if (!isNaN(filters.filter_type_id) && filters.filter_type_id != -1) {
       query.andWhere(

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { RecoveryCaseImageService } from './recovery-case-image.service';
 import { CreateRecoveryCaseImageDto } from './dto/create-recovery-case-image.dto';
 import { UpdateRecoveryCaseImageDto } from './dto/update-recovery-case-image.dto';
@@ -18,17 +18,17 @@ export class RecoveryCaseImageController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.recoveryCaseImageService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecoveryCaseImageDto: UpdateRecoveryCaseImageDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateRecoveryCaseImageDto: UpdateRecoveryCaseImageDto) {
     return this.recoveryCaseImageService.update(+id, updateRecoveryCaseImageDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.recoveryCaseImageService.remove(+id);
   }
 }

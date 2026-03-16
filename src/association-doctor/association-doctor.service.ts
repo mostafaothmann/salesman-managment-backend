@@ -9,29 +9,29 @@ import { Repository } from 'typeorm';
 export class AssociationDoctorService {
   constructor(
     @InjectRepository(AssociationDoctor)
-    private readonly associationRepo: Repository<AssociationDoctor>,
+    private readonly associationDoctorRepo: Repository<AssociationDoctor>,
   ) { }
 
   create(associationDoctorDto: CreateAssociationDoctorDto): Promise<AssociationDoctor> {
-    const association = this.associationRepo.create(associationDoctorDto);
-    return this.associationRepo.save(association);
+    const association = this.associationDoctorRepo.create(associationDoctorDto);
+    return this.associationDoctorRepo.save(association);
   }
 
   findAll(): Promise<AssociationDoctor[]> {
-    return this.associationRepo.find({ relations: ['streets'] });
+    return this.associationDoctorRepo.find();
   }
 
   findOne(id: number): Promise<AssociationDoctor | null> {
-    return this.associationRepo.findOneBy({ id });
+    return this.associationDoctorRepo.findOneBy({ id });
   }
 
   async update(id: number, updateAssociationDoctorDto: UpdateAssociationDoctorDto): Promise<AssociationDoctor | null> {
-    await this.associationRepo.update(id, updateAssociationDoctorDto);
-    return this.associationRepo.findOneBy({ id });
+    await this.associationDoctorRepo.update(id, updateAssociationDoctorDto);
+    return this.associationDoctorRepo.findOneBy({ id });
   }
 
   async remove(id: number): Promise<void> {
-    await this.associationRepo.delete(id);
+    await this.associationDoctorRepo.delete(id);
   }
 
 }

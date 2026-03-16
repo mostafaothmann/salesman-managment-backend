@@ -2,9 +2,6 @@ import { IsBoolean, IsDate, IsNotEmpty, IsNumber, IsOptional, Max, Min } from "c
 
 export class CreateProductDto {
 
-    @IsNotEmpty()
-    @IsNumber()
-    quantity: number;
 
     @IsNotEmpty()
     @IsNumber()
@@ -18,21 +15,17 @@ export class CreateProductDto {
     @IsNumber()
     percentage_for_piece: number;
 
-    @IsNotEmpty()
     @IsNumber()
-    total_percentage: number;
+    total_percentage?: number;
 
-    @IsNotEmpty()
     @IsNumber()
-    base_percentage: number;
+    base_percentage?: number;
 
-    @IsNotEmpty()
     @IsNumber()
-    return_percentage: number;
+    return_percentage?: number;
 
-    @IsNotEmpty()
     @IsNumber()
-    total_delivery_percentage: number
+    total_delivery_percentage?: number
 
     @IsNotEmpty()
     @IsNumber()
@@ -43,39 +36,31 @@ export class CreateProductDto {
     price_for_piece: number;
 
     @IsNumber()
-    @IsNotEmpty()
-    base_total_price: number;
+    base_total_price?: number;
 
     @IsNumber()
-    return_total_price: number;
+    return_total_price?: number;
 
     @IsNumber()
-    @IsNotEmpty()
-    total_price: number;
-
-    @IsNumber()
-    @IsNotEmpty()
-    base_quantity: number;
+    total_price?: number;
 
     @IsNumber()
     @IsNotEmpty()
-    return_quantity: number;
+    base_quantity?: number;
 
     @IsNumber()
-    @IsNotEmpty()
-    total_quantity: number;
+    return_quantity?: number;
+
+    @IsNumber()
+    total_quantity?: number;
 
     @IsBoolean()
-    @IsNotEmpty()
-    has_return: boolean;
+    has_return?: boolean;
 
     @IsNumber()
-    @IsOptional()
-    return_discount?: number;
+    @IsNotEmpty()
+    return_discount: number;
 
-    @IsDate()
-    @IsOptional()
-    return_date?: Date;
 }
 
 

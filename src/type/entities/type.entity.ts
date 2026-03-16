@@ -37,6 +37,9 @@ export class Type {
     @Column({ type: 'int', nullable: true, default: 1 })
     delivery_percentage: number;//delivery percentage on the type
 
+    @Column({ type: 'int', nullable: true, default: 1 })
+    return_discount: number;//dreturn discount for the type 
+
     @Column({ type: 'int', nullable: true, default: 10 })
     percentage: number;//percentage for field salesman
 
@@ -50,14 +53,8 @@ export class Type {
     grouptype_id: number;//indicated the groput of the type 
 
     //each type has many products 
-    @ManyToOne(() => GroupType, groupType => groupType.types)
+    @ManyToOne(() => GroupType)
     @JoinColumn({ name: 'grouptype_id' })
     groupType: GroupType;
 
-    @OneToMany(() => SpecializationType, specializationType => specializationType.specialization)
-    specializationTypes: SpecializationType[];
-
-    //each Ingredient has many TypeIngredients
-    @OneToMany(() => TypeIngredient, typeIngredient => typeIngredient.ingredient)
-    typeIngredients: TypeIngredient[];
 }

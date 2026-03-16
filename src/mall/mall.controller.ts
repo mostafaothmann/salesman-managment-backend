@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { MallService } from './mall.service';
 import { CreateMallDto } from './dto/create-mall.dto';
 import { UpdateMallDto } from './dto/update-mall.dto';
@@ -18,17 +18,17 @@ export class MallController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.mallService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMallDto: UpdateMallDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateMallDto: UpdateMallDto) {
     return this.mallService.update(+id, updateMallDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.mallService.remove(+id);
   }
 }

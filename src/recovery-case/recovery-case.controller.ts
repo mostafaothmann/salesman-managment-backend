@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { RecoveryCaseService } from './recovery-case.service';
 import { CreateRecoveryCaseDto } from './dto/create-recovery-case.dto';
 import { UpdateRecoveryCaseDto } from './dto/update-recovery-case.dto';
@@ -18,17 +18,17 @@ export class RecoveryCaseController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.recoveryCaseService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecoveryCaseDto: UpdateRecoveryCaseDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateRecoveryCaseDto: UpdateRecoveryCaseDto) {
     return this.recoveryCaseService.update(+id, updateRecoveryCaseDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.recoveryCaseService.remove(+id);
   }
 }

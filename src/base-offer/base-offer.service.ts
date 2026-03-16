@@ -9,28 +9,28 @@ import { Repository } from 'typeorm';
 export class BaseOfferService {
   constructor(
     @InjectRepository(BaseOffer)
-    private readonly associationRepo: Repository<BaseOffer>,
+    private readonly baseOfferRepo: Repository<BaseOffer>,
   ) { }
 
-  create(associationPharmacistDto: CreateBaseOfferDto): Promise<BaseOffer> {
-    const association = this.associationRepo.create(associationPharmacistDto);
-    return this.associationRepo.save(association);
+  create(baseOfferDto: CreateBaseOfferDto): Promise<BaseOffer> {
+    const baseOffer = this.baseOfferRepo.create(baseOfferDto);
+    return this.baseOfferRepo.save(baseOffer);
   }
 
   findAll(): Promise<BaseOffer[]> {
-    return this.associationRepo.find({ relations: ['streets'] });
+    return this.baseOfferRepo.find();
   }
 
   findOne(id: number): Promise<BaseOffer | null> {
-    return this.associationRepo.findOneBy({ id });
+    return this.baseOfferRepo.findOneBy({ id });
   }
 
-  async update(id: number, updateAssociationPharmacistDto: UpdateBaseOfferDto): Promise<BaseOffer | null> {
-    await this.associationRepo.update(id, updateAssociationPharmacistDto);
-    return this.associationRepo.findOneBy({ id });
+  async update(id: number, updateBaseOfferDto: UpdateBaseOfferDto): Promise<BaseOffer | null> {
+    await this.baseOfferRepo.update(id, updateBaseOfferDto);
+    return this.baseOfferRepo.findOneBy({ id });
   }
 
   async remove(id: number): Promise<void> {
-    await this.associationRepo.delete(id);
+    await this.baseOfferRepo.delete(id);
   }
 }

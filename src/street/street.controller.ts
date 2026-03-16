@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { StreetService } from './street.service';
 import { CreateStreetDto } from './dto/create-street.dto';
 import { UpdateStreetDto } from './dto/update-street.dto';
@@ -18,17 +18,17 @@ export class StreetController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.streetService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStreetDto: UpdateStreetDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateStreetDto: UpdateStreetDto) {
     return this.streetService.update(+id, updateStreetDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.streetService.remove(+id);
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { OnlineOfferService } from './online-offer.service';
 import { CreateOnlineOfferDto } from './dto/create-online-offer.dto';
 import { UpdateOnlineOfferDto } from './dto/update-online-offer.dto';
@@ -18,17 +18,17 @@ export class OnlineOfferController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.onlineOfferService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOnlineOfferDto: UpdateOnlineOfferDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateOnlineOfferDto: UpdateOnlineOfferDto) {
     return this.onlineOfferService.update(+id, updateOnlineOfferDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.onlineOfferService.remove(+id);
   }
 }

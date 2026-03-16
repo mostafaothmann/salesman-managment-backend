@@ -11,38 +11,30 @@ export class CreateOfferDto {
     order_id: number;
 
     @IsNumber()
-    @IsNotEmpty()
     price_for_piece: number;
 
     @IsNumber()
-    @IsNotEmpty()
     base_total_price: number;
 
     @IsNumber()
     return_total_price: number;
 
     @IsNotEmpty()
-    @IsNumber()
     total_percentage: number;
 
     @IsNotEmpty()
-    @IsNumber()
     base_percentage: number;
 
     @IsNotEmpty()
-    @IsNumber()
     return_percentage: number;
 
     @IsNotEmpty()
-    @IsNumber()
     total_delivery_percentage: number
 
     @IsNumber()
-    @IsNotEmpty()
     total_price: number;
 
     @IsNumber()
-    @IsNotEmpty()
     base_quantity: number;
 
     @IsNumber()
@@ -50,7 +42,6 @@ export class CreateOfferDto {
     return_quantity: number;
 
     @IsNumber()
-    @IsNotEmpty()
     total_quantity: number;
 
     @IsBoolean()
@@ -58,21 +49,25 @@ export class CreateOfferDto {
     is_with_gift: boolean;
 
     @IsBoolean()
-    @IsNotEmpty()
     has_return: boolean;
 
     @IsNumber()
     return_discount: number;
 
-    @IsDate()
-    return_date: Date;
-
-    @IsNotEmpty()
     @IsNumber()
     delivery_percentage_for_piece: number;
 
-    @IsNotEmpty()
     @IsNumber()
     percentage_for_piece: number;
+}
 
+
+export interface FilterOfferProps {
+    page: number;
+    limit: number;
+    filter_base_offer_id: number;
+    filter_min_quantity: number;
+    filter_max_quantity: number;
+    filter_min_total_price: number;
+    filter_max_total_price: number;
 }

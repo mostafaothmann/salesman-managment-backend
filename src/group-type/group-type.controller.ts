@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { GroupTypeService } from './group-type.service';
 import { CreateGroupTypeDto } from './dto/create-group-type.dto';
 import { UpdateGroupTypeDto } from './dto/update-group-type.dto';
@@ -18,17 +18,17 @@ export class GroupTypeController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe)  id: string) {
     return this.groupTypeService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGroupTypeDto: UpdateGroupTypeDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateGroupTypeDto: UpdateGroupTypeDto) {
     return this.groupTypeService.update(+id, updateGroupTypeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.groupTypeService.remove(+id);
   }
 }

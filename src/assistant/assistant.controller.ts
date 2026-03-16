@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { AssistantService } from './assistant.service';
 import { CreateAssistantDto } from './dto/create-assistant.dto';
 import { UpdateAssistantDto } from './dto/update-assistant.dto';
@@ -21,19 +21,19 @@ export class AssistantController {
   getNames() {
     return this.assistantService.getNames();
   }
-  
+
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.assistantService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAssistantDto: UpdateAssistantDto) {
+  update(@Param('id', ParseIntPipe) id: string, @Body() updateAssistantDto: UpdateAssistantDto) {
     return this.assistantService.update(+id, updateAssistantDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.assistantService.remove(+id);
   }
 
