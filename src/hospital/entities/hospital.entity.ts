@@ -11,6 +11,12 @@ export class Hospital {
     id: number;
 
     @Column({ type: 'varchar', length: 255, nullable: false })
+    name: string;
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    email: string;
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
     lat: string;//latitude of the place 
 
     @Column({ type: 'varchar', length: 255, nullable: false })

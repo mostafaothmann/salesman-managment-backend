@@ -12,6 +12,6 @@ export class CreateAreaDto {
 
     @IsNotEmpty()
     @IsNumber()
-    city_Id: number;
+    city_id: number;
 
 }

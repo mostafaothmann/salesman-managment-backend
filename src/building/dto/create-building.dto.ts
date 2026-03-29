@@ -12,6 +12,6 @@ export class CreateBuildingDto {
 
     @IsNotEmpty()
     @IsNumber()
-    street_Id: number;
+    street_id: number;
 
 }

@@ -81,7 +81,7 @@ export class Pharmacist {
     street_id: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
-    sex: number;
+    gender: number;
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;

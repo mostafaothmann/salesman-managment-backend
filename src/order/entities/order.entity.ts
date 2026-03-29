@@ -54,7 +54,7 @@ export class Order {
     @Column({ type: 'int', nullable: false, default: 0 })
     total_percentage: number;
 
-    @Column({ type: 'int', nullable: false, default: 0 })
+    @Column({ type: 'int', nullable: false, default: 1 })
     order_status: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })

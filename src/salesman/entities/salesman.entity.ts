@@ -28,7 +28,7 @@ export class Salesman {
     admin_description: string;
 
     @Column({ type: 'int', nullable: false, default: 0 })
-    sex: number;
+    gender: number;
 
     //Assign assistant role to the assistant account directly
     @Column({ type: 'enum', enum: ROLE, nullable: false, default: ROLE.SALESMAN })

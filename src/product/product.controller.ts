@@ -13,9 +13,9 @@ export class ProductController {
   }
 
 
-  @Get('preview')
-  getPreview() {
-    return this.productService.getPreview();
+  @Get('preview/:id')
+  getPreview(@Param('id', ParseIntPipe) id: string) {
+    return this.productService.getPreview(+id);
   }
 
   @Get()

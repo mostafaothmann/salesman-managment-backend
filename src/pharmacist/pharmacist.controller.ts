@@ -18,13 +18,18 @@ export class PharmacistController {
     return this.pharmacistService.findAll(page, limit);
   }
 
+  @Get(`/show`)
+  show() {
+    return this.pharmacistService.show();
+  }
+
   @Get(`/fullname`)
   getNames() {
     return this.pharmacistService.getNames();
   }
 
   @Get(':id')
-    findOne(@Param('id', ParseIntPipe)  id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.pharmacistService.findOne(+id);
   }
 

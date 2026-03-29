@@ -16,6 +16,10 @@ export class PharmacistService {
     return this.docotorRepo.save(docotr)
   }
 
+  async show() {
+    return this.dataSource.query(`Select * from pharmacist p`)
+  }
+
   async findAll(page: number = 1, limit: number = 10) {
     const offset = (page - 1) * limit;
 

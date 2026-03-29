@@ -85,14 +85,15 @@ export class ProductService {
   }
 
 
-  async getPreview() {
+  async getPreview(id: number) {
     return await this.dataSource.query(`
-    SELECT p.id,p.order_id,p.type_id,
+       SELECT p.id,p.created_at,p.order_id,p.type_id,p.price_for_piece,
     p.base_quantity, p.return_quantity, p.total_quantity,
-    p.base_total_price,p.return_total_price, p.total_price,
+    p.base_total_price,p.return_total_price, p.total_price,p.return_discount,
     p.base_percentage,p.return_percentage,p.total_percentage,
+    p.percentage_for_piece,p.delivery_percentage_for_piece,
     p.total_delivery_percentage
-    FROM product p
+    FROM product p where p.order_id=${id}
   `);
   }
 
@@ -215,6 +216,7 @@ export class ProductService {
   }
 
   async update(id: number, updateProductDto: UpdateProductDto): Promise<Product | null> {
+    console.log(updateProductDto);
     const productBefore = await this.findOne(id)
     const type = await this.typeService.findOne(updateProductDto?.type_id || 0);
 
@@ -243,6 +245,7 @@ export class ProductService {
       (
         (updateProductDto?.base_percentage || 0) - updateProductDto?.return_percentage
       )
+    console.log(updateProductDto);
 
     const return_quantity = (updateProductDto?.return_quantity || 0) - (productBefore?.return_quantity || 0)
     this.typeService.update((type?.id || 0), { ...type, quantity: ((type?.quantity || 0) + (return_quantity || 0)) })

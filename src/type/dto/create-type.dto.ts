@@ -38,6 +38,13 @@ export class CreateTypeDto {
     @IsNotEmpty()
     delivery_percentage: number;
 
+    @IsNumber()
+    @IsNotEmpty()
+    price_for_sale: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    price_for_piece: number;
 
     @IsNumber()
     @IsNotEmpty()

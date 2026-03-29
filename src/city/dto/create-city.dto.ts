@@ -8,7 +8,7 @@ export class CreateCityDto {
 
     @IsNotEmpty()
     @IsNumber()
-    governorate_Id: number;
+    governorate_id: number;
 
     @IsOptional()
     @IsString()

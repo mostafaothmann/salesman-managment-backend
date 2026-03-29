@@ -122,11 +122,11 @@ export class CreateDoctorDto {
 
     @IsNotEmpty()
     @IsNumber()
-    governorate_Id?: number;
+    governorate_id?: number;
 
     @IsNotEmpty()
     @IsNumber()
-    city_Id?: number;
+    city_id?: number;
 
     @IsNotEmpty()
     @IsNumber()
@@ -134,7 +134,7 @@ export class CreateDoctorDto {
 
     @IsNotEmpty()
     @IsNumber()
-    sex?: number;
+    gender?: number;
 
     @IsNotEmpty()
     @IsNumber()

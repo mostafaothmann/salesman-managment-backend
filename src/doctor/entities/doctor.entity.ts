@@ -84,7 +84,7 @@ export class Doctor {
     city_id: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
-    sex: number;
+    gender: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
     area_id: number;

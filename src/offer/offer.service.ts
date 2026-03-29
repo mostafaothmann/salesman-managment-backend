@@ -85,14 +85,17 @@ export class OfferService {
     return this.offerRepo.save(offer);
   }
 
-  async getPreview() {
+  async getPreview(id: number) {
     return await this.dataSource.query(`
-    SELECT o.id,o.order_id,bf.type_id,o.base_offer_id,
+      SELECT o.id,o.created_at,o.order_id,o.price_for_piece,bf.type_id,
     o.base_quantity, o.return_quantity, o.total_quantity,
-    o.base_total_price,o.return_total_price, o.total_price,
+    o.base_total_price,o.return_total_price, o.total_price,o.return_discount,
     o.base_percentage,o.return_percentage,o.total_percentage,
+    o.percentage_for_piece,o.delivery_percentage_for_piece,
     o.total_delivery_percentage
-    FROM offer o INNER JOIN base_offer bf
+    FROM offer o
+    INNER JOIN base_offer bf ON bf.id = o.base_offer_id
+    WHERE o.order_id = ${id};  
   `);
   }
 
@@ -210,6 +213,7 @@ export class OfferService {
   }
 
   async update(id: number, updateOfferDto: UpdateOfferDto): Promise<Offer | null> {
+    console.log("offer", updateOfferDto);
     const offerBefore = await this.findOne(id)
     const baseOffer = await this.baseOfferService.findOne((updateOfferDto?.base_offer_id || 0));
     const type = await this.typeService.findOne(baseOffer?.type_id || 0);

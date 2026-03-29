@@ -12,6 +12,6 @@ export class CreateStreetDto {
 
     @IsNotEmpty()
     @IsNumber()
-    area_Id: number;
+    area_id: number;
 
 }

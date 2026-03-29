@@ -105,6 +105,15 @@ export class OrderService {
         `o.total_price  <= :maxTotal`,
         { maxTotal: filters.filter_max_total_price },
       );
+      
+    }
+
+      if (!isNaN(filters.filter_order_status) && filters.filter_order_status > 0) {
+      query.andWhere(
+        `o.order_status  = :status`,
+        { status: filters.filter_order_status },
+      );
+      
     }
     // Pagination
     filters.limit = filters.limit > 100 ? 100 : filters.limit;

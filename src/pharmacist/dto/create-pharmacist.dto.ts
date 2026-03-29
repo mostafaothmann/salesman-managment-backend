@@ -13,7 +13,7 @@ export class CreatePharmacistDto {
 
     @IsNotEmpty()
     @IsNumber()
-    sex?: number;
+    gender?: number;
 
     @IsOptional()
     @IsString()
@@ -84,11 +84,11 @@ export class CreatePharmacistDto {
 
     @IsNotEmpty()
     @IsNumber()
-    governorate_Id: number;
+    governorate_id: number;
 
     @IsNotEmpty()
     @IsNumber()
-    city_Id: number;
+    city_id: number;
 
     @IsNotEmpty()
     @IsNumber()

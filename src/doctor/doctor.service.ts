@@ -10,9 +10,14 @@ export class DoctorService {
   constructor(@InjectRepository(Doctor)
   private readonly docotorRepo: Repository<Doctor>,
     private readonly dataSource: DataSource) { }
+    
   create(createDoctorDto: CreateDoctorDto): Promise<Doctor> {
     const docotr = this.docotorRepo.create(createDoctorDto);
     return this.docotorRepo.save(docotr)
+  }
+
+  async show() {
+    return this.dataSource.query(`Select * from doctor d`)
   }
 
   async findAll(page: number = 1, limit: number = 10) {

@@ -30,6 +30,8 @@ export class Type {
     @Column({ type: 'int', nullable: true })
     price_for_piece: number;//price for one piece of the type 
 
+    @Column({ type: 'int', nullable: true })
+    price_for_sale: number;//price for one piece of the type 
 
     @Column({ type: 'int', nullable: true, default: 1 })
     quantity: number;//quantity existed in the repos

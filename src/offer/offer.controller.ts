@@ -17,9 +17,9 @@ export class OfferController {
     return this.offerService.findAll();
   }
 
-  @Get('preview')
-  getPreview() {
-    return this.offerService.getPreview();
+  @Get('preview/:id')
+  getPreview(@Param('id', ParseIntPipe) id: string) {
+    return this.offerService.getPreview(+id);
   }
 
   @Get(':id')

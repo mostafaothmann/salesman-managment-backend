@@ -20,6 +20,10 @@ export class PharmacistVisitService {
     return this.visitRepo.save(visit);
   }
 
+  async show() {
+    return this.dataSource.query(`Select * from pharmacist_visit pv`)
+  }
+
   async findAll(page: number = 1, limit: number = 10) {
     const offset = (page - 1) * limit;
     const data = await this.dataSource.query(`select pv.lan,pv.lat, pv.id,pv.visit_status_id,pv.salesman_id,pv.assistant_id,
@@ -41,7 +45,7 @@ export class PharmacistVisitService {
       lastPage: Math.ceil(total / limit),
     };
   }
-  
+
   async filter(
     filters: FilterPharmacistVisitProps,
   ): Promise<Record<string, any>> {

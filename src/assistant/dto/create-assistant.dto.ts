@@ -61,7 +61,7 @@ export class CreateAssistantDto {
     
     @IsNotEmpty()
     @IsNumber()
-    sex: number;
+    gender: number;
 
     @IsNotEmpty()
     @IsNumber()

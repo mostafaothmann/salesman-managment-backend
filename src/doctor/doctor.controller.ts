@@ -13,6 +13,11 @@ export class DoctorController {
     return this.doctorService.create(createDoctorDto);
   }
 
+  @Get('/show')
+  show() {
+    return this.doctorService.show();
+  }
+
   @Get()
   findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 10) {
     return this.doctorService.findAll(page, limit);
@@ -22,9 +27,9 @@ export class DoctorController {
   getNames() {
     return this.doctorService.getNames();
   }
-  
+
   @Get(':id')
-    findOne(@Param('id', ParseIntPipe)  id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.doctorService.findOne(+id);
   }
 
