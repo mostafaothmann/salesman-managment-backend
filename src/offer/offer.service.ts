@@ -18,6 +18,10 @@ export class OfferService {
     private readonly dataSource: DataSource
   ) { }
 
+  async show() {
+    return this.dataSource.query(`Select o.*,bf.number_of_gifts,bf.number_of_pieces from offer o INNER JOIN base_offer bf on o.base_offer_id=bf.id `)
+  }
+
   async create(createOfferDto: CreateOfferDto): Promise<Offer> {
     const baseOffer = await this.baseOfferService.findOne(createOfferDto?.base_offer_id);
     const type = await this.typeService.findOne(baseOffer?.type_id || 0);
@@ -87,7 +91,7 @@ export class OfferService {
 
   async getPreview(id: number) {
     return await this.dataSource.query(`
-      SELECT o.id,o.created_at,o.order_id,o.price_for_piece,bf.type_id,
+      SELECT bf.number_of_gifts,bf.number_of_pieces,o.id,o.created_at,o.order_id,o.price_for_piece,bf.type_id,
     o.base_quantity, o.return_quantity, o.total_quantity,
     o.base_total_price,o.return_total_price, o.total_price,o.return_discount,
     o.base_percentage,o.return_percentage,o.total_percentage,
@@ -108,8 +112,8 @@ export class OfferService {
     o.base_total_price,o.return_total_price, o.total_price,o.return_discount,
     o.base_percentage,o.return_percentage,o.total_percentage,
     o.percentage_for_piece,o.delivery_percentage_for_piece,
-    o.total_delivery_percentage
-    FROM offer o
+    o.total_delivery_percentage,bf.number_of_pieces,bf.number_of_gifts,bf.type_id
+    FROM offer o INNER JOIN base_offer bf on o.base_offer_id = bf.id 
     LIMIT ${limit} OFFSET ${offset};
   `);
 

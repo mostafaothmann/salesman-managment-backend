@@ -8,6 +8,12 @@ import type { FilterPharmacistProps } from './dto/create-pharmacist.dto';
 export class PharmacistController {
   constructor(private readonly pharmacistService: PharmacistService) { }
 
+
+  @Get(`/show`)
+  show() {
+    return this.pharmacistService.show();
+  }
+
   @Post()
   create(@Body() createPharmacistDto: CreatePharmacistDto) {
     return this.pharmacistService.create(createPharmacistDto);
@@ -16,11 +22,6 @@ export class PharmacistController {
   @Get()
   findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 10) {
     return this.pharmacistService.findAll(page, limit);
-  }
-
-  @Get(`/show`)
-  show() {
-    return this.pharmacistService.show();
   }
 
   @Get(`/fullname`)
@@ -46,6 +47,28 @@ export class PharmacistController {
   @Post('/filter')
   filter(@Body() filters: FilterPharmacistProps) {
     return this.pharmacistService.filter(filters);
+  }
+
+  //for  Profile Page 
+
+  @Get('/samples/:id')
+  getSamples(@Param('id', ParseIntPipe) id: string) {
+    return this.pharmacistService.getSamples(+id)
+  }
+
+  @Get('/visits/:id')
+  getVisits(@Param('id', ParseIntPipe) id: string) {
+    return this.pharmacistService.getVisits(+id)
+  }
+
+  @Get('/gifts/:id')
+  getGfits(@Param('id', ParseIntPipe) id: string) {
+    return this.pharmacistService.getGifts(+id)
+  }
+
+  @Get('/orders/:id')
+  getOrders(@Param('id', ParseIntPipe) id: string) {
+    return this.pharmacistService.getOrders(+id)
   }
 
 }

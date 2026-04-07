@@ -40,4 +40,20 @@ export class AssistantService {
   async getNames(): Promise<{ first_name: string, last_name: string }[] | []> {
     return await this.dataSource.query(`select a.id,a.first_name,a.last_name from assistant as a`)
   }
+
+
+  //for Profile Page
+
+  async getDoctorVisits(id: number): Promise<void> {
+    return await this.dataSource.query(`select v.* from visit v where v.typeC='doctor' and v.assistant_id=${id}`)
+  }
+
+  async getPharmacistVisits(id: number): Promise<void> {
+    return await this.dataSource.query(`select v.* from visit v where v.typeC='pharmacist' and v.assistant_id=${id}`)
+  }
+
+  async getOrders(id: number): Promise<void> {
+    return await this.dataSource.query(`select o.* from \`order\` o where o.assistant_id=${id}`)
+  }
+
 }

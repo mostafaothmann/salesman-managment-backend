@@ -37,19 +37,26 @@ export class TypeController {
     return this.typeService.remove(+id);
   }
 
-  @Get('/samples-doctors/:id')
+  //for  Profile Page 
+
+  @Get('/doctors-samples/:id')
   getSamplesDoctors(@Param('id', ParseIntPipe) id: string) {
-    return this.typeService.getSamplesDoctors(+id)
+    return this.typeService.getDoctorsSamples(+id)
   }
 
-  @Get('/samples-pharmacists/:id')
+  @Get('/pharmacists-samples/:id')
   getSamplesPharmacists(@Param('id', ParseIntPipe) id: string) {
-    return this.typeService.getSamplesPharmacists(+id)
+    return this.typeService.getPharmacistsSamples(+id)
   }
 
   @Get('/base-offers/:id')
   getBaseOffers(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getBaseOffers(+id)
+  }
+
+  @Get('/orders/:id')
+  getOrders(@Param('id', ParseIntPipe) id: string) {
+    return this.typeService.getOrders(+id)
   }
 
   @Get('/recovery-cases/:id')
@@ -62,6 +69,11 @@ export class TypeController {
     return this.typeService.getProducts(+id)
   }
 
+  @Get('/offers/:id')
+  getOffers(@Param('id', ParseIntPipe) id: string) {
+    return this.typeService.getOffers(+id)
+  }
+
   @Get('/online-products/:id')
   getOnlineProducts(@Param('id', ParseIntPipe) id: string) {
     return this.typeService.getOnlineProducts(+id)
@@ -69,12 +81,12 @@ export class TypeController {
 
   @Get('/doctors-visits/:id')
   getDoctorsVisits(@Param('id', ParseIntPipe) id: string) {
-    return this.typeService.getVisitsDoctors(+id)
+    return this.typeService.getDoctorsVisits(+id)
   }
 
   @Get('/pharmacists-visits/:id')
   getPharmacistsVisits(@Param('id', ParseIntPipe) id: string) {
-    return this.typeService.getVisitsPharmacists(+id)
+    return this.typeService.getPharmacistsVisits(+id)
   }
 
   @Get('/ingredients/:id')

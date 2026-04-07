@@ -7,7 +7,7 @@ export class BaseOffer {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @CreateDateColumn({type:'datetime'})
+    @CreateDateColumn({ type: 'datetime' })
     created_at: Date;
 
     @Column({ type: 'int', nullable: false })
@@ -18,6 +18,9 @@ export class BaseOffer {
 
     @Column({ type: 'int', nullable: false })
     type_id: number;
+
+    @Column({ type: 'boolean', nullable: true ,default:true})
+    isActive: boolean;
 
     //each BaseOffer has many offers in it 
     @ManyToOne(() => Type)

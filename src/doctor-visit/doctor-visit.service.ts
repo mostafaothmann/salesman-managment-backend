@@ -14,6 +14,10 @@ export class DoctorVisitService {
     private readonly dataSource: DataSource
   ) { }
 
+  async show() {
+    return this.dataSource.query(`Select * from visit v where v.typeC='doctor'`)
+  }
+
   create(createVisitDto: CreateDoctorVisitDto): Promise<DoctorVisit> {
     const visit = this.visitRepo.create(createVisitDto);
     return this.visitRepo.save(visit);

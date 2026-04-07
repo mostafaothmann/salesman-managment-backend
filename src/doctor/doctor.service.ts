@@ -10,7 +10,7 @@ export class DoctorService {
   constructor(@InjectRepository(Doctor)
   private readonly docotorRepo: Repository<Doctor>,
     private readonly dataSource: DataSource) { }
-    
+
   create(createDoctorDto: CreateDoctorDto): Promise<Doctor> {
     const docotr = this.docotorRepo.create(createDoctorDto);
     return this.docotorRepo.save(docotr)
@@ -25,7 +25,7 @@ export class DoctorService {
 
     const data = await this.dataSource.query(`
     SELECT d.id, d.first_name, d.last_name, d.specialization_id,
-           d.classification, d.loyalty, d.last_visit_date,
+           d.classification_id, d.loyalty_id, d.last_visit_date,
            d.lat, d.lan, d.phone_number, d.telephone_number,
            d.city_id, d.area_id, d.street_id
     FROM doctor d
@@ -57,8 +57,8 @@ export class DoctorService {
       .addSelect('doctor.last_name', 'last_name')
       .addSelect('TIMESTAMPDIFF(YEAR,doctor.birth_date,CURDATE())', 'age')
       .addSelect('doctor.specialization_id', 'specialization_id')
-      .addSelect('doctor.classification', 'classification')
-      .addSelect('doctor.loyalty', 'loyalty')
+      .addSelect('doctor.classification_id', 'classification_id')
+      .addSelect('doctor.loyalty_id', 'loyalty_id')
       .addSelect('doctor.last_visit_date', 'last_visit_date')
       .addSelect('doctor.city_id', 'city_id')
       .addSelect('doctor.area_id', 'area_id')
@@ -118,28 +118,28 @@ export class DoctorService {
 
     if (!isNaN(filters.filter_min_classification) && filters.filter_min_classification > -1) {
       query.andWhere(
-        `doctor.classification >= :minClassification`,
+        `doctor.classification_id >= :minClassification`,
         { minClassification: filters.filter_min_classification },
       );
     }
 
     if (!isNaN(filters.filter_max_classification) && filters.filter_max_classification < 6) {
       query.andWhere(
-        `doctor.classification <= :maxClassification`,
+        `doctor.classification_id <= :maxClassification`,
         { maxClassification: filters.filter_max_classification },
       );
     }
 
     if (!isNaN(filters.filter_min_loyalty) && filters.filter_min_loyalty > -1) {
       query.andWhere(
-        `doctor.loyalty >= :minLoyalty`,
+        `doctor.loyalty_id >= :minLoyalty`,
         { minLoyalty: filters.filter_min_loyalty },
       );
     }
 
     if (!isNaN(filters.filter_max_loyalty) && filters.filter_max_loyalty < 6) {
       query.andWhere(
-        `doctor.loyalty <= :maxLoyalty`,
+        `doctor.loyalty_id <= :maxLoyalty`,
         { maxLoyalty: filters.filter_max_loyalty },
       );
     }
@@ -156,9 +156,7 @@ export class DoctorService {
       query.getRawMany(),
       query.clone().getCount(),
     ]);
-    console.log(filters)
 
-    console.log(query.getQueryAndParameters())
     return {
       data,
       total,
@@ -183,4 +181,35 @@ export class DoctorService {
   async getNames(): Promise<{ first_name: string, last_name: string }[] | []> {
     return await this.dataSource.query(`select d.id,d.first_name,d.last_name from doctor as d `)
   }
+
+  //for Profile Page
+  async getSamples(id: number): Promise<void> {
+    return await this.dataSource.query(`select s.*,v.salesman_id,v.doctor_id from sample s  INNER JOIN visit v on s.visit_id = v.id where v.doctor_id=${id} AND v.typeC='doctor'`)
+  }
+
+  async getVisits(id: number): Promise<void> {
+    return await this.dataSource.query(`select *
+       from visit v where v.doctor_id=${id} AND v.typeC='doctor'`)
+  }
+
+  async getAssociations(id: number): Promise<void> {
+    return await this.dataSource.query(`select *
+       from association a INNER JOIN association_doctor ad on a.id = ad.association_id AND ad.doctor_id=${id}`)
+  }
+
+  async getHospitals(id: number): Promise<void> {
+    return await this.dataSource.query(`select *
+       from hospital h INNER JOIN hospital_doctor hd on h.id = hd.hospital_id AND hd.doctor_id=${id}`)
+  }
+
+  async getPharmacists(id: number): Promise<void> {
+    return await this.dataSource.query(`select p.*
+       from pharmacist p INNER JOIN doctor_pharmacist dp on p.id = dp.pharmacist_id AND dp.doctor_id=${id}`)
+  }
+
+  async getGifts(id: number): Promise<void> {
+    return await this.dataSource.query(`select bg.name,gv.*,v.salesman_id,v.doctor_id from gift_visit gv INNER JOIN visit v on gv.visit_id = v.id  
+      INNER JOIN base_gift bg on bg.id= gv.base_gift_id where v.doctor_id=${id} AND v.typeC='doctor'`)
+  }
+
 }

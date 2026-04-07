@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreateBaseOfferDto {
 
@@ -13,5 +13,9 @@ export class CreateBaseOfferDto {
     @IsNumber()
     @IsNotEmpty()
     type_id: number;
-    
+
+    @IsBoolean()
+    @IsNotEmpty()
+    isActive: boolean;
+
 }

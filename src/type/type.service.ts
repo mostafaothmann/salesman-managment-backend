@@ -36,12 +36,12 @@ export class TypeService {
     await this.typeRepo.delete(id);
   }
 
-  async getSamplesDoctors(id: number): Promise<void> {
-    return await this.dataSource.query(`select id,quantity from sample_doctor where type_id=${id}`)
+  async getDoctorsSamples(id: number): Promise<void> {
+    return await this.dataSource.query(`select s.*,v.salesman_id,v.doctor_id from sample s  INNER JOIN visit v on s.visit_id = v.id where v.type_id=${id} AND v.typeC='doctor'`)
   }
 
-  async getSamplesPharmacists(id: number): Promise<void> {
-    return await this.dataSource.query(`select sp.id,sp.quantity from sample_pharmacist sp where sp.type_id=${id}`)
+  async getPharmacistsSamples(id: number): Promise<void> {
+    return await this.dataSource.query(`select s.*,v.salesman_id,v.pharmacist_id from sample s  INNER JOIN visit v on s.visit_id = v.id where v.type_id=${id} AND v.typeC='pharmacist'`)
   }
 
   async getSpecializations(id: number): Promise<void> {
@@ -50,23 +50,28 @@ export class TypeService {
       doctor d ON s.id = d.specialization_id WHERE st.type_id = ${id} GROUP BY s.id, s.name;
 `)
   }
-  async getVisitsDoctors(id: number): Promise<void> {
-    return await this.dataSource.query(`select dv.id,dv.note,dv.salesman_id,dv.doctor_id,dv.id,dv.created_at
-       from doctor_visit dv where dv.type_id=${id}`)
+  async getDoctorsVisits(id: number): Promise<void> {
+    return await this.dataSource.query(`select *
+       from visit v where v.type_id=${id} AND v.typeC='doctor'`)
   }
 
-  async getVisitsPharmacists(id: number): Promise<void> {
-    return await this.dataSource.query(`select pv.id,pv.note,pv.salesman_id,pv.pharmacist_id,pv.id,pv.created_at
-       from pharmacist_visit pv where pv.type_id=${id}`)
+  async getPharmacistsVisits(id: number): Promise<void> {
+    return await this.dataSource.query(`select *
+       from visit v where v.type_id=${id} AND v.typeC='pharmacist'`)
   }
 
   async getProducts(id: number): Promise<void> {
-    return await this.dataSource.query(`select p.id,p.total_price,p.has_return,p.total_quantity,p.order_id,pv.created_at
-       from product p where p.type_id=${id}`)
+    return await this.dataSource.query(`select p.*
+       from product p INNER JOIN \`order\` o  where p.type_id=${id} AND o.order_status=2`)
+  }
+
+  async getOffers(id: number): Promise<void> {
+    return await this.dataSource.query(`select o.*
+       from offer o INNER JOIN base_offer bo where bo.type_id=${id}`)
   }
 
   async getOnlineProducts(id: number): Promise<void> {
-    return await this.dataSource.query(`select p.id,p.total_price,p.has_return,p.total_quantity,p.order_id,pv.created_at
+    return await this.dataSource.query(`select *
        from online_product p where p.type_id=${id}`)
   }
 
@@ -78,6 +83,11 @@ export class TypeService {
   async getBaseOffers(id: number): Promise<void> {
     return await this.dataSource.query(`select *
        from base_offer bs where bs.type_id=${id}`)
+  }
+
+  async getOrders(id: number): Promise<void> {
+    return await this.dataSource.query(`select o.*
+       from \`order\`  o INNER JOIN product p on p.order_id = o.id AND p.type_id=${id} `)
   }
 
   async getIngredients(id: number): Promise<void> {

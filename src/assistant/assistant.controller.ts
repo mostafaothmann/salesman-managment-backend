@@ -37,4 +37,19 @@ export class AssistantController {
     return this.assistantService.remove(+id);
   }
 
+  @Get('/doctor-visits/:id')
+  getDoctorVisits(@Param('id', ParseIntPipe) id: string) {
+    return this.assistantService.getDoctorVisits(+id)
+  }
+
+  @Get('/pharmacist-visits/:id')
+  getPharmacistVisits(@Param('id', ParseIntPipe) id: string) {
+    return this.assistantService.getPharmacistVisits(+id)
+  }
+
+  @Get('/orders/:id')
+  getOrders(@Param('id', ParseIntPipe) id: string) {
+    return this.assistantService.getOrders(+id)
+  }
+
 }

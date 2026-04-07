@@ -13,6 +13,11 @@ export class OrderService {
     private readonly dataSource: DataSource
   ) { }
 
+
+  async show() {
+    return this.dataSource.query(`Select * from  \`order\` o`)
+  }
+
   create(createOrderDto: CreateOrderDto): Promise<Order> {
     const area = this.orderRepo.create(createOrderDto);
     return this.orderRepo.save(area);
@@ -105,15 +110,15 @@ export class OrderService {
         `o.total_price  <= :maxTotal`,
         { maxTotal: filters.filter_max_total_price },
       );
-      
+
     }
 
-      if (!isNaN(filters.filter_order_status) && filters.filter_order_status > 0) {
+    if (!isNaN(filters.filter_order_status) && filters.filter_order_status > 0) {
       query.andWhere(
         `o.order_status  = :status`,
         { status: filters.filter_order_status },
       );
-      
+
     }
     // Pagination
     filters.limit = filters.limit > 100 ? 100 : filters.limit;

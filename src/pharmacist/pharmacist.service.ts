@@ -174,4 +174,26 @@ export class PharmacistService {
   async getNames(): Promise<{ first_name: string, last_name: string }[] | []> {
     return await this.dataSource.query(`select p.id,p.first_name,p.last_name from pharmacist as p `)
   }
+
+
+  //for Profile Page
+  async getSamples(id: number): Promise<void> {
+    return await this.dataSource.query(`select s.*,v.salesman_id,v.pharmacist_id from sample s  INNER JOIN visit v on s.visit_id = v.id where v.pharmacist_id=${id} AND v.typeC='pharmacist'`)
+  }
+
+  async getVisits(id: number): Promise<void> {
+    return await this.dataSource.query(`select *
+         from visit v where v.pharmacist_id=${id} AND v.typeC='pharmacist'`)
+  }
+
+  async getGifts(id: number): Promise<void> {
+    return await this.dataSource.query(`select bg.name,gv.*,v.salesman_id,v.pharmacist_id from gift_visit gv INNER JOIN visit v on gv.visit_id = v.id  
+        INNER JOIN base_gift bg on bg.id= gv.base_gift_id where v.pharmacist_id=${id} AND v.typeC='pharmacist'`)
+  }
+
+  async getOrders(id: number): Promise<void> {
+    return await this.dataSource.query(`select o.* from \`order\` o where o.pharmacist_id=${id} `)
+  }
+
+
 }

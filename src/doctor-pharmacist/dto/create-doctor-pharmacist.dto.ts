@@ -10,8 +10,4 @@ export class CreateDoctorPharmacistDto {
     @IsNotEmpty()
     pharmacist_id: number;
 
-    @IsOptional()
-    @IsString()
-    status?: string;
-
 }

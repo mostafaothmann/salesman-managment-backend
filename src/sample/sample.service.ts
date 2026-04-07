@@ -14,6 +14,8 @@ export class SampleService {
     private readonly dataSource: DataSource
   ) { }
 
+
+
   create(createSampleDto: CreateSampleDto): Promise<Sample> {
     const sample = this.sampleRepo.create(createSampleDto);
     return this.sampleRepo.save(sample);
@@ -25,7 +27,7 @@ export class SampleService {
 
   async findAll(page: number = 1, limit: number = 10) {
     const offset = (page - 1) * limit;
-    const data = await this.dataSource.query(`select * from sample
+    const data = await this.dataSource.query(`select s.*,v.salesman_id from sample s INNER JOIN visit v on s.visit_id=v.id
        LIMIT ${limit} OFFSET ${offset};
        `);
     const totalResult = await this.dataSource.query(`
@@ -43,12 +45,10 @@ export class SampleService {
 
   async findAllPharmacists(page: number = 1, limit: number = 10) {
     const offset = (page - 1) * limit;
-    const data = await this.dataSource.query(`select s.id,s.quantity,s.visit_id,s.type_id,s.created_at from sample as s INNER JOIN visit as v on s.visit_id = v.id 
-      INNER JOIN pharmacist as p on v.pharmacist_id=p.id;
+    const data = await this.dataSource.query(`select v.salesman_id,v.pharmacist_id,s.id,s.quantity,s.visit_id,s.type_id,s.created_at from sample as s INNER JOIN visit as v on s.visit_id = v.id where v.typeC='pharmacist'
        `);
     const totalResult = await this.dataSource.query(`
-    select COUNT(*) from sample as s INNER JOIN visit as v on s.visit_id = v.id 
-      INNER JOIN pharmacist as p on v.pharmacist_id =p.id;
+    select COUNT(*) from sample as s INNER JOIN visit as v on s.visit_id = v.id where v.typeC='doctor'
   `);
     const total = parseInt(totalResult[0].total, 10);
     return {
@@ -62,13 +62,11 @@ export class SampleService {
 
   async findAllDoctors(page: number = 1, limit: number = 10) {
     const offset = (page - 1) * limit;
-    const data = await this.dataSource.query(`select s.id,s.quantity,s.visit_id,s.type_id,s.created_at from sample as s INNER JOIN visit as v on s.visit_id = v.id 
-      INNER JOIN doctor as d on v.doctor_id =d.id
+    const data = await this.dataSource.query(`select v.salesman_id,v.doctor_id,s.id,s.quantity,s.visit_id,s.type_id,s.created_at from sample as s INNER JOIN visit as v on s.visit_id = v.id where v.typeC='doctor'
        LIMIT ${limit} OFFSET ${offset};
        `);
     const totalResult = await this.dataSource.query(`
-    select COUNT(*) from sample as s INNER JOIN visit as v on s.visit_id = v.id 
-      INNER JOIN doctor as d on v.doctor_id =d.id;
+    select COUNT(*) from sample as s INNER JOIN visit as v on s.visit_id = v.id where v.typeC='doctor'
   `);
     const total = parseInt(totalResult[0].total, 10);
     return {

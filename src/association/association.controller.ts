@@ -16,6 +16,11 @@ export class AssosiationController {
   findAll() {
     return this.assosiationService.findAll();
   }
+  
+  @Get(`/names`)
+  getNames() {
+    return this.assosiationService.getNames();
+  }
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: string) {
@@ -31,4 +36,6 @@ export class AssosiationController {
   remove(@Param('id', ParseIntPipe) id: string) {
     return this.assosiationService.remove(+id);
   }
+
+
 }

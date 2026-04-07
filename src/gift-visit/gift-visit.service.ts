@@ -25,7 +25,7 @@ export class GiftVisitService {
 
   async findAll(page: number = 1, limit: number = 10) {
     const offset = (page - 1) * limit;
-    const data = await this.dataSource.query(`select * from gift_visit
+    const data = await this.dataSource.query(`select gv.*,bg.name from gift_visit gv INNER JOIN base_gift bg on gv.base_gift_id = bg.id
        LIMIT ${limit} OFFSET ${offset};
        `);
     const totalResult = await this.dataSource.query(`
@@ -100,7 +100,8 @@ export class GiftVisitService {
 
     const query = this.giftVisitRepo
       .createQueryBuilder('gv')
-      .select('gv.id', 'id')
+      .innerJoin('base_gift', 'bg', 'gv.base_gift_id = bg.id')
+      .addSelect('bg.name','name')
       .addSelect('gv.base_gift_id', 'base_gift_id')
       .addSelect('gv.quantity', 'quantity')
       .addSelect('gv.created_at', 'created_at')

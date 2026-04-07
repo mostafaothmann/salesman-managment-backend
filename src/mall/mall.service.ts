@@ -34,4 +34,9 @@ export class MallService {
   async remove(id: number): Promise<void> {
     await this.mallRepo.delete(id);
   }
+
+  async getNames(): Promise<{ name: string }[] | []> {
+    return this.dataSource.query(`select m.name,m.id from mall as m`)
+  }
+
 }

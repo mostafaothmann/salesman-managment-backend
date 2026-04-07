@@ -4,7 +4,7 @@ import { Visit } from 'src/visit/entities/visit.entity';
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
-@Unique('unique_sample', ['visit', 'type']) // prevents duplicates
+@Unique('unique_sample', ['visit', 'type']) 
 export class Sample {
 
     @PrimaryGeneratedColumn()

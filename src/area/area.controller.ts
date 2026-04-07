@@ -22,6 +22,11 @@ export class AreaController {
     return this.areaService.findAll();
   }
 
+  @Get(`/names`)
+  getNames() {
+    return this.areaService.getNames();
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: string) {
     return this.areaService.findOne(+id);
@@ -36,4 +41,72 @@ export class AreaController {
   remove(@Param('id', ParseIntPipe) id: string) {
     return this.areaService.remove(+id);
   }
+
+  //for Profile Page
+
+  @Get('/doctors-visits/:id')
+  getDoctorVisits(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getDoctorVisits(+id)
+  }
+
+  @Get('/pharmacists-visits/:id')
+  getPharmacistVisits(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getPharmacistVisits(+id)
+  }
+
+  @Get('/doctors/:id')
+  getDoctors(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getDoctors(+id)
+  }
+
+  @Get('/pharmacists/:id')
+  getPharmacists(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getPharmacists(+id)
+  }
+
+  @Get('/doctors-samples/:id')
+  getDoctorsSamples(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getDoctorsSamples(+id)
+  }
+
+  @Get('/pharmacists-samples/:id')
+  getPharmacistsSamples(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getPharmacistsSamples(+id)
+  }
+
+  @Get('/doctors-gifts/:id')
+  getDoctorsGifts(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getDoctorsGifts(+id)
+  }
+
+  @Get('/pharmacists-gifts/:id')
+  getPharmacistsGifts(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getPharmacistsGifts(+id)
+  }
+
+  @Get('/orders/:id')
+  getOrders(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getOrders(+id)
+  }
+
+  @Get('/streets/:id')
+  getStreets(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getStreets(+id)
+  }
+
+  @Get('/hospitals/:id')
+  getHospitals(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getHospitals(+id)
+  }
+
+  @Get('/malls/:id')
+  getMalls(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getMalls(+id)
+  }
+
+  @Get('/associations/:id')
+  getAssociations(@Param('id', ParseIntPipe) id: string) {
+    return this.areaService.getAssociations(+id)
+  }
+
 }

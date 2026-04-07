@@ -48,6 +48,36 @@ export class DoctorController {
     return this.doctorService.filter(filters);
   }
 
+  //for  Profile Page 
 
+  @Get('/samples/:id')
+  getSamples(@Param('id', ParseIntPipe) id: string) {
+    return this.doctorService.getSamples(+id)
+  }
+
+  @Get('/visits/:id')
+  getVisits(@Param('id', ParseIntPipe) id: string) {
+    return this.doctorService.getVisits(+id)
+  }
+
+  @Get('/associations/:id')
+  getAssociations(@Param('id', ParseIntPipe) id: string) {
+    return this.doctorService.getAssociations(+id)
+  }
+
+  @Get('/hospitals/:id')
+  getHospitals(@Param('id', ParseIntPipe) id: string) {
+    return this.doctorService.getHospitals(+id)
+  }
+
+  @Get('/pharmacists/:id')
+  getPharmacists(@Param('id', ParseIntPipe) id: string) {
+    return this.doctorService.getPharmacists(+id)
+  }
+
+  @Get('/gifts/:id')
+  getGfits(@Param('id', ParseIntPipe) id: string) {
+    return this.doctorService.getGifts(+id)
+  }
 
 }

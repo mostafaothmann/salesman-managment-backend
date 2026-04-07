@@ -5,7 +5,12 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 
 @Controller('order')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) { }
+
+  @Get('/show')
+  show() {
+    return this.orderService.show();
+  }
 
   @Post()
   create(@Body() createOrderDto: CreateOrderDto) {
@@ -18,7 +23,7 @@ export class OrderController {
   }
 
   @Get(':id')
-    findOne(@Param('id', ParseIntPipe)  id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.orderService.findOne(+id);
   }
 

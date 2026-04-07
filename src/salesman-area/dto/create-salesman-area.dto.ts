@@ -10,10 +10,6 @@ export class CreateSalesmanAreaDto {
     @IsNumber()
     area_id: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    status: string;
-
     @IsNumber()
     @IsOptional()
     note: string;

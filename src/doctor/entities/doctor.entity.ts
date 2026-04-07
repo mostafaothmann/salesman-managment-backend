@@ -15,97 +15,155 @@ export class Doctor {
     id: number;
 
     @Column({ type: 'varchar', length: 255, nullable: false })
-    first_name: string;//first name of the Pharmacist
+    first_name: string;
+
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    second_name: string;
 
     @Column({ type: 'varchar', length: 255, nullable: false })
-    last_name: string;//last name of the Pharmacist
+    last_name: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
-    lat: string;//latitude of the place 
+    @Column({ type: 'varchar', nullable: true })
+    lat: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
-    lan: string;//langitude of the place 
+    @Column({ type: 'varchar', nullable: true })
+    lan: string;
 
     @Column({ type: 'datetime', nullable: true })
-    birth_date: Date;//birth date of the Doctor
+    birth_date: Date;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', nullable: false })
     phone_number: string;
 
-    @Column({ type: 'boolean', nullable: false, default: true })
-    is_added_by_assistant: boolean;
-
-    @Column({ type: 'varchar', length: 255, nullable: true })
+    @Column({ type: 'varchar', nullable: true })
     telephone_number: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: true })
+    @Column({ type: 'varchar', nullable: true })
+    email: string;
+
+    @Column({ type: 'boolean', default: false })
+    is_added_by_admin: boolean;
+
+    @Column({ type: 'varchar', nullable: true })
+    graduation_country: string;
+
+    @Column({ type: 'varchar', nullable: true })
     graduation_university: string;
 
-    @Column({ type: 'int', nullable: true, default: 1 })
-    loyalty: number;
+    @Column({ type: 'int', default: 1 })
+    loyalty_id: number;
 
-    @Column({ type: 'varchar', length: 255, nullable: true })
-    salesman_description: string
+    @Column({ type: 'int', default: 0 })
+    classification_id: number;
 
-    @Column({ type: 'varchar', length: 255, nullable: true })
-    admin_description: string
+    @Column({ type: 'varchar', nullable: true })
+    salesman_description: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    admin_description: string;
 
     @Column({ type: 'varchar', nullable: true })
     favourite_time_opening: string;
 
     @Column({ type: 'varchar', nullable: true })
-    favourite_time_closing: string
+    favourite_time_closing: string;
 
     @Column({ type: 'varchar', nullable: false })
-    first_work_time_opening: string
+    first_work_time_opening: string;
 
     @Column({ type: 'varchar', nullable: false })
-    first_work_time_closing: string
+    first_work_time_closing: string;
 
     @Column({ type: 'varchar', nullable: false })
-    second_work_time_opening: string
+    second_work_time_opening: string;
 
     @Column({ type: 'varchar', nullable: true })
-    second_work_time_closing: string
+    second_work_time_closing: string;
 
     @Column({ type: 'datetime', nullable: true })
     last_visit_date: Date;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', nullable: true })
     last_visit_note: string;
 
-    @Column({ type: 'int', nullable: false, default: 0 })
-    classification: number;
-
-    @Column({ type: 'int', nullable: false, default: 0 })
+    @Column({ type: 'int', default: 0 })
     governorate_id: number;
 
-    @Column({ type: 'int', nullable: false, default: 0 })
+    @Column({ type: 'int', default: 0 })
     city_id: number;
 
-    @Column({ type: 'int', nullable: false, default: 0 })
-    gender: number;
-
-    @Column({ type: 'int', nullable: false, default: 0 })
+    @Column({ type: 'int', default: 0 })
     area_id: number;
 
-    @Column({ type: 'int', nullable: false, default: 0 })
+    @Column({ type: 'int', default: 0 })
     street_id: number;
 
-    @Column({ type: 'int', nullable: false, default: 0 })
+    @Column({ type: 'int', default: 0 })
     specialization_id: number;
 
-    @Column({ type: 'int', nullable: false, default: 0 })
+    @Column({ type: 'int', default: 0 })
+    gender: number;
+
+    @Column({ type: 'int', default: 0 })
     average_patients_per_day: number;
 
-    @CreateDateColumn({ type: 'datetime' })
-    created_at: Date;
+    @Column({ type: 'int', nullable: true })
+    expected_recipes: number;
 
+    @Column({ type: 'varchar', nullable: true })
+    adopted_types: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    preffered_dietary_types: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    preffered_treatment_types: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    preffered_companies: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    competitive_types: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    stance_on_dietary_supp: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    personality_strengthens: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    interestes: string;
+
+    @Column({ type: 'int', nullable: true })
+    personality_type_id: number;
+
+    @Column({ type: 'int', nullable: true })
+    social_pattern_id: number;
+
+    @Column({ type: 'int', nullable: true })
+    salesman_relationship_id: number;
+
+    @Column({ type: 'varchar', nullable: true })
+    secrtary_first_name: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    full_place: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    close_place: string;
+
+    @Column({ type: 'int', nullable: true })
+    waiting_time_id: number;
+
+    @CreateDateColumn()
+    created_at: Date;
+    
+/* 
     @Column({ type: 'varchar', length: 255, nullable: true, default: "" })
     wife_husband_first_name: string;
 
     @Column({ type: 'varchar', length: 255, nullable: true, default: "" })
-    wife_husband_last_name: string;
+    wife_husband_last_name: string; */
 
     //each Governorate has many doctors in it 
     @ManyToOne(() => Governorate)

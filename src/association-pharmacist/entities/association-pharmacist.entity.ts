@@ -3,7 +3,7 @@ import { Pharmacist } from "src/pharmacist/entities/pharmacist.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
-@Unique('unique_association_pharmacist', ['association', 'pharmacist']) // prevents duplicates
+@Unique('unique_association_pharmacist', ['association', 'pharmacist']) 
 export class AssociationPharmacist {
 
     @PrimaryGeneratedColumn()

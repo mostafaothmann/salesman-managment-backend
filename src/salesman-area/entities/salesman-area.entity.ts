@@ -4,18 +4,14 @@ import { Salesman } from "src/salesman/entities/salesman.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
-@Unique('unique_salesman_area', ['salesman', 'area']) // prevents duplicates
+@Unique('unique_salesman_area', ['salesman', 'area']) 
 export class SalesmanArea {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', nullable: false, default: "normal" })
-    status: string;//a status of how much the salesman did with the area
-
     @Column({ type: 'varchar', length: 255, nullable: false })
     note: string;//describes how the salesman did with this area
-
 
     @Column({ type: 'int', nullable: true })
     salesman_id: number;
@@ -40,7 +36,7 @@ export class SalesmanArea {
     area: Area;
 
     //each assistant has many salesmen
-    @ManyToOne(() => Area)
+    @ManyToOne(() => Assistant)
     @JoinColumn({ name: 'assistant_id' })
     Assistant: Assistant;
 

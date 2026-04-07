@@ -1,149 +1,182 @@
-import { IsBoolean, IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Max, Min } from "class-validator";
-import { LOYALTY } from "src/auth/enums/loyalty-enums";
+import { IsString, IsNumber, IsOptional, IsBoolean, IsDateString } from "class-validator";
 
 export class CreateDoctorDto {
 
-    @IsNotEmpty()
     @IsString()
-    first_name?: string;
+    first_name: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    last_name?: string;
+    second_name: string;
 
+    @IsString()
+    last_name: string;
 
-    @IsNotEmpty()
+    @IsOptional()
+    @IsString()
+    lat: string;
+
+    @IsOptional()
+    @IsString()
+    lan: string;
+
+    @IsOptional()
+    @IsDateString()
+    birth_date: string;
+
+    @IsString()
+    phone_number: string;
+
+    @IsOptional()
+    @IsString()
+    telephone_number: string;
+
+    @IsOptional()
+    @IsString()
+    email: string;
+
+    @IsOptional()
     @IsBoolean()
-    is_added_by_assistant?: boolean;
-
-    @IsNotEmpty()
-    @IsString()
-    graduation_university?: string;
-
-    @IsNotEmpty()
-    @IsString()
-    wife_husband_first_name?: string;
-
-    @IsNotEmpty()
-    @IsString()
-    wife_husband_last_name?: string;
-
-    @IsOptional()
-    @IsEmail()
-    email?: string;
-
-    @IsNotEmpty()
-    @IsString()
-    photo?: string;
-
-    @IsOptional()
-    @IsEmail()
-    graduation_country?: string;
-
-    @IsNotEmpty()
-    @IsEmail()
-    description?: string;
+    is_added_by_admin: boolean;
 
     @IsOptional()
     @IsString()
-    first_work_time_opening?: string;
+    graduation_country: string;
 
     @IsOptional()
     @IsString()
-    first_work_time_closing?: string;
-
-    @IsOptional()
-    @IsString()
-    second_work_time_opening?: string;
-
-    @IsOptional()
-    @IsString()
-    second_work_time_closing?: string;
-
-    @IsNotEmpty()
-    @IsString()
-    phone_number?: string;
-
-    @IsNotEmpty()
-    @IsString()
-    telephone_number?: string;
-
-    @IsOptional()
-    @IsString()
-    last_visit_note?: string;
-
-    @IsOptional()
-    @IsDate()
-    birth_date?: Date;
-
-    @IsNotEmpty()
-    @IsDate()
-    last_visit_date?: Date;
-
-    @IsOptional()
-    @IsString()
-    admin_description?: string;
-
-    @IsOptional()
-    @IsString()
-    salesman_description?: string;
-
-    @IsOptional()
-    @IsString()
-    lan?: string;
-
-    @IsOptional()
-    @IsString()
-    lat?: string;
-
-    @IsOptional()
-    @IsString()
-    favourite_time_closing?: string;
-
-    @IsOptional()
-    @IsString()
-    favourite_time_opening?: string;
+    graduation_university: string;
 
     @IsOptional()
     @IsNumber()
-    classification?: number;
-
-    @IsNotEmpty()
-    @IsNumber()
-    specialization_id?: number;
+    loyalty_id: number;
 
     @IsOptional()
     @IsNumber()
-    average_patients_per_day?: number;
+    classification_id: number;
+
+    @IsOptional()
+    @IsString()
+    salesman_description: string;
+
+    @IsOptional()
+    @IsString()
+    admin_description: string;
+
+    @IsOptional()
+    @IsString()
+    favourite_time_opening: string;
+
+    @IsOptional()
+    @IsString()
+    favourite_time_closing: string;
+
+    @IsString()
+    first_work_time_opening: string;
+
+    @IsString()
+    first_work_time_closing: string;
+
+    @IsString()
+    second_work_time_opening: string;
+
+    @IsOptional()
+    @IsString()
+    second_work_time_closing: string;
+
+    @IsOptional()
+    @IsDateString()
+    last_visit_date: string;
+
+    @IsOptional()
+    @IsString()
+    last_visit_note: string;
+
+    @IsNumber()
+    governorate_id: number;
+
+    @IsNumber()
+    city_id: number;
+
+    @IsNumber()
+    area_id: number;
+
+    @IsNumber()
+    street_id: number;
+
+    @IsNumber()
+    specialization_id: number;
+
+    @IsNumber()
+    gender: number;
 
     @IsOptional()
     @IsNumber()
-    loyalty?: number;
+    average_patients_per_day: number;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
-    governorate_id?: number;
+    expected_recipes: number;
 
-    @IsNotEmpty()
+    @IsOptional()
+    @IsString()
+    adopted_types: string;
+
+    @IsOptional()
+    @IsString()
+    preffered_dietary_types: string;
+
+    @IsOptional()
+    @IsString()
+    preffered_treatment_types: string;
+
+    @IsOptional()
+    @IsString()
+    preffered_companies: string;
+
+    @IsOptional()
+    @IsString()
+    competitive_types: string;
+
+    @IsOptional()
+    @IsString()
+    stance_on_dietary_supp: string;
+
+    @IsOptional()
+    @IsString()
+    personality_strengthens: string;
+
+    @IsOptional()
+    @IsString()
+    interestes: string;
+
+    @IsOptional()
     @IsNumber()
-    city_id?: number;
+    personality_type_id: number;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
-    area_id?: number;
+    social_pattern_id: number;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
-    gender?: number;
+    salesman_relationship_id: number;
 
-    @IsNotEmpty()
+    @IsOptional()
+    @IsString()
+    secrtary_first_name: string;
+
+    @IsOptional()
+    @IsString()
+    full_place: string;
+
+    @IsOptional()
+    @IsString()
+    close_place: string;
+
+    @IsOptional()
     @IsNumber()
-    street_id?: number;
-
-    /*    @IsNotEmpty()
-       @IsNumber()
-       building_id?: number; */
-
+    waiting_time_id: number;
 }
 
 

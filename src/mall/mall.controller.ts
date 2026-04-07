@@ -5,7 +5,7 @@ import { UpdateMallDto } from './dto/update-mall.dto';
 
 @Controller('mall')
 export class MallController {
-  constructor(private readonly mallService: MallService) {}
+  constructor(private readonly mallService: MallService) { }
 
   @Post()
   create(@Body() createMallDto: CreateMallDto) {
@@ -17,8 +17,13 @@ export class MallController {
     return this.mallService.findAll();
   }
 
+  @Get(`/names`)
+  getNames() {
+    return this.mallService.getNames();
+  }
+
   @Get(':id')
-    findOne(@Param('id', ParseIntPipe)  id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.mallService.findOne(+id);
   }
 

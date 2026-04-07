@@ -1,9 +1,7 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateHospitalDoctorDto {
-    @IsString()
-    @IsNotEmpty()
-    status: string;
+
 
     @IsNumber()
     @IsNotEmpty()

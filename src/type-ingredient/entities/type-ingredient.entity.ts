@@ -3,7 +3,7 @@ import { Type } from "src/type/entities/type.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
-@Unique('unique_type_ingredient', ['type', 'ingredient']) // prevents duplicates
+@Unique('unique_type_ingredient', ['type', 'ingredient']) 
 export class TypeIngredient {
 
     @PrimaryGeneratedColumn()

@@ -5,7 +5,7 @@ import { UpdateHospitalDto } from './dto/update-hospital.dto';
 
 @Controller('hospital')
 export class HospitalController {
-  constructor(private readonly hospitalService: HospitalService) {}
+  constructor(private readonly hospitalService: HospitalService) { }
 
   @Post()
   create(@Body() createHospitalDto: CreateHospitalDto) {
@@ -17,8 +17,13 @@ export class HospitalController {
     return this.hospitalService.findAll();
   }
 
+  @Get(`/names`)
+  getNames() {
+    return this.hospitalService.getNames();
+  }
+
   @Get(':id')
-    findOne(@Param('id', ParseIntPipe)  id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.hospitalService.findOne(+id);
   }
 

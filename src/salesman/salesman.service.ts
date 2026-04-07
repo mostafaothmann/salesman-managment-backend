@@ -174,5 +174,51 @@ export class SalesmanService {
   }
 
 
+  //for Profile Page
+  async getDoctorSamples(id: number): Promise<void> {
+    return await this.dataSource.query(`select s.*,v.salesman_id,v.doctor_id from sample s  INNER JOIN visit v on s.visit_id = v.id where v.doctor_id=${id} AND v.typeC='doctor'`)
+  }
+
+  async getPharmacistSamples(id: number): Promise<void> {
+    return await this.dataSource.query(`select s.*,v.salesman_id,v.pharmacist_id from sample s  INNER JOIN visit v on s.visit_id = v.id where v.doctor_id=${id} AND v.typeC='pharmacist'`)
+  }
+
+  async getDoctorVisits(id: number): Promise<void> {
+    return await this.dataSource.query(`select v.* from visit v where v.typeC='doctor' and v.salesman_id=${id}`)
+  }
+
+  async getPharmacistVisits(id: number): Promise<void> {
+    return await this.dataSource.query(`select v.* from visit v where v.typeC='pharmacist' and v.salesman_id=${id}`)
+  }
+
+  async getDoctorGifts(id: number): Promise<void> {
+    return await this.dataSource.query(`select bg.name,gv.*,v.doctor_id from gift_visit gv INNER JOIN visit v on gv.visit_id = v.id  
+      INNER JOIN base_gift bg on bg.id= gv.base_gift_id where v.salesman_id=${id} AND v.typeC='doctor'`)
+  }
+
+  async getPharmacistGifts(id: number): Promise<void> {
+    return await this.dataSource.query(`select bg.name,gv.*,v.pharmacist_id from gift_visit gv INNER JOIN visit v on gv.visit_id = v.id  
+      INNER JOIN base_gift bg on bg.id= gv.base_gift_id where v.salesman_id=${id} AND v.typeC='pharmacist'`)
+  }
+
+  async getOrders(id: number): Promise<void> {
+    return await this.dataSource.query(`select o.* from \`order\` o where o.salesman_id=${id}`)
+  }
+
+  async getAreas(id: number): Promise<void> {
+    return await this.dataSource.query(`select sa.* from salesman_area sa where sa.salesman_id=${id}`)
+  }
+
+  //for Application
+  async getDoctors(id: number): Promise<void> {
+    return await this.dataSource.query(`select d.* from doctor d INNER JOIN salesman_area sa 
+      on sa.area_id = d.area_id where sa.salesman_id=${id}`)
+  }
+
+  async getPharmacists(id: number): Promise<void> {
+    return await this.dataSource.query(`select d.* from pharmacist p INNER JOIN salesman_area sa 
+      on sa.area_id = p.area_id where sa.salesman_id=${id}`)
+  }
+
 }
 

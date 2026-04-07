@@ -8,12 +8,6 @@ export class GiftVisit {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', nullable: false, length: 255 })
-    name: string;
-
-    @Column({ type: 'varchar', nullable: true, length: 255 })
-    description: string;
-
     @Column({ type: 'int', nullable: false })
     base_gift_id: number;
 
@@ -25,7 +19,6 @@ export class GiftVisit {
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;
-
     //each BaseGift has gift-visit s in it 
     @ManyToOne(() => BaseGift)
     @JoinColumn({ name: 'base_gift_id' })

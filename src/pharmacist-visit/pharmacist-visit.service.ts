@@ -21,7 +21,7 @@ export class PharmacistVisitService {
   }
 
   async show() {
-    return this.dataSource.query(`Select * from pharmacist_visit pv`)
+    return this.dataSource.query(`Select * from visit v where v.typeC='pharmacist'`)
   }
 
   async findAll(page: number = 1, limit: number = 10) {

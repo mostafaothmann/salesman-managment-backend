@@ -7,11 +7,16 @@ import { UpdateDoctorVisitDto } from './dto/update-doctor-visit.dto';
 export class DoctorVisitController {
   constructor(private readonly doctorVisitService: DoctorVisitService) { }
 
+  @Get(`/show`)
+  show() {
+    return this.doctorVisitService.show();
+  }
+
   @Post()
   create(@Body() createDoctorVisitDto: CreateDoctorVisitDto) {
     return this.doctorVisitService.create(createDoctorVisitDto);
   }
-  
+
   @Get()
   findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 10) {
     return this.doctorVisitService.findAll(page, limit);
@@ -23,7 +28,7 @@ export class DoctorVisitController {
   }
 
   @Get(':id')
-    findOne(@Param('id', ParseIntPipe)  id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.doctorVisitService.findOne(+id);
   }
 
