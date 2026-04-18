@@ -25,7 +25,7 @@ export class PharmacistService {
 
     const data = await this.dataSource.query(`
     SELECT p.id, p.first_name, p.last_name,
-           p.classification, p.loyalty, p.last_visit_date,
+           p.classification_id, p.loyalty_id, p.last_visit_date,
            p.lat, p.lan, p.phone_number, p.telephone_number,
            p.city_id, p.area_id, p.street_id
     FROM pharmacist p
@@ -56,8 +56,8 @@ export class PharmacistService {
       .addSelect('pharmacist.first_name', 'first_name')
       .addSelect('pharmacist.last_name', 'last_name')
       .addSelect('TIMESTAMPDIFF(YEAR,pharmacist.birth_date,CURDATE())', 'age')
-      .addSelect('pharmacist.classification', 'classification')
-      .addSelect('pharmacist.loyalty', 'loyalty')
+      .addSelect('pharmacist.classification_id', 'classification_id')
+      .addSelect('pharmacist.loyalty_id', 'loyalty_id')
       .addSelect('pharmacist.last_visit_date', 'last_visit_date')
       .addSelect('pharmacist.city_id', 'city_id')
       .addSelect('pharmacist.area_id', 'area_id')
@@ -111,28 +111,28 @@ export class PharmacistService {
 
     if (!isNaN(filters.filter_min_classification) && filters.filter_min_classification > -1) {
       query.andWhere(
-        `pharmacist.classification >= :minClassification`,
+        `pharmacist.classification_id >= :minClassification`,
         { minClassification: filters.filter_min_classification },
       );
     }
 
     if (!isNaN(filters.filter_max_classification) && filters.filter_max_classification < 6) {
       query.andWhere(
-        `pharmacist.classification <= :maxClassification`,
+        `pharmacist.classification_id <= :maxClassification`,
         { maxClassification: filters.filter_max_classification },
       );
     }
 
     if (!isNaN(filters.filter_min_loyalty) && filters.filter_min_loyalty > -1) {
       query.andWhere(
-        `pharmacist.loyalty >= :minLoyalty`,
+        `pharmacist.loyalty_id >= :minLoyalty`,
         { minLoyalty: filters.filter_min_loyalty },
       );
     }
 
     if (!isNaN(filters.filter_max_loyalty) && filters.filter_max_loyalty < 6) {
       query.andWhere(
-        `pharmacist.loyalty <= :maxLoyalty`,
+        `pharmacist.loyalty_id <= :maxLoyalty`,
         { maxLoyalty: filters.filter_max_loyalty },
       );
     }

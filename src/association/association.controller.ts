@@ -2,21 +2,28 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { AssosiationService } from './association.service';
 import { CreateAssociationDto } from './dto/create-assosiation.dto';
 import { UpdateAssociationDto } from './dto/update-assosiation.dto';
+import { NotificationGateway } from 'src/notification/notification.gateway';
 
 @Controller('association')
 export class AssosiationController {
-  constructor(private readonly assosiationService: AssosiationService) { }
+  constructor(private readonly assosiationService: AssosiationService,
+    private readonly notification: NotificationGateway
+  ) { }
 
   @Post()
-  create(@Body() createAssosiationDto: CreateAssociationDto) {
-    return this.assosiationService.create(createAssosiationDto);
+  async create(@Body() createAssosiationDto: CreateAssociationDto) {
+    const data = await this.assosiationService.create(createAssosiationDto);
+    if (data) {
+      this.notification.sendAdminNotification({ createAssosiationDto, title: 'تم إضافة جمعية' })
+    }
+    return data;
   }
 
   @Get()
   findAll() {
     return this.assosiationService.findAll();
   }
-  
+
   @Get(`/names`)
   getNames() {
     return this.assosiationService.getNames();

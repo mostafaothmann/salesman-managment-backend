@@ -1,1 +1,1 @@
-export const JWT_SECRET="we don't make it yet";
+export const JWT_SECRET="we didn't make it yet";

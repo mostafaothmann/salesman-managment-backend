@@ -1,20 +1,64 @@
-import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
-import { LOYALTY } from "src/auth/enums/loyalty-enums";
+import {
+    IsEmail,
+    IsNumber,
+    IsOptional,
+    IsString,
+    IsBoolean,
+} from "class-validator";
 
 export class CreatePharmacistDto {
 
-    @IsNotEmpty()
+    // ========================
+    // Personal Info
+    // ========================
     @IsString()
     first_name: string;
 
-    @IsNotEmpty()
+    @IsString()
+    second_name: string;
+
     @IsString()
     last_name: string;
 
-    @IsNotEmpty()
     @IsNumber()
-    gender?: number;
+    classification_id: number;
 
+    @IsNumber()
+    loyalty_id: number;
+
+    @IsString()
+    birth_date: string;
+
+    @IsOptional()
+    @IsString()
+    admin_description?: string;
+
+    @IsOptional()
+    @IsString()
+    salesman_description?: string;
+
+    @IsString()
+    graduation_country: string;
+
+    @IsString()
+    graduation_university: string;
+
+    @IsString()
+    phone_number: string;
+
+    @IsOptional()
+    @IsString()
+    telephone_number?: string;
+
+    @IsNumber()
+    gender_id: number;
+
+    @IsEmail()
+    email: string;
+
+    // ========================
+    // Place Info
+    // ========================
     @IsOptional()
     @IsString()
     lan?: string;
@@ -23,99 +67,137 @@ export class CreatePharmacistDto {
     @IsString()
     lat?: string;
 
-    @IsNotEmpty()
-    @IsString()
-    graduation_university: string;
-
-    @IsOptional()
-    @IsEmail()
-    email?: string;
-
-    @IsOptional()
-    @IsString()
-    photo?: string;
-
-    @IsOptional()
-    @IsEmail()
-    graduation_country?: string;
-
-    @IsOptional()
-    @IsString()
-    description?: string;
-
-    @IsNotEmpty()
-    @IsString()
-    phone_number: string;
-
-    @IsOptional()
-    @IsString()
-    telephone_number?: string;
-
-    @IsOptional()
-    @IsString()
-    last_visit_note?: string;
-
-    @IsOptional()
-    @IsDate()
-    birth_date?: Date;
-
-    @IsOptional()
-    @IsDate()
-    last_visit_date?: Date;
-
-    @IsNotEmpty()
-    @IsString()
-    favorite_time_opening?: string;
-
-    @IsNotEmpty()
-    @IsString()
-    favorite_time_closing?: string;
-
-    @IsOptional()
-    @IsNumber()
-    classification?: number;
-
-    @IsOptional()
-    @IsNumber()
-    average_patients_per_day?: number;
-
-    @IsEnum(LOYALTY)
-    loyalty?: LOYALTY;
-
-    @IsNotEmpty()
     @IsNumber()
     governorate_id: number;
 
-    @IsNotEmpty()
     @IsNumber()
     city_id: number;
 
-    @IsNotEmpty()
     @IsNumber()
     area_id: number;
 
-    @IsNotEmpty()
     @IsNumber()
     street_id: number;
 
     @IsString()
+    full_place: string;
+
     @IsOptional()
-    first_work_opening_time: string;
+    @IsString()
+    close_place?: string;
+
+    // ========================
+    // Administrative Info
+    // ========================
+    @IsNumber()
+    average_patients_per_day: number;
+
+    @IsBoolean()
+    is_added_by_admin: boolean;
+
+    // ========================
+    // Work Time Info
+    // ========================
+    @IsString()
+    favourite_time_opening: string;
 
     @IsString()
-    @IsOptional()
-    first_work_closing_time: string;
+    favourite_time_closing: string;
 
     @IsString()
-    @IsOptional()
-    second_work_opening_time: string;
+    first_work_time_opening: string;
 
     @IsString()
+    first_work_time_closing: string;
+
+    @IsString()
+    second_work_time_opening: string;
+
+    @IsString()
+    second_work_time_closing: string;
+
+    @IsString()
+    waiting_time: string;
+
+    // ========================
+    // Medical Info
+    // ========================
     @IsOptional()
-    second_work_closing_time: string;
+    @IsString()
+    stance_on_dietary_supp?: string;
+
+    @IsOptional()
+    @IsString()
+    adopted_types?: string;
+
+    @IsOptional()
+    @IsString()
+    preffered_dietary_types?: string;
+
+    @IsOptional()
+    @IsString()
+    preffered_treatment_types?: string;
+
+    @IsOptional()
+    @IsString()
+    preffered_companies?: string;
+
+    @IsString()
+    competitive_types: string;
+
+    // ========================
+    // Personality Info
+    // ========================
+    @IsOptional()
+    @IsString()
+    personality_strengthens?: string;
+
+    @IsOptional()
+    @IsString()
+    interestes?: string;
+
+    @IsNumber()
+    personality_type: string;
+
+    @IsNumber()
+    social_pattern: string;
+
+    @IsNumber()
+    salesman_relationship: string;
+
+    // ========================
+    // Pharmacy Info
+    // ========================
+    @IsOptional()
+    @IsString()
+    pharmacy_description?: string;
+
+    @IsNumber()
+    pharmacy_name: string;
+
+    @IsOptional()
+    @IsString()
+    assistant_full_name?: string;
+
+    // ========================
+    // Company Relation
+    // ========================
+    @IsOptional()
+    @IsString()
+    execute_prescription?: string;
+
+    @IsOptional()
+    @IsString()
+    doctor_relationship?: string;
+
+    @IsOptional()
+    @IsString()
+    average_sell_for_our_products?: string;
+
+    @IsOptional()
+    @IsString()
+    our_products_existance_percentage?: string;
 }
-
-
 
 export interface FilterPharmacistProps {
     page: number;

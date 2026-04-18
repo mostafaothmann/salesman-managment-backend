@@ -1,7 +1,4 @@
 import { Area } from "src/area/entities/area.entity";
-import { LOYALTY } from "src/auth/enums/loyalty-enums";
-import { WORKTIME } from "src/auth/enums/worktime-enums";
-import { Building } from "src/building/entities/building.entity";
 import { City } from "src/city/entities/city.entity";
 import { Governorate } from "src/governorate/entities/governorate.entity";
 import { Specialization } from "src/specialization/entities/specialization.entity";
@@ -80,12 +77,6 @@ export class Doctor {
     @Column({ type: 'varchar', nullable: true })
     second_work_time_closing: string;
 
-    @Column({ type: 'datetime', nullable: true })
-    last_visit_date: Date;
-
-    @Column({ type: 'varchar', nullable: true })
-    last_visit_note: string;
-
     @Column({ type: 'int', default: 0 })
     governorate_id: number;
 
@@ -102,7 +93,7 @@ export class Doctor {
     specialization_id: number;
 
     @Column({ type: 'int', default: 0 })
-    gender: number;
+    gender_id: number;
 
     @Column({ type: 'int', default: 0 })
     average_patients_per_day: number;
@@ -134,14 +125,14 @@ export class Doctor {
     @Column({ type: 'varchar', nullable: true })
     interestes: string;
 
-    @Column({ type: 'int', nullable: true })
-    personality_type_id: number;
+    @Column({ type: 'varchar', nullable: true })
+    personality_type: string;
 
-    @Column({ type: 'int', nullable: true })
-    social_pattern_id: number;
+    @Column({ type: 'varchar', nullable: true })
+    social_pattern: string;
 
-    @Column({ type: 'int', nullable: true })
-    salesman_relationship_id: number;
+    @Column({ type: 'varchar', nullable: true })
+    salesman_relationship: string;
 
     @Column({ type: 'varchar', nullable: true })
     secrtary_first_name: string;
@@ -152,18 +143,18 @@ export class Doctor {
     @Column({ type: 'varchar', nullable: true })
     close_place: string;
 
-    @Column({ type: 'int', nullable: true })
-    waiting_time_id: number;
+    @Column({ type: 'varchar', nullable: true })
+    waiting_time: string;
 
     @CreateDateColumn()
     created_at: Date;
-    
-/* 
-    @Column({ type: 'varchar', length: 255, nullable: true, default: "" })
-    wife_husband_first_name: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: true, default: "" })
-    wife_husband_last_name: string; */
+    /* 
+        @Column({ type: 'varchar', length: 255, nullable: true, default: "" })
+        wife_husband_first_name: string;
+    
+        @Column({ type: 'varchar', length: 255, nullable: true, default: "" })
+        wife_husband_last_name: string; */
 
     //each Governorate has many doctors in it 
     @ManyToOne(() => Governorate)

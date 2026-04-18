@@ -4,6 +4,7 @@ import { UpdateAssistantDto } from './dto/update-assistant.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Assistant } from './entities/assistant.entity';
 import { DataSource, Repository } from 'typeorm';
+import { encodePassword } from 'src/auth/utils.ts/bcrypt';
 
 @Injectable()
 export class AssistantService {
@@ -12,6 +13,7 @@ export class AssistantService {
     private readonly dataSource: DataSource) { }
 
   create(createAssistantDto: CreateAssistantDto): Promise<Assistant> {
+    createAssistantDto.password = encodePassword(createAssistantDto.password)
     const assitant = this.assistantRepo.create(createAssistantDto);
     return this.assistantRepo.save(assitant)
   }
@@ -25,8 +27,11 @@ export class AssistantService {
     return this.assistantRepo.findOneBy({ id })
   }
 
-  findByEmail(email: string): Promise<Assistant | null> {
-    return this.assistantRepo.findOneBy({ email });
+  async findByEmail(email: string): Promise<Assistant | null> {
+    console.log("from auth", email);
+    const res = await this.assistantRepo.findOneBy({ email });
+    console.log(res?.password)
+    return res;
   }
 
   async update(id: number, updateAssistantDto: UpdateAssistantDto): Promise<Assistant | null> {

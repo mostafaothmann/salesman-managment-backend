@@ -47,12 +47,14 @@ import { BaseGiftModule } from './base-gift/base-gift.module';
 import { GiftVisitModule } from './gift-visit/gift-visit.module';
 import { VideoLinkModule } from './video-link/video-link.module';
 import { SalesmanMessageModule } from './salesman-message/salesman-message.module';
+import { NotificationModule } from './notification/notification.module';
+import { AdminModule } from './admin/admin.module';
 
 
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
-    url: "mysql://root:@127.0.0.1:3306/rohalarad3",
+    url: "mysql://root:@127.0.0.1:3306/rohalarad4",
     autoLoadEntities: true,
     synchronize: true,
   }),    SpeechModule,PhotoModule,
@@ -91,6 +93,8 @@ import { SalesmanMessageModule } from './salesman-message/salesman-message.modul
     GiftVisitModule,
     VideoLinkModule,
     SalesmanMessageModule,
+    NotificationModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

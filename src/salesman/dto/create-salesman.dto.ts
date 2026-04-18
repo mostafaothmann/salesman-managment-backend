@@ -26,7 +26,7 @@ export class CreateSalesmanDto {
     email: string;
 
     @IsNotEmpty()
-    @IsEmail()
+    @IsString()
     admin_description: string;
 
     @IsNotEmpty()
@@ -104,8 +104,7 @@ export class CreateSalesmanDto {
     building_id: number;
 
     @IsEnum(ROLE)
-    role: ROLE.SALESMAN
-
+    role: ROLE;
 
 }
 

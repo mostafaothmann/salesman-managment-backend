@@ -21,7 +21,7 @@ export class Assistant {
     @Column({ type: 'varchar', length: 255, nullable: false })
     admin_description: string;
 
-    //Assign assistant role to the assistant account directly
+
     @Column({ type: 'enum', enum: ROLE, nullable: false, default: ROLE.ASSISTANT })
     role: ROLE;
 

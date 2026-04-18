@@ -8,11 +8,12 @@ import { PharmacistVisitService } from 'src/pharmacist-visit/pharmacist-visit.se
 import { DoctorVisitService } from 'src/doctor-visit/doctor-visit.service';
 import { DoctorVisit } from 'src/doctor-visit/entities/doctor-visit.entity';
 import { PharmacistVisit } from 'src/pharmacist-visit/entities/pharmacist-visit.entity';
+import { NotificationGateway } from 'src/notification/notification.gateway';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Visit, DoctorVisit, PharmacistVisit]),
   ], controllers: [VisitController],
-  providers: [VisitService, DoctorVisitService, PharmacistVisitService],
+  providers: [VisitService, DoctorVisitService, PharmacistVisitService,NotificationGateway],
 })
 export class VisitModule { }

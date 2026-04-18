@@ -2,14 +2,22 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { TypeService } from './type.service';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { UpdateTypeDto } from './dto/update-type.dto';
+import { NotificationGateway } from 'src/notification/notification.gateway';
 
 @Controller('type')
 export class TypeController {
-  constructor(private readonly typeService: TypeService) { }
+  constructor(private readonly typeService: TypeService,
+    private readonly notification: NotificationGateway
+  ) { }
 
   @Post()
-  create(@Body() createTypeDto: CreateTypeDto) {
-    return this.typeService.create(createTypeDto);
+  async create(@Body() createTypeDto: CreateTypeDto) {
+
+    const data = await this.typeService.create(createTypeDto);
+    if (data) {
+      this.notification.sendAdminNotification({ createTypeDto, title: 'تم إضافة صنف' })
+    }
+    return data;
   }
 
   @Get(`/names`)
@@ -28,8 +36,12 @@ export class TypeController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: string, @Body() updateTypeDto: UpdateTypeDto) {
-    return this.typeService.update(+id, updateTypeDto);
+  async update(@Param('id', ParseIntPipe) id: string, @Body() updateTypeDto: UpdateTypeDto) {
+    const data = await this.typeService.update(+id, updateTypeDto);
+    if (data) {
+      this.notification.sendAdminNotification({ updateTypeDto, title: 'تم تعديل صنف' })
+    }
+    return data;
   }
 
   @Delete(':id')

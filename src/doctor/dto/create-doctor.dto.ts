@@ -108,7 +108,7 @@ export class CreateDoctorDto {
     specialization_id: number;
 
     @IsNumber()
-    gender: number;
+    gender_id: number;
 
     @IsOptional()
     @IsNumber()
@@ -151,16 +151,16 @@ export class CreateDoctorDto {
     interestes: string;
 
     @IsOptional()
-    @IsNumber()
-    personality_type_id: number;
+    @IsString()
+    personality_type: string;
 
     @IsOptional()
-    @IsNumber()
-    social_pattern_id: number;
+    @IsString()
+    social_pattern: string;
 
     @IsOptional()
-    @IsNumber()
-    salesman_relationship_id: number;
+    @IsString()
+    salesman_relationship: string;
 
     @IsOptional()
     @IsString()
@@ -175,8 +175,8 @@ export class CreateDoctorDto {
     close_place: string;
 
     @IsOptional()
-    @IsNumber()
-    waiting_time_id: number;
+    @IsString()
+    waiting_time: string;
 }
 
 

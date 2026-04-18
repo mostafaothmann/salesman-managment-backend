@@ -3,14 +3,21 @@ import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 import type { FilterDoctorProps } from './dto/create-doctor.dto';
+import { NotificationGateway } from 'src/notification/notification.gateway';
 
 @Controller('doctor')
 export class DoctorController {
-  constructor(private readonly doctorService: DoctorService) { }
+  constructor(private readonly doctorService: DoctorService,
+    private readonly notification: NotificationGateway
+
+  ) { }
 
   @Post()
-  create(@Body() createDoctorDto: CreateDoctorDto) {
-    return this.doctorService.create(createDoctorDto);
+  async create(@Body() createDoctorDto: CreateDoctorDto) {
+    const data = await this.doctorService.create(createDoctorDto);
+    if (data) {
+      this.notification.sendAdminNotification({ createDoctorDto, title: 'تم إضافة  طبيب' })
+    } return data;
   }
 
   @Get('/show')

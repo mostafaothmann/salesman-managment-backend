@@ -7,6 +7,7 @@ import { PharmacistVisitService } from 'src/pharmacist-visit/pharmacist-visit.se
 import { DoctorVisitService } from 'src/doctor-visit/doctor-visit.service';
 import { type FilterDoctorVisitProps } from 'src/doctor-visit/dto/create-doctor-visit.dto';
 import { type FilterPharmacistVisitProps } from 'src/pharmacist-visit/dto/create-pharmacist-visit.dto';
+import { NotificationGateway } from 'src/notification/notification.gateway';
 
 
 @Controller('visit')
@@ -14,11 +15,14 @@ export class VisitController {
   constructor(private readonly visitService: VisitService,
     private readonly pharmacistVisitService: PharmacistVisitService,
     private readonly doctorVisitService: DoctorVisitService,
+    private readonly notification: NotificationGateway
+
   ) { }
 
   @Post()
   async create(@Body() dto: CreateVisitDto) {
     if (dto.typeC === 'doctor') {
+      this.notification.sendAdminNotification(dto)
       return this.doctorVisitService.create({
         ...dto,
         doctor_id: dto.doctor_id,
@@ -45,7 +49,7 @@ export class VisitController {
   }
 
   @Get(':id')
-    findOne(@Param('id', ParseIntPipe)  id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.visitService.findOne(+id);
   }
 

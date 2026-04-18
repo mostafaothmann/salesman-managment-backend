@@ -1,8 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Query, UseGuards } from '@nestjs/common';
 import { SalesmanMessageService } from './salesman-message.service';
 import { CreateSalesmanMessageDto, type FitlerSalesmanMessageProps } from './dto/create-salesman-message.dto';
 import { UpdateSalesmanMessageDto } from './dto/update-salesman-message.dto';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles/roles/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorators';
+import { ROLE } from 'src/auth/enums/role.enum';
 
+@UseGuards(AuthGuard, RolesGuard)
+@Roles(ROLE.ADMIN)
 @Controller('salesman-message')
 export class SalesmanMessageController {
   constructor(private readonly salesmanMessageService: SalesmanMessageService) { }

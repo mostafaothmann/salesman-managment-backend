@@ -3,10 +3,14 @@ import { PharmacistService } from './pharmacist.service';
 import { CreatePharmacistDto } from './dto/create-pharmacist.dto';
 import { UpdatePharmacistDto } from './dto/update-pharmacist.dto';
 import type { FilterPharmacistProps } from './dto/create-pharmacist.dto';
+import { NotificationGateway } from 'src/notification/notification.gateway';
 
 @Controller('pharmacist')
 export class PharmacistController {
-  constructor(private readonly pharmacistService: PharmacistService) { }
+  constructor(private readonly pharmacistService: PharmacistService,
+    private readonly notification: NotificationGateway
+
+  ) { }
 
 
   @Get(`/show`)
@@ -15,8 +19,11 @@ export class PharmacistController {
   }
 
   @Post()
-  create(@Body() createPharmacistDto: CreatePharmacistDto) {
-    return this.pharmacistService.create(createPharmacistDto);
+  async create(@Body() createPharmacistDto: CreatePharmacistDto) {
+    const data = await this.pharmacistService.create(createPharmacistDto);
+    if (data) {
+      this.notification.sendAdminNotification({ createPharmacistDto, title: 'تم إضافة  صيدلي' })
+    } return data;
   }
 
   @Get()

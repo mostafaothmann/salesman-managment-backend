@@ -2,14 +2,22 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { HospitalService } from './hospital.service';
 import { CreateHospitalDto } from './dto/create-hospital.dto';
 import { UpdateHospitalDto } from './dto/update-hospital.dto';
+import { NotificationGateway } from 'src/notification/notification.gateway';
 
 @Controller('hospital')
 export class HospitalController {
-  constructor(private readonly hospitalService: HospitalService) { }
+  constructor(private readonly hospitalService: HospitalService,
+    private readonly notification: NotificationGateway
+
+  ) { }
 
   @Post()
-  create(@Body() createHospitalDto: CreateHospitalDto) {
-    return this.hospitalService.create(createHospitalDto);
+  async create(@Body() createHospitalDto: CreateHospitalDto) {
+    const data = await this.hospitalService.create(createHospitalDto);
+    if (data) {
+      this.notification.sendAdminNotification({ createHospitalDto, title: 'تم إضافة مركز طبي' })
+    }
+    return data;
   }
 
   @Get()

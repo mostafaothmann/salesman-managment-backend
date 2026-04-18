@@ -5,7 +5,9 @@ import { UpdateDoctorVisitDto } from './dto/update-doctor-visit.dto';
 
 @Controller('doctor-visit')
 export class DoctorVisitController {
-  constructor(private readonly doctorVisitService: DoctorVisitService) { }
+  constructor(
+    private readonly doctorVisitService: DoctorVisitService,
+  ) { }
 
   @Get(`/show`)
   show() {

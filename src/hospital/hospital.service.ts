@@ -13,8 +13,8 @@ export class HospitalService {
     private readonly dataSource: DataSource
   ) { }
 
-  create(createTypeDto: CreateHospitalDto): Promise<Hospital> {
-    const type = this.hospitalRepo.create(createTypeDto);
+  async create(createTypeDto: CreateHospitalDto): Promise<Hospital> {
+    const type = await this.hospitalRepo.create(createTypeDto);
     return this.hospitalRepo.save(type);
   }
 

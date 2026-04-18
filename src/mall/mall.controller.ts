@@ -2,14 +2,21 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { MallService } from './mall.service';
 import { CreateMallDto } from './dto/create-mall.dto';
 import { UpdateMallDto } from './dto/update-mall.dto';
+import { NotificationGateway } from 'src/notification/notification.gateway';
 
 @Controller('mall')
 export class MallController {
-  constructor(private readonly mallService: MallService) { }
+  constructor(private readonly mallService: MallService,
+    private readonly notification: NotificationGateway
+  ) { }
 
   @Post()
-  create(@Body() createMallDto: CreateMallDto) {
-    return this.mallService.create(createMallDto);
+  async create(@Body() createMallDto: CreateMallDto) {
+    const data = await this.mallService.create(createMallDto);
+    if (data) {
+      this.notification.sendAdminNotification({ createMallDto, title: 'تم إضافة مركز تجاري' })
+    }
+    return data;
   }
 
   @Get()

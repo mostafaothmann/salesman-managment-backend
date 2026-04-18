@@ -4,6 +4,7 @@ import { SalesmanService } from 'src/salesman/salesman.service';
 import { AssistantService } from 'src/assistant/assistant.service';
 import { ROLE } from './enums/role.enum';
 import { comparePasswords } from './utils.ts/bcrypt';
+import { AdminService } from 'src/admin/admin.service';
 
 type authInput = { email: string; password: string };
 type signInData = { email: string; id: number; role: ROLE };
@@ -14,6 +15,7 @@ export class AuthService {
   constructor(
     private salesmanService: SalesmanService,
     private assistantService: AssistantService,
+    private adminService: AdminService,
     private readonly jwtService: JwtService,
   ) { }
 
@@ -60,18 +62,41 @@ export class AuthService {
   async authenticateAssistant(input: authInput): Promise<AuthResult> {
     const user = await this.validateAssistant(input);
 
-    if (!user) throw new UnauthorizedException('Invalid Salesman credentials');
+    if (!user) throw new UnauthorizedException('Invalid Assistant credentials');
 
     return this.signIn(user);
   }
 
   async validateAssistant(input: authInput): Promise<signInData | null> {
-    const user = await this.salesmanService.findByEmail(input.email);
+    console.log("from auth", input.email)
+    console.log("from auth", input.password)
+
+    const user = await this.assistantService.findByEmail(input.email);
 
     if (user && comparePasswords(input.password, user.password)) {
       return { id: user.id, email: user.email, role: user.role };
     }
+    return null;
+  }
 
+  // ------------------------
+  // Admin AUTHENTICATION
+  // ------------------------
+
+  async authenticateAdmin(input: authInput): Promise<AuthResult> {
+    const user = await this.validateAdmin(input);
+
+    if (!user) throw new UnauthorizedException('Invalid Admin credentials');
+
+    return this.signIn(user);
+  }
+
+  async validateAdmin(input: authInput): Promise<signInData | null> {
+    const user = await this.adminService.findByEmail(input.email);
+    console.log(input.email)
+    if (user && comparePasswords(input.password, user.password)) {
+      return { id: user.id, email: user.email, role: user.role };
+    }
     return null;
   }
 

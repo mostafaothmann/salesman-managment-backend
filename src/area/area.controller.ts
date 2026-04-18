@@ -7,7 +7,8 @@ import { RolesGuard } from 'src/auth/guards/roles/roles/roles.guard';
 import { Roles } from 'src/auth/decorators/roles.decorators';
 import { ROLE } from 'src/auth/enums/role.enum';
 
-
+/* @UseGuards(AuthGuard, RolesGuard)
+@Roles(ROLE.ADMIN) */
 @Controller('area')
 export class AreaController {
   constructor(private readonly areaService: AreaService) { }

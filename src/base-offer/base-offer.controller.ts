@@ -1,8 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { BaseOfferService } from './base-offer.service';
 import { CreateBaseOfferDto } from './dto/create-base-offer.dto';
 import { UpdateBaseOfferDto } from './dto/update-base-offer.dto';
+import { ROLE } from 'src/auth/enums/role.enum';
+import { Roles } from 'src/auth/decorators/roles.decorators';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles/roles/roles.guard';
 
+@UseGuards(AuthGuard, RolesGuard)
+@Roles(ROLE.ADMIN)
 @Controller('base-offer')
 export class BaseOfferController {
   constructor(private readonly baseOfferService: BaseOfferService) {}

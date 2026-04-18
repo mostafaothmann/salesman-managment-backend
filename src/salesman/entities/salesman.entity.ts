@@ -30,7 +30,7 @@ export class Salesman {
     @Column({ type: 'int', nullable: false, default: 0 })
     gender: number;
 
-    //Assign assistant role to the assistant account directly
+
     @Column({ type: 'enum', enum: ROLE, nullable: false, default: ROLE.SALESMAN })
     role: ROLE;
 
@@ -44,22 +44,10 @@ export class Salesman {
     leader_id: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
-    total_profit: number;
-
-    @Column({ type: 'int', nullable: false, default: 0 })
-    sales_profit: number;
-
-    @Column({ type: 'int', nullable: false, default: 0 })
-    team_profit: number;
-
-    @Column({ type: 'int', nullable: false, default: 0 })
     account_status_id: number;
 
     @Column({ type: 'int', nullable: false, default: 0 })
     account_type_id: number;
-
-    @Column({ type: 'int', nullable: false, default: 0 })
-    level: number;
 
     @Column({ type: 'varchar', length: 10, nullable: false })
     phone_number: string;//phone number of salesman
@@ -69,9 +57,6 @@ export class Salesman {
 
     @Column({ type: 'datetime', nullable: false })
     birth_date: Date;//birth date of salesman 
-
-    @Column({ type: 'datetime', nullable: false })
-    last_login: Date;//account creating date 
 
     @CreateDateColumn({ type: 'datetime' })
     created_at: Date;//account creating date 
