@@ -24,8 +24,9 @@ export class DoctorService {
     const offset = (page - 1) * limit;
 
     const data = await this.dataSource.query(`
-    SELECT d.id, d.first_name, d.last_name, d.specialization_id,
-           d.classification_id, d.loyalty_id, d.last_visit_date,
+    SELECT d.id, d.first_name,d.second_name, d.last_name, d.specialization_id,
+           d.classification_id, d.loyalty_id,d.first_work_time_opening,d.first_work_time_closing,
+           d.second_work_time_opening,d.second_work_time_closing,d.favourite_time_opening,d.favourite_time_closing,
            d.lat, d.lan, d.phone_number, d.telephone_number,
            d.city_id, d.area_id, d.street_id
     FROM doctor d
@@ -59,7 +60,6 @@ export class DoctorService {
       .addSelect('doctor.specialization_id', 'specialization_id')
       .addSelect('doctor.classification_id', 'classification_id')
       .addSelect('doctor.loyalty_id', 'loyalty_id')
-      .addSelect('doctor.last_visit_date', 'last_visit_date')
       .addSelect('doctor.city_id', 'city_id')
       .addSelect('doctor.area_id', 'area_id')
       .addSelect('doctor.street_id', 'street_id')

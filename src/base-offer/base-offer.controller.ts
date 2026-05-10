@@ -7,11 +7,11 @@ import { Roles } from 'src/auth/decorators/roles.decorators';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles/roles/roles.guard';
 
-@UseGuards(AuthGuard, RolesGuard)
-@Roles(ROLE.ADMIN)
+/* @UseGuards(AuthGuard, RolesGuard)
+@Roles(ROLE.ADMIN) */
 @Controller('base-offer')
 export class BaseOfferController {
-  constructor(private readonly baseOfferService: BaseOfferService) {}
+  constructor(private readonly baseOfferService: BaseOfferService) { }
 
   @Post()
   create(@Body() createBaseOfferDto: CreateBaseOfferDto) {
@@ -23,8 +23,13 @@ export class BaseOfferController {
     return this.baseOfferService.findAll();
   }
 
+  @Get('/withTypes')
+  findAllWithTypes() {
+    return this.baseOfferService.findAllWithTypes();
+  }
+
   @Get(':id')
-    findOne(@Param('id', ParseIntPipe)  id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.baseOfferService.findOne(+id);
   }
 

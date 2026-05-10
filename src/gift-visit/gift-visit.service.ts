@@ -20,7 +20,7 @@ export class GiftVisitService {
   }
 
   async getAll(): Promise<GiftVisit[]> {
-    return await this.giftVisitRepo.find();
+    return await this.dataSource.query(`select gv.*,bg.name,v.salesman_id from gift_visit gv INNER JOIN base_gift bg on gv.base_gift_id = bg.id INNER JOIN visit v on gv.visit_id = v.id`)
   }
 
   async findAll(page: number = 1, limit: number = 10) {
@@ -101,7 +101,7 @@ export class GiftVisitService {
     const query = this.giftVisitRepo
       .createQueryBuilder('gv')
       .innerJoin('base_gift', 'bg', 'gv.base_gift_id = bg.id')
-      .addSelect('bg.name','name')
+      .addSelect('bg.name', 'name')
       .addSelect('gv.base_gift_id', 'base_gift_id')
       .addSelect('gv.quantity', 'quantity')
       .addSelect('gv.created_at', 'created_at')

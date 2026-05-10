@@ -14,15 +14,13 @@ export class SampleService {
     private readonly dataSource: DataSource
   ) { }
 
-
-
   create(createSampleDto: CreateSampleDto): Promise<Sample> {
     const sample = this.sampleRepo.create(createSampleDto);
     return this.sampleRepo.save(sample);
   }
 
   async getAll(): Promise<Sample[]> {
-    return await this.sampleRepo.find();
+    return this.dataSource.query(`select s.*,v.salesman_id from sample s INNER JOIN visit v on s.visit_id=v.id`)
   }
 
   async findAll(page: number = 1, limit: number = 10) {

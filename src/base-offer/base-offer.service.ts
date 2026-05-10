@@ -3,13 +3,14 @@ import { CreateBaseOfferDto } from './dto/create-base-offer.dto';
 import { UpdateBaseOfferDto } from './dto/update-base-offer.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BaseOffer } from './entities/base-offer.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
 @Injectable()
 export class BaseOfferService {
   constructor(
     @InjectRepository(BaseOffer)
     private readonly baseOfferRepo: Repository<BaseOffer>,
+    private readonly dataSource: DataSource
   ) { }
 
   create(baseOfferDto: CreateBaseOfferDto): Promise<BaseOffer> {
@@ -32,5 +33,9 @@ export class BaseOfferService {
 
   async remove(id: number): Promise<void> {
     await this.baseOfferRepo.delete(id);
+  }
+
+  async findAllWithTypes():Promise<void> {
+    return await this.dataSource.query(`select bo.*,t.name,t.brand from base_offer bo INNER JOIN type t on bo.type_id = t.id`)
   }
 }

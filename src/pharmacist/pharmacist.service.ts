@@ -25,7 +25,7 @@ export class PharmacistService {
 
     const data = await this.dataSource.query(`
     SELECT p.id, p.first_name, p.last_name,
-           p.classification_id, p.loyalty_id, p.last_visit_date,
+           p.classification_id, p.loyalty_id, 
            p.lat, p.lan, p.phone_number, p.telephone_number,
            p.city_id, p.area_id, p.street_id
     FROM pharmacist p
@@ -58,7 +58,6 @@ export class PharmacistService {
       .addSelect('TIMESTAMPDIFF(YEAR,pharmacist.birth_date,CURDATE())', 'age')
       .addSelect('pharmacist.classification_id', 'classification_id')
       .addSelect('pharmacist.loyalty_id', 'loyalty_id')
-      .addSelect('pharmacist.last_visit_date', 'last_visit_date')
       .addSelect('pharmacist.city_id', 'city_id')
       .addSelect('pharmacist.area_id', 'area_id')
       .addSelect('pharmacist.street_id', 'street_id')
